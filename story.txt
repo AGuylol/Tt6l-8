@@ -3,3 +3,6 @@ He brushes his teeth.
 He has breakfast.
 Then he . . .
 He goes to class
+He learns coding in class
+He then tries to code
+He fails
