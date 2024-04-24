@@ -1,10 +1,14 @@
 extends CharacterBody2D
 
-const speed = 479.0
+
+const speed = 100.0
 var current_dir = "none"
+var player_health = 100.0
+var player_alive = false
 
 func _physics_process(delta):
 	player_movement(delta)
+	player_attack(delta)
 
 func player_movement(delta):
 	
@@ -67,5 +71,23 @@ func player_animation(movement):
 			anim.play("front_walk")
 		elif movement ==0:
 			anim.play("front_idle")
-			
 
+func player_attack(delta):
+	if Input.is_mouse_button_pressed(1): 
+		var dir = current_dir
+		
+		var anim = $player_animation
+		
+		if dir == "right":
+			anim.play("side_attack")
+			
+		if dir == "left":
+			anim.play("side_attack")
+			
+		if dir == "up":
+			anim.play("back_attack")
+		
+		if dir == "down":
+			anim.play("front_attack")
+
+	
