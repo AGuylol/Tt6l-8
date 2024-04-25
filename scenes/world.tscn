@@ -1,7 +1,7 @@
 [gd_scene load_steps=64 format=3 uid="uid://bnbior1b67oky"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_6hm7h"]
-[ext_resource type="Texture2D" uid="uid://cjp1usryxs7w1" path="res://arts/character/player.png" id="1_oc22b"]
+[ext_resource type="Texture2D" uid="uid://b166odwvm75j0" path="res://arts/characters/player.png" id="1_oc22b"]
 [ext_resource type="Texture2D" uid="uid://cioegjltvp74w" path="res://arts/tilesets/decor_8x8.png" id="3_yrbrb"]
 [ext_resource type="Texture2D" uid="uid://boyi655oiulii" path="res://arts/tilesets/grass.png" id="4_uvbvb"]
 [ext_resource type="Texture2D" uid="uid://cwyc7tyhcmyou" path="res://arts/tilesets/plains.png" id="5_cash8"]
@@ -505,9 +505,10 @@ script = ExtResource("1_6hm7h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 
 [node name="player_animation" type="AnimatedSprite2D" parent="player"]
-position = Vector2(10, -20)
+position = Vector2(110, -31)
 sprite_frames = SubResource("SpriteFrames_xnkpw")
 animation = &"front_idle"
+frame_progress = 0.703822
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 
