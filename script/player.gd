@@ -78,11 +78,9 @@ func player_attack(delta):
 		
 		var anim = $player_animation
 		
-		if dir == "right":
+		if dir == "right" or dir == "left":
 			anim.play("side_attack")
 			
-		if dir == "left":
-			anim.play("side_attack")
 			
 		if dir == "up":
 			anim.play("back_attack")
