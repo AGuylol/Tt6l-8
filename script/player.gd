@@ -89,5 +89,3 @@ func player_attack(delta):
 		
 		if dir == "down":
 			anim.play("front_attack")
-
-	
