@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://cir1856fnqe0l"]
+
+[ext_resource type="Script" path="res://script/enemytest.gd" id="1_f7ps5"]
+[ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_4t5oq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh6h1"]
+atlas = ExtResource("2_4t5oq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot6t7"]
+atlas = ExtResource("2_4t5oq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orfnd"]
+atlas = ExtResource("2_4t5oq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x5u7"]
+atlas = ExtResource("2_4t5oq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgept"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh6h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot6t7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orfnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x5u7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eyhpu"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ne41f"]
+radius = 8.06226
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40npp"]
+radius = 33.0
+
+[node name="enemytest" type="CharacterBody2D"]
+script = ExtResource("1_f7ps5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fgept")
+frame_progress = 0.37776
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_eyhpu")
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(-1, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(1, -1)
+shape = SubResource("CircleShape2D_ne41f")
+
+[node name="detection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+shape = SubResource("CircleShape2D_40npp")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
