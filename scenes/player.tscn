@@ -129,6 +129,7 @@ func player_attack(delta):
 func _on_attack_timeout():
 	$attack.stop()
 	Global.player_current_attack = false
+	attacking = false
 
 
 func _on_playerhitbox_body_entered(body):
@@ -592,7 +593,7 @@ shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wetq0")
-animation = &"front_idle"
+animation = &"back_attack"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -606,6 +607,7 @@ shape = SubResource("CapsuleShape2D_1q7mt")
 [node name="attack_cooldown" type="Timer" parent="."]
 
 [node name="attack" type="Timer" parent="."]
+wait_time = 5.263
 
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]
 [connection signal="body_exited" from="playerhitbox" to="." method="_on_playerhitbox_body_exited"]
