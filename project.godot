@@ -10,11 +10,6 @@ config_version=5
 
 [application]
 
-config/name="Test"
-run/main_scene="res://scenes/world.tscn"
-config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://arts/objects/icon.svg"
-<<<<<<<Updatedupstreamconfig/name="Main Menu"
 
 [autoload]
 
@@ -38,5 +33,4 @@ attack={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="gl_compatibility"
