@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://db15feovladwn"]
+[gd_scene load_steps=32 format=3 uid="uid://2gqrvtiwmx1w"]
 
-[ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_ca6p6"]
+[ext_resource type="Texture2D" uid="uid://djs3l3ldpkvyl" path="res://arts/characters/slime.png" id="2_ca6p6"]
 
 [sub_resource type="GDScript" id="GDScript_drxfr"]
 script/source = "extends CharacterBody2D
@@ -15,7 +15,8 @@ func _ready():
 	$AnimatedSprite2D.play(\"Idle\")
 
 func _physics_process(delta):
-	pass
+	if player_chase:
+		position += (player.position - position) / speed
 
 func _on_detection_area_body_entered(body):
 		player = body

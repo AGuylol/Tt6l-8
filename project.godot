@@ -14,10 +14,18 @@ config/name="Test"
 run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://arts/objects/icon.svg"
+<<<<<<<Updatedupstreamconfig/name="Main Menu"
 
 [autoload]
 
 Global="*res://script/global.gd"
+
+[display]
+
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="canvas_items"
+window/stretch/scale=2.0
 
 [input]
 
@@ -31,3 +39,4 @@ attack={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var max_speed = 100
-var accel = 150
+var accel = 1000
 var friction = 800
 
 var input = Vector2.ZERO

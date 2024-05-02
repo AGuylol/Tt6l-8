@@ -1,22 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cir1856fnqe0l"]
+[gd_scene load_steps=11 format=3 uid="uid://banmh5jfcrh8l"]
 
-[ext_resource type="Script" path="res://script/enemytest.gd" id="1_f7ps5"]
-[ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_4t5oq"]
+[ext_resource type="Script" path="res://script/enemytest.gd" id="1_ohw3y"]
+[ext_resource type="Texture2D" uid="uid://djs3l3ldpkvyl" path="res://arts/characters/slime.png" id="2_0bap4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gh6h1"]
-atlas = ExtResource("2_4t5oq")
+atlas = ExtResource("2_0bap4")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ot6t7"]
-atlas = ExtResource("2_4t5oq")
+atlas = ExtResource("2_0bap4")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orfnd"]
-atlas = ExtResource("2_4t5oq")
+atlas = ExtResource("2_0bap4")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5x5u7"]
-atlas = ExtResource("2_4t5oq")
+atlas = ExtResource("2_0bap4")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgept"]
@@ -49,7 +49,7 @@ radius = 8.06226
 radius = 33.0
 
 [node name="enemytest" type="CharacterBody2D"]
-script = ExtResource("1_f7ps5")
+script = ExtResource("1_ohw3y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fgept")

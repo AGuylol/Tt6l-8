@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cwyc7tyhcmyou" path="res://arts/tilesets/plains.png" id="5_cash8"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="5_fdaxo"]
 [ext_resource type="Texture2D" uid="uid://d3yj3587h1amh" path="res://arts/objects/objects.png" id="6_iro0s"]
-[ext_resource type="PackedScene" uid="uid://db15feovladwn" path="res://scenes/slime.tscn" id="6_nuprf"]
+[ext_resource type="PackedScene" uid="uid://2gqrvtiwmx1w" path="res://scenes/slime.tscn" id="6_nuprf"]
 [ext_resource type="PackedScene" uid="uid://bf7ggduhr05ns" path="res://scenes/character_body_2d.tscn" id="7_je3yi"]
-[ext_resource type="PackedScene" uid="uid://cir1856fnqe0l" path="res://scenes/enemytest.tscn" id="8_lltvk"]
+[ext_resource type="PackedScene" uid="uid://banmh5jfcrh8l" path="res://scenes/enemy.tscn" id="8_lltvk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oesec"]
 texture = ExtResource("3_yrbrb")
