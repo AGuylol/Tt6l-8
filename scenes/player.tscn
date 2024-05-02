@@ -1,12 +1,11 @@
 [gd_scene load_steps=57 format=3 uid="uid://c8tishbphs8e8"]
 
-[ext_resource type="Texture2D" uid="uid://7xkvifmf048l" path="res://arts/characters/player.png" id="1_bp6jc"]
 
 [sub_resource type="GDScript" id="GDScript_g0g3h"]
 script/source = "extends CharacterBody2D
 
 
-var enemy_inattack_range = false
+
 var enemy_attack_cooldown = true
 var player_health = 100.0
 var player_alive = false
@@ -596,7 +595,7 @@ sprite_frames = SubResource("SpriteFrames_wetq0")
 animation = &"back_attack"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+
 
 [node name="playerhitbox" type="Area2D" parent="."]
 

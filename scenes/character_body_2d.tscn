@@ -1,7 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dolni4gelwan3"]
 
-[ext_resource type="Script" path="res://script/test.gd" id="1_wepn4"]
-[ext_resource type="Texture2D" uid="uid://7xkvifmf048l" path="res://arts/characters/player.png" id="2_at6qe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvjtu"]
 atlas = ExtResource("2_at6qe")
@@ -63,4 +60,3 @@ sprite_frames = SubResource("SpriteFrames_gmusg")
 frame_progress = 0.133643
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
