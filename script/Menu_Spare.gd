@@ -23,7 +23,7 @@ func toggle():
 
 func _on_start_pressed():
 	toggle()
-	get_tree().change_scene("res://scenes/world.tscn")
+	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
 func _on_option_pressed():
 	show_and_hide(option,menu)
