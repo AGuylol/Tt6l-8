@@ -11,6 +11,7 @@ func _ready():
 
 func _physics_process(delta):
 	movement()
+	slime_damaged()
 	
 func movement():
 	if player_chase:
@@ -31,7 +32,7 @@ func slime_damaged():
 		health = health - 20
 		print("slime health " , health)
 		if health <= 0 :
-			self.queue_free
+			self.queue_free()
 
 
 func _on_detection_body_entered(body):

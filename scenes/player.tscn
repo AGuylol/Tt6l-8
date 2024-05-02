@@ -23,11 +23,12 @@ func _physics_process(delta):
 	player_movement(delta)
 	player_attack(delta)
 	enemy_attack()
+	_on_attack_timeout()
 	
 	if player_health <= 0:
 		player_alive = false 
-		print(\"player died\") # add end screen here
-		self.queue_free 
+		print(\"player died\") 
+		self.queue_free()
 	
 func player_movement(delta):
 	
@@ -99,23 +100,36 @@ func player_animation(movement):
 				
 func player_attack(delta):
 	if Input.is_action_just_pressed(\"attack\"): 
+		Global.player_current_attack = true
 		attacking = true
 		var dir = current_dir
 		
 		var anim = $player_animation
 		
 		if dir == \"right\":
+			anim.flip_h = false
 			anim.play(\"side_attack\")
+			$attack.start()
 			
 		if dir == \"left\":
+			anim.flip_h = true
 			anim.play(\"side_attack\")
+			$attack.start()
 			
 		if dir == \"up\":
+			anim.flip_h = true
 			anim.play(\"back_attack\")
+			$attack.start()
 		
 		if dir == \"down\":
+			anim.flip_h = true
 			anim.play(\"front_attack\")
+			$attack.start()
 			
+func _on_attack_timeout():
+	$attack.stop()
+	Global.player_current_attack = false
+
 
 func _on_playerhitbox_body_entered(body):
 	if body.has_method(\"enemytest\"):
@@ -137,6 +151,11 @@ func enemy_attack():
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
+
+
+
+
+
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
@@ -586,6 +605,9 @@ shape = SubResource("CapsuleShape2D_1q7mt")
 
 [node name="attack_cooldown" type="Timer" parent="."]
 
+[node name="attack" type="Timer" parent="."]
+
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]
 [connection signal="body_exited" from="playerhitbox" to="." method="_on_playerhitbox_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
