@@ -1,6 +1,5 @@
 res://scenes/player.tscn
 res://scenes/enemy.tscn
-res://scenes/slime.tscn
-res://scenes/character_body_2d.tscn
 res://scenes/world.tscn
-res://script/test.gd
+res://scenes/arrow.tscn
+res://script/enemytest.gd
