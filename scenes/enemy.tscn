@@ -1,7 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://banmh5jfcrh8l"]
+[gd_scene load_steps=16 format=3 uid="uid://0vngswwsrm1"]
 
 [ext_resource type="Script" path="res://script/enemytest.gd" id="1_ohw3y"]
-[ext_resource type="Texture2D" uid="uid://djs3l3ldpkvyl" path="res://arts/characters/slime.png" id="2_0bap4"]
+[ext_resource type="Texture2D" uid="uid://brpresvdw6wsw" path="res://arts/characters/slime.png" id="2_0bap4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2qmk"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bwc7"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgso6"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_veops"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8wld"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(128, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gh6h1"]
 atlas = ExtResource("2_0bap4")
@@ -21,6 +41,26 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgept"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2qmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bwc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgso6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_veops")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8wld")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gh6h1")
@@ -53,7 +93,6 @@ script = ExtResource("1_ohw3y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fgept")
-frame_progress = 0.37776
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -73,7 +112,12 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
 shape = SubResource("CircleShape2D_40npp")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.251
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
