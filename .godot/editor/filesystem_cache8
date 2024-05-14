@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1715157655
+::res://::1715699531
 CharacterBody2D.gd::GDScript::-1::1715014346::0::1::::<>CharacterBody2D<>::
 default_bus_layout.tres::AudioBusLayout::-1::1714668444::0::1::::<><>::
 ::res://arts/::1715015889
@@ -56,18 +56,18 @@ wooden_door_b.png::CompressedTexture2D::4301987881174891397::1713878241::1714883
 walls.png::CompressedTexture2D::5946398594472977223::1714132354::1714883725::1::::<><>::
 wooden_door.png::CompressedTexture2D::5141854135208790725::1714132354::1714883725::1::::<><>::
 wooden_door_b.png::CompressedTexture2D::6462890665725760223::1714132354::1714883725::1::::<><>::
-::res://scenes/::1715105993
-arrow.tscn::PackedScene::8361984312129422415::1715103123::0::1::::<><>::res://script/arrow.gd<>uid://bax6x2jewmf55::::res://arts/objects/icon.svg
-attackarea.gd::GDScript::-1::1715100564::0::1::::<>Area2D<>::
-character_body_2d.tscn::PackedScene::2803800195541126140::1715096355::0::1::::<><>::res://script/test.gd<>uid://duih2hwnrb5kq::::res://arts/characters/sPlayerIdle_strip4.png<>uid://bbuxyxqvxisah::::res://arts/characters/sPlayerRun_strip7.png
-enemy.tscn::PackedScene::52908059996640422::1715103123::0::1::::<><>::res://script/enemytest.gd<>uid://brpresvdw6wsw::::res://arts/characters/slime.png
+::res://scenes/::1715699480
+arrow.tscn::PackedScene::8361984312129422415::1715697458::0::1::::<><>::res://script/arrow.gd<>uid://bax6x2jewmf55::::res://arts/objects/icon.svg
+attackarea.gd::GDScript::-1::1715612591::0::1::::<>RefCounted<>::
+character_body_2d.tscn::PackedScene::2803800195541126140::1715697458::0::1::::<><>::res://script/test.gd<>uid://duih2hwnrb5kq::::res://arts/characters/sPlayerIdle_strip4.png<>uid://bbuxyxqvxisah::::res://arts/characters/sPlayerRun_strip7.png
+enemy.tscn::PackedScene::52908059996640422::1715697458::0::1::::<><>::res://script/enemytest.gd<>uid://brpresvdw6wsw::::res://arts/characters/slime.png
 Menu_Spare.tscn::PackedScene::7702954685902751681::1715096355::0::1::::<><>::res://script/Menu_Spare.gd<>uid://b2iijfpv4gwn8::::res://arts/background img.jpg
-player.tscn::PackedScene::7128814634900713293::1715105993::0::1::::<><>::uid://c0r3q5mfr0mjo::::res://arts/characters/survivalgame-player-green.png<>res://scenes/attackarea.gd
-world.tscn::PackedScene::3301451698948385460::1715103123::0::1::::<><>::uid://cioegjltvp74w::::res://arts/tilesets/decor_8x8.png<>uid://boyi655oiulii::::res://arts/tilesets/grass.png<>uid://cwyc7tyhcmyou::::res://arts/tilesets/plains.png<>uid://c8tishbphs8e8::::res://scenes/player.tscn<>uid://d3yj3587h1amh::::res://arts/objects/objects.png<>uid://bf7ggduhr05ns::::res://scenes/character_body_2d.tscn<>uid://0vngswwsrm1::::res://scenes/enemy.tscn
-::res://script/::1715103123
-arrow.gd::GDScript::-1::1715102405::0::1::::<>Area2D<>::
+player.tscn::PackedScene::7128814634900713293::1715699480::0::1::::<><>::uid://c0r3q5mfr0mjo::::res://arts/characters/survivalgame-player-green.png
+world.tscn::PackedScene::3301451698948385460::1715697458::0::1::::<><>::uid://cioegjltvp74w::::res://arts/tilesets/decor_8x8.png<>uid://boyi655oiulii::::res://arts/tilesets/grass.png<>uid://cwyc7tyhcmyou::::res://arts/tilesets/plains.png<>uid://c8tishbphs8e8::::res://scenes/player.tscn<>uid://d3yj3587h1amh::::res://arts/objects/objects.png<>uid://bf7ggduhr05ns::::res://scenes/character_body_2d.tscn<>uid://0vngswwsrm1::::res://scenes/enemy.tscn
+::res://script/::1715693954
+arrow.gd::GDScript::-1::1715622038::0::1::::<>Area2D<>::
 CharacterBody2D.gd::GDScript::-1::1714883725::0::1::::<>CharacterBody2D<>::
-enemytest.gd::GDScript::-1::1715103123::0::1::::<>CharacterBody2D<>::
+enemytest.gd::GDScript::-1::1715693954::0::1::::<>CharacterBody2D<>::
 global.gd::GDScript::-1::1714883734::0::1::::<>Node<>::
 Marker2D.gd::GDScript::-1::1714926281::0::1::::<>Marker2D<>::
 Menu_Spare.gd::GDScript::-1::1714883734::0::1::::<>Control<>::

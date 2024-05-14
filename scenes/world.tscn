@@ -232,6 +232,3 @@ visible = false
 
 [node name="enemytest" parent="." instance=ExtResource("8_lltvk")]
 position = Vector2(96, 51)
-
-[node name="enemytest2" parent="." instance=ExtResource("8_lltvk")]
-position = Vector2(51, 5)
