@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dreuwo4qjwdrb"]
+
+[ext_resource type="Script" path="res://script/arrow.gd" id="1_gov41"]
+[ext_resource type="Texture2D" uid="uid://viktoilg5xl6" path="res://arts/sBullet.png" id="3_sgsna"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bmybl"]
+radius = 3.0
+height = 8.0
+
+[node name="arrow" type="Area2D"]
+script = ExtResource("1_gov41")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bmybl")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(0.3, 0.2)
+
+[node name="SBullet" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_sgsna")
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
