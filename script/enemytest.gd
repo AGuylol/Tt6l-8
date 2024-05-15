@@ -57,7 +57,5 @@ func take_damage(damage):
 		await get_tree().create_timer(0.8).timeout
 		queue_free()
 		
-func attack_player():
-	if player:
-		emit_signal("enemy_attack", player)
+
 	

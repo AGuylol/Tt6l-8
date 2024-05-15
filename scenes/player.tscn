@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=3 uid="uid://c8tishbphs8e8"]
+[gd_scene load_steps=136 format=3 uid="uid://c8tishbphs8e8"]
 
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
 
@@ -27,17 +27,26 @@ var state = idle
 
 var blend_position : Vector2 = Vector2.ZERO
 
+var dash_speed = 400
+var dash_duration = 0.075
+var is_dashing = false
+var can_dash = true
+var dash_direction : Vector2
+
+@onready var dash_period = $dash_period
+@onready var dash_cooldown_timer = $dash_cooldown
 
 func _ready():
 	$player_animation.play(\"n-idle\")
 	animation_tree.active = true
 	
-	
+
 func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
 	_on_attack_timeout()
 	bow_shoot()
+	
 	
 	if Input.is_action_just_pressed(\"equip_bow\"):
 		if bow_equiped:
@@ -62,17 +71,35 @@ func _physics_process(delta):
 func player_movement(delta):
 	var input_vector = Input.get_vector(\"left\" , \"right\" , \"up\" , \"down\")
 	
-	if input_vector == Vector2.ZERO:
+	if input_vector == Vector2.ZERO and not is_dashing:
 		state = idle
 		apply_friction(friction * delta)
 		
-	else:
+	elif is_dashing == false:
 		state = walk
 		apply_movement(input_vector * accel * delta)
 		blend_position = input_vector
+
+	if Input.is_action_just_pressed(\"dash\") and can_dash:
+		start_dash(input_vector)
+		
+	if attacking and input_vector != Vector2.ZERO:
+		animation_tree.set(\"parameters/conditions/attacking\", false)
+		attacking = false
+		
 		
 	move_and_slide()
 	update_parameters(input_vector)
+	
+
+func start_dash(input_vector):
+	is_dashing = true
+	can_dash = false
+	dash_direction = input_vector.normalized()
+	velocity = dash_direction * dash_speed
+	dash_period.start(dash_duration)
+	$dash_cooldown.start()
+
 	
 func update_parameters(input_vector):
 	if input_vector == Vector2.ZERO:
@@ -107,16 +134,18 @@ func apply_movement(amount) -> void:
 
 func _on_playerhitbox_body_entered(body):
 	if body.is_in_group(\"enemy\"):
-		await get_tree().create_timer(0.5).timeout
 		enemy_inattack_range= true
+		$enemy_attack_timer.start()
 		
 
 func _on_playerhitbox_body_exited(body):
 	if body.is_in_group(\"enemy\"):
 		enemy_inattack_range= false
+		$enemy_attack_timer.stop()
+
 		
 func enemy_attack():
-	if enemy_inattack_range:
+	if enemy_inattack_range and enemy_attack_cooldown:
 		player_health -= 20
 		print(player_health)
 		print(\"enemy attacked you\")
@@ -142,6 +171,17 @@ func bow_shoot():
 		bow_cooldown = true
 		
 
+func _on_enemy_attack_timer_timeout():
+	enemy_attack_cooldown = true
+
+
+func _on_dash_period_timeout():
+	is_dashing = false
+	max_speed = 100
+	accel = 800
+
+func _on_dash_cooldown_timeout():
+	can_dash = true
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
@@ -228,67 +268,67 @@ region = Rect2(64, 64, 32, 32)
 atlas = ExtResource("1_2pnou")
 region = Rect2(96, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mr8ps"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwk21"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f61ww"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l38lo"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s0k5j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1axe"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0w5ko"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hse2"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bvvi3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_adf7p"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uw0yu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjsav"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dn1g4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf6np"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c53ea"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvdl5"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_so161"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kfpj"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mwrru"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t026u"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w5q5x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_76uom"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xglei"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj2eg"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4cyik"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u71uj"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vabm8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpqal"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_trb2a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n5rj"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 224, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ryfnd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8c48"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 224, 32, 32)
 
@@ -547,52 +587,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mr8ps")
+"texture": SubResource("AtlasTexture_hwk21")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f61ww")
+"texture": SubResource("AtlasTexture_l38lo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s0k5j")
+"texture": SubResource("AtlasTexture_o1axe")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0w5ko")
+"texture": SubResource("AtlasTexture_4hse2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bvvi3")
+"texture": SubResource("AtlasTexture_adf7p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uw0yu")
+"texture": SubResource("AtlasTexture_sjsav")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dn1g4")
+"texture": SubResource("AtlasTexture_hf6np")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c53ea")
+"texture": SubResource("AtlasTexture_uvdl5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_so161")
+"texture": SubResource("AtlasTexture_8kfpj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mwrru")
+"texture": SubResource("AtlasTexture_t026u")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w5q5x")
+"texture": SubResource("AtlasTexture_76uom")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xglei")
+"texture": SubResource("AtlasTexture_tj2eg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4cyik")
+"texture": SubResource("AtlasTexture_u71uj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vabm8")
+"texture": SubResource("AtlasTexture_vpqal")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_trb2a")
+"texture": SubResource("AtlasTexture_3n5rj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ryfnd")
+"texture": SubResource("AtlasTexture_o8c48")
 }],
 "loop": true,
 "name": &"idle",
@@ -947,7 +987,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_m0q6c"]
 resource_name = "e-idle"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -968,15 +1007,14 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]
 }
 
 [sub_resource type="Animation" id="Animation_p0m7d"]
 resource_name = "e-walk"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -997,10 +1035,10 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]
 }
 
 [sub_resource type="Animation" id="Animation_3ibm7"]
@@ -1069,7 +1107,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_klwb0"]
 resource_name = "n-idle"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1090,15 +1127,14 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [8, 9]
+"values": [8, 8, 8, 8, 8, 9, 9, 9, 9, 9]
 }
 
 [sub_resource type="Animation" id="Animation_daw7t"]
 resource_name = "n-walk"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1119,10 +1155,10 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [8, 9]
+"values": [8, 8, 8, 8, 8, 9, 9, 9, 9, 9]
 }
 
 [sub_resource type="Animation" id="Animation_2lqnx"]
@@ -1191,7 +1227,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_elofm"]
 resource_name = "ne-idle"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1212,10 +1247,10 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7]
+"values": [6, 6, 6, 6, 6, 7, 7, 7, 7, 7]
 }
 
 [sub_resource type="Animation" id="Animation_28kjg"]
@@ -1435,7 +1470,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_gqn06"]
 resource_name = "s-idle"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1456,15 +1490,14 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
 }
 
 [sub_resource type="Animation" id="Animation_flqcb"]
 resource_name = "s-walk"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1485,10 +1518,10 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
 }
 
 [sub_resource type="Animation" id="Animation_on3u7"]
@@ -1813,7 +1846,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_hw4q3"]
 resource_name = "w-idle"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1834,15 +1866,14 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [12, 13]
+"values": [12, 12, 12, 12, 12, 13, 13, 13, 13, 13]
 }
 
 [sub_resource type="Animation" id="Animation_f6ics"]
 resource_name = "w-walk"
-length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1863,10 +1894,10 @@ tracks/1/path = NodePath("player_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [12, 13]
+"values": [12, 12, 12, 12, 12, 13, 13, 13, 13, 13]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_luo1q"]
@@ -1935,9 +1966,6 @@ animation = &"n-idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i2x47"]
 animation = &"e-idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_07rxn"]
-animation = &"sw-idle"
-
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_k2tso"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_fdri7")
 blend_point_0/pos = Vector2(-1, 0)
@@ -1947,8 +1975,6 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_j8gc6")
 blend_point_2/pos = Vector2(0, -1.1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_i2x47")
 blend_point_3/pos = Vector2(1, 0)
-blend_point_4/node = SubResource("AnimationNodeAnimation_07rxn")
-blend_point_4/pos = Vector2(-1, 1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
@@ -2070,11 +2096,11 @@ parameters/walk/blend_position = Vector2(0, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="playerhitbox"]
 shape = SubResource("CapsuleShape2D_1q7mt")
 
-[node name="attack_cooldown" type="Timer" parent="."]
+[node name="enemy_attack_timer" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="attack" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 0.554
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
@@ -2087,7 +2113,13 @@ position = Vector2(0, 5)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_e2b3r")
 
+[node name="dash_period" type="Timer" parent="."]
+
+[node name="dash_cooldown" type="Timer" parent="."]
+
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]
 [connection signal="body_exited" from="playerhitbox" to="." method="_on_playerhitbox_body_exited"]
-[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="enemy_attack_timer" to="." method="_on_enemy_attack_timer_timeout"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
+[connection signal="timeout" from="dash_period" to="." method="_on_dash_period_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
