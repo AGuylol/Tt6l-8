@@ -2,4 +2,6 @@ res://scenes/player.tscn
 res://scenes/enemy.tscn
 res://scenes/world.tscn
 res://scenes/arrow.tscn
+res://scenes/character_body_2d.tscn
 res://script/enemytest.gd
+res://scenes/Menu_Spare.tscn
