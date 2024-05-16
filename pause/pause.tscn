@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://pause/pause.gd" id="1_gu85i"]
 
 [node name="PauseMenu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,34 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gu85i")
 
-[node name="Pause" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -50.5
-offset_right = 48.0
-offset_bottom = 50.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Continue" type="Button" parent="Pause"]
-layout_mode = 2
-text = "Continue"
-
-[node name="Option" type="Button" parent="Pause"]
-layout_mode = 2
-text = "Option"
-
-[node name="Mainmenu" type="Button" parent="Pause"]
-layout_mode = 2
-text = "Main Menu"
-
-[node name="Option" type="Control" parent="."]
-visible = false
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +20,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Option"]
+[node name="Stop" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="PanelContainer/Stop"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Option" type="Button" parent="PanelContainer/Stop"]
+layout_mode = 2
+text = "Option"
+
+[node name="Mainmenu" type="Button" parent="PanelContainer/Stop"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Option" type="Control" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Option"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,18 +55,18 @@ offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Video" type="Button" parent="Option/VBoxContainer"]
+[node name="Video" type="Button" parent="PanelContainer/Option/VBoxContainer"]
 layout_mode = 2
 text = "Video"
 
-[node name="HSeparator" type="HSeparator" parent="Option/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/Option/VBoxContainer"]
 layout_mode = 2
 
-[node name="Audio" type="Button" parent="Option/VBoxContainer"]
+[node name="Audio" type="Button" parent="PanelContainer/Option/VBoxContainer"]
 layout_mode = 2
 text = "Audio"
 
-[node name="BackFromOption" type="Button" parent="Option"]
+[node name="BackFromOption" type="Button" parent="PanelContainer/Option"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -85,16 +80,11 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="Video" type="Control" parent="."]
+[node name="Video" type="Control" parent="PanelContainer"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Video"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Video"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,35 +98,35 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Labels" type="VBoxContainer" parent="Video/HBoxContainer"]
+[node name="Labels" type="VBoxContainer" parent="PanelContainer/Video/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Fullscreen" type="Label" parent="Video/HBoxContainer/Labels"]
+[node name="Fullscreen" type="Label" parent="PanelContainer/Video/HBoxContainer/Labels"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="Borderless" type="Label" parent="Video/HBoxContainer/Labels"]
+[node name="Borderless" type="Label" parent="PanelContainer/Video/HBoxContainer/Labels"]
 layout_mode = 2
 text = "Borderless"
 
-[node name="VSync" type="Label" parent="Video/HBoxContainer/Labels"]
+[node name="VSync" type="Label" parent="PanelContainer/Video/HBoxContainer/Labels"]
 layout_mode = 2
 text = "VSync"
 
-[node name="Checks" type="VBoxContainer" parent="Video/HBoxContainer"]
+[node name="Checks" type="VBoxContainer" parent="PanelContainer/Video/HBoxContainer"]
 layout_mode = 2
 
-[node name="Fullscreen" type="CheckBox" parent="Video/HBoxContainer/Checks"]
+[node name="Fullscreen" type="CheckBox" parent="PanelContainer/Video/HBoxContainer/Checks"]
 layout_mode = 2
 
-[node name="Borderless" type="CheckBox" parent="Video/HBoxContainer/Checks"]
+[node name="Borderless" type="CheckBox" parent="PanelContainer/Video/HBoxContainer/Checks"]
 layout_mode = 2
 
-[node name="VSync" type="CheckBox" parent="Video/HBoxContainer/Checks"]
+[node name="VSync" type="CheckBox" parent="PanelContainer/Video/HBoxContainer/Checks"]
 layout_mode = 2
 
-[node name="BackFromVideo" type="Button" parent="Video"]
+[node name="BackFromVideo" type="Button" parent="PanelContainer/Video"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -150,60 +140,51 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="Audio" type="Control" parent="."]
+[node name="Audio" type="Control" parent="PanelContainer"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Audio"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/Audio"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -263.0
-offset_top = -38.0
-offset_right = 309.0
-offset_bottom = 39.0
-grow_horizontal = 2
+offset_top = -38.5
+offset_right = 572.0
+offset_bottom = 38.5
 grow_vertical = 2
 
-[node name="Label" type="VBoxContainer" parent="Audio/HBoxContainer2"]
+[node name="Label" type="VBoxContainer" parent="PanelContainer/Audio/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Master" type="Label" parent="Audio/HBoxContainer2/Label"]
+[node name="Master" type="Label" parent="PanelContainer/Audio/HBoxContainer2/Label"]
 layout_mode = 2
 text = "Master"
 
-[node name="Music" type="Label" parent="Audio/HBoxContainer2/Label"]
+[node name="Music" type="Label" parent="PanelContainer/Audio/HBoxContainer2/Label"]
 layout_mode = 2
 text = "Music"
 
-[node name="Sound FX" type="Label" parent="Audio/HBoxContainer2/Label"]
+[node name="Sound FX" type="Label" parent="PanelContainer/Audio/HBoxContainer2/Label"]
 layout_mode = 2
 text = "Sound FX"
 
-[node name="Slider" type="VBoxContainer" parent="Audio/HBoxContainer2"]
+[node name="Slider" type="VBoxContainer" parent="PanelContainer/Audio/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Master" type="HSlider" parent="Audio/HBoxContainer2/Slider"]
+[node name="Master" type="HSlider" parent="PanelContainer/Audio/HBoxContainer2/Slider"]
 layout_mode = 2
 
-[node name="Music" type="HSlider" parent="Audio/HBoxContainer2/Slider"]
+[node name="Music" type="HSlider" parent="PanelContainer/Audio/HBoxContainer2/Slider"]
 layout_mode = 2
 
-[node name="Sound FX" type="HSlider" parent="Audio/HBoxContainer2/Slider"]
+[node name="Sound FX" type="HSlider" parent="PanelContainer/Audio/HBoxContainer2/Slider"]
 layout_mode = 2
 
-[node name="BackFromAudio" type="Button" parent="Audio"]
+[node name="BackFromAudio" type="Button" parent="PanelContainer/Audio"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -217,17 +198,17 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[connection signal="pressed" from="Pause/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="Pause/Option" to="." method="_on_option_pressed"]
-[connection signal="pressed" from="Pause/Mainmenu" to="." method="_on_mainmenu_pressed"]
-[connection signal="pressed" from="Option/VBoxContainer/Video" to="." method="_on_video_pressed"]
-[connection signal="pressed" from="Option/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
-[connection signal="pressed" from="Option/BackFromOption" to="." method="_on_back_from_option_pressed"]
-[connection signal="toggled" from="Video/HBoxContainer/Checks/Fullscreen" to="." method="_on_fullscreen_toggled"]
-[connection signal="toggled" from="Video/HBoxContainer/Checks/Borderless" to="." method="_on_borderless_toggled"]
-[connection signal="toggled" from="Video/HBoxContainer/Checks/VSync" to="." method="_on_v_sync_toggled"]
-[connection signal="pressed" from="Video/BackFromVideo" to="." method="_on_back_from_video_pressed"]
-[connection signal="value_changed" from="Audio/HBoxContainer2/Slider/Master" to="." method="_on_master_value_changed"]
-[connection signal="value_changed" from="Audio/HBoxContainer2/Slider/Music" to="." method="_on_music_value_changed"]
-[connection signal="value_changed" from="Audio/HBoxContainer2/Slider/Sound FX" to="." method="_on_sound_fx_value_changed"]
-[connection signal="pressed" from="Audio/BackFromAudio" to="." method="_on_back_from_audio_pressed"]
+[connection signal="pressed" from="PanelContainer/Stop/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/Stop/Option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="PanelContainer/Stop/Mainmenu" to="." method="_on_mainmenu_pressed"]
+[connection signal="pressed" from="PanelContainer/Option/VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="PanelContainer/Option/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="PanelContainer/Option/BackFromOption" to="." method="_on_back_from_option_pressed"]
+[connection signal="toggled" from="PanelContainer/Video/HBoxContainer/Checks/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="PanelContainer/Video/HBoxContainer/Checks/Borderless" to="." method="_on_borderless_toggled"]
+[connection signal="toggled" from="PanelContainer/Video/HBoxContainer/Checks/VSync" to="." method="_on_v_sync_toggled"]
+[connection signal="pressed" from="PanelContainer/Video/BackFromVideo" to="." method="_on_back_from_video_pressed"]
+[connection signal="value_changed" from="PanelContainer/Audio/HBoxContainer2/Slider/Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="PanelContainer/Audio/HBoxContainer2/Slider/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="PanelContainer/Audio/HBoxContainer2/Slider/Sound FX" to="." method="_on_sound_fx_value_changed"]
+[connection signal="pressed" from="PanelContainer/Audio/BackFromAudio" to="." method="_on_back_from_audio_pressed"]
