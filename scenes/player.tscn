@@ -144,7 +144,7 @@ func _on_playerhitbox_body_exited(body):
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
 		player_health = player_health - 20
-		enemy_attack_cooldown = false
+		enemy_attack_cooldown = true
 		$attack_cooldown.start()
 		print(player_health)
 		print(\"enemy attacked you\")
