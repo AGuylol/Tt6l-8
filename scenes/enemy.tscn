@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://0vngswwsrm1"]
+[gd_scene load_steps=17 format=3 uid="uid://0vngswwsrm1"]
 
 [ext_resource type="Script" path="res://script/enemytest.gd" id="1_ohw3y"]
-[ext_resource type="Texture2D" uid="uid://brpresvdw6wsw" path="res://arts/characters/slime.png" id="2_0bap4"]
+[ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_0bap4"]
+[ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_0vc2j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2qmk"]
 atlas = ExtResource("2_0bap4")
@@ -88,7 +89,7 @@ radius = 8.06226
 [sub_resource type="CircleShape2D" id="CircleShape2D_40npp"]
 radius = 33.0
 
-[node name="enemytest" type="CharacterBody2D" groups=["enemy"]]
+[node name="enemytest" type="CharacterBody2D"]
 script = ExtResource("1_ohw3y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -110,10 +111,17 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_40npp")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.251
+
+[node name="Healthbar" parent="." instance=ExtResource("3_0vc2j")]
+offset_left = -7.0
+offset_top = 10.0
+offset_right = 8.0
+offset_bottom = 12.0
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
