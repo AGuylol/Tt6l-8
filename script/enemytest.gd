@@ -10,7 +10,7 @@ var player_attacked = false
 var knockback_force = Vector2()
 var knockback_duration = 0.5
 var knockback_timer = 0.0
-
+var moving = false
 
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -28,9 +28,10 @@ func movement(_delta):
 		move_and_slide()
 	else:
 		if player_chase and player:
-			var direction = (player.position - position).normalized()
-			velocity = direction * speed
-			move_and_slide()
+			if moving:
+				var direction = (player.position - position).normalized()
+				velocity = direction * speed
+				move_and_slide()
 		else:
 			velocity = Vector2.ZERO
 
@@ -45,10 +46,12 @@ func _on_detection_body_entered(body):
 	if not body.is_in_group("enemy"):
 		player = body
 		player_chase = true
+		moving = true
 
 func _on_detection_body_exited(_body):
 	player = null
 	player_chase = false
+	moving = false
 
 
 func _on_hitbox_area_entered(area):
@@ -77,6 +80,8 @@ func take_damage(damage):
 	await get_tree().create_timer(1).timeout
 	$AnimatedSprite2D.play("default")
 	if health <= 0:
+		moving = false
+		$CollisionShape2D.disabled
 		$AnimatedSprite2D.play("death")
 		await get_tree().create_timer(0.8).timeout
 		queue_free()
@@ -86,3 +91,4 @@ func apply_knockback(source_position , knockback_multiplier):
 	knockback_force = direction * knockback_multiplier
 	knockback_timer = knockback_duration
 	
+
