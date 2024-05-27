@@ -202,7 +202,6 @@ func apply_knockback(direction: Vector2):
 	await get_tree().create_timer(knockback_duration).timeout
 	is_knocked_back = false
 	
-
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
