@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://0vngswwsrm1"]
+[gd_scene load_steps=21 format=3 uid="uid://0vngswwsrm1"]
 
 [ext_resource type="Script" path="res://script/enemytest.gd" id="1_ohw3y"]
 [ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_0bap4"]
@@ -40,6 +40,18 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("2_0bap4")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6y7ix"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xclxq"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2vld"]
+atlas = ExtResource("2_0bap4")
+region = Rect2(64, 96, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgept"]
 animations = [{
 "frames": [{
@@ -78,6 +90,20 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6y7ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xclxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2vld")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 3.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eyhpu"]
@@ -89,6 +115,9 @@ radius = 8.06226
 [sub_resource type="CircleShape2D" id="CircleShape2D_40npp"]
 radius = 33.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_busrp"]
+radius = 11.0
+
 [node name="enemytest" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_ohw3y")
 
@@ -99,7 +128,7 @@ sprite_frames = SubResource("SpriteFrames_fgept")
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_eyhpu")
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="." groups=["enemy"]]
 position = Vector2(-1, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
@@ -122,6 +151,12 @@ offset_left = -7.0
 offset_top = 10.0
 offset_right = 8.0
 offset_bottom = 12.0
+
+[node name="hitarea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitarea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_busrp")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

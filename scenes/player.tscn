@@ -38,6 +38,10 @@ var dash_direction : Vector2
 @onready var dash_period = $dash_period
 @onready var dash_cooldown_timer = $dash_cooldown
 
+var knockback_force = 100
+var knockback_duration = 0.5
+var is_knocked_back = false
+
 func _ready():
 	animation_tree.active = true
 	healthbar.init_health(player_health)
@@ -71,20 +75,21 @@ func _physics_process(delta):
 		
 	
 func player_movement(delta):
-	var input_vector = Input.get_vector(\"left\" , \"right\" , \"up\" , \"down\")
-	
-	if input_vector == Vector2.ZERO and not is_dashing:
-		state = idle
+	var input_vector = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	if is_knocked_back:
 		apply_friction(friction * delta)
+	else:
 		
-	elif is_dashing == false:
-		state = walk
-		apply_movement(input_vector * accel * delta)
-		blend_position = input_vector
+		if input_vector == Vector2.ZERO and not is_dashing:
+			state = idle
+			apply_friction(friction * delta)
+		elif not is_dashing:
+			state = walk
+			apply_movement(input_vector * accel * delta)
+			blend_position = input_vector
 
-	if Input.is_action_just_pressed(\"dash\") and can_dash:
-		start_dash(input_vector)
-		
+		if Input.is_action_just_pressed(\"dash\") and can_dash:
+			start_dash(input_vector)
 	
 	move_and_slide()
 	update_parameters(input_vector)
@@ -132,9 +137,19 @@ func apply_movement(amount) -> void:
 
 func _on_playerhitbox_body_entered(body):
 	if body.is_in_group(\"enemy\"):
-		enemy_inattack_range= true
+		enemy_inattack_range = true
 		$enemy_attack_timer.start()
 		
+		var knockback_direction = (global_position - body.global_position).normalized()
+		apply_knockback(knockback_direction)
+		player_health -= 20
+		healthbar.health = player_health
+		print(\"Player health:\", player_health)
+		if player_health <= 0:
+			player_alive = false
+			print(\"Player died\")
+			get_tree().change_scene_to_file(\"res://gameover/gameover.tscn\")
+
 
 func _on_playerhitbox_body_exited(body):
 	if body.is_in_group(\"enemy\"):
@@ -165,10 +180,10 @@ func bow_shoot():
 		arrow_instance.global_position = $Marker2D.global_position
 		add_child(arrow_instance)
 		
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(20).timeout
 		bow_cooldown = true
 		
-
+ 
 func _on_enemy_attack_timer_timeout():
 	enemy_attack_cooldown = true
 
@@ -180,6 +195,14 @@ func _on_dash_period_timeout():
 
 func _on_dash_cooldown_timeout():
 	can_dash = true
+	
+func apply_knockback(direction: Vector2):
+	is_knocked_back = true
+	velocity = direction * knockback_force
+	await get_tree().create_timer(knockback_duration).timeout
+	is_knocked_back = false
+	
+
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
@@ -1035,6 +1058,7 @@ advance_condition = &"attacking"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_usk0s"]
+states/End/position = Vector2(896, 100)
 states/Start/position = Vector2(52, 116)
 states/attacking/node = SubResource("AnimationNodeBlendSpace2D_j6eky")
 states/attacking/position = Vector2(492, -51)
