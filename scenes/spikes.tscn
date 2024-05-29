@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4gwjtpa0kbwk"]
+
+[ext_resource type="Script" path="res://scenes/spikes.gd" id="1_36b7x"]
+[ext_resource type="Texture2D" uid="uid://guetmq1kpwkv" path="res://arts/mines/Spike.png" id="2_cluvo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7bof"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12o7e"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6wqr"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8t0n"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkbf8"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53fah"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc27y"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m5l7"]
+atlas = ExtResource("2_cluvo")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3aws1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7bof")
+}],
+"loop": true,
+"name": &"spike_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12o7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6wqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8t0n")
+}],
+"loop": true,
+"name": &"spike_going_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkbf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53fah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc27y")
+}],
+"loop": true,
+"name": &"spike_going_up",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m5l7")
+}],
+"loop": true,
+"name": &"spike_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3bwo"]
+size = Vector2(12.9063, 12.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sw667"]
+size = Vector2(96, 90)
+
+[node name="spikes" type="Area2D" groups=["spikes"]]
+script = ExtResource("1_36b7x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.38419e-07, -2.38419e-07)
+scale = Vector2(0.875, 0.9375)
+sprite_frames = SubResource("SpriteFrames_3aws1")
+animation = &"spike_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w3bwo")
+
+[node name="detectplayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectplayer"]
+shape = SubResource("RectangleShape2D_sw667")
+
+[connection signal="body_entered" from="detectplayer" to="." method="_on_detectplayer_body_entered"]

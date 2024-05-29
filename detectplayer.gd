@@ -17,7 +17,7 @@ func _on_body_entered(body):
 func close_door():
 	var door_node = get_node(door)
 	if door_node.has_method("play"):
-		door_node.play("close")  # Assuming "close" is the animation name for closing the door
+		door_node.play("wallup")  # Assuming "close" is the animation name for closing the door
 
 func spawn_enemies():
 	for spawn_point_path in spawn_points:
