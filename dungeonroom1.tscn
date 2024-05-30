@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=47 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -573,7 +573,7 @@ sources/6 = SubResource("TileSetAtlasSource_howyd")
 sources/7 = SubResource("TileSetAtlasSource_ofbnr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4axp"]
-size = Vector2(149, 154.5)
+size = Vector2(155.5, 154.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5u4e"]
 atlas = ExtResource("6_ptiwa")
@@ -841,11 +841,15 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi2lc"]
 size = Vector2(32, 8.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpw4k"]
+size = Vector2(169, 134.25)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_cjri4")
 slime_scene = ExtResource("10_bo2mn")
 enemy_scene = ExtResource("10_bo2mn")
-spawn_points = Array[NodePath]([NodePath("slime_spawn"), NodePath("slime_spawn2"), NodePath(""), NodePath(""), NodePath("")])
+spawn_points = Array[NodePath]([NodePath("slime_spawn"), NodePath("slime_spawn2")])
+spawn_points_2 = Array[NodePath]([NodePath(""), NodePath("")])
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, -1)
@@ -910,6 +914,25 @@ position = Vector2(-0.820509, 5)
 shape = SubResource("RectangleShape2D_fi2lc")
 disabled = true
 
+[node name="door4" type="AnimatedSprite2D" parent="."]
+position = Vector2(298, -137)
+scale = Vector2(1.21875, 1)
+sprite_frames = SubResource("SpriteFrames_r8uqv")
+animation = &"close"
+script = ExtResource("8_h5172")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="door4"]
+libraries = {
+"": SubResource("AnimationLibrary_cptuv")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door4"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(7.62939e-06, 3.99999)
+shape = SubResource("RectangleShape2D_fi2lc")
+disabled = true
+
 [node name="door2" type="AnimatedSprite2D" parent="."]
 position = Vector2(91, -48)
 rotation = 1.5708
@@ -934,7 +957,7 @@ disabled = true
 position = Vector2(-50, -83)
 
 [node name="slime_spawn2" type="Marker2D" parent="."]
-position = Vector2(37, -66)
+position = Vector2(34, -66)
 
 [node name="spikes" parent="." instance=ExtResource("14_6cn4f")]
 position = Vector2(233, -58)
@@ -945,4 +968,18 @@ position = Vector2(312, -26)
 [node name="spikes3" parent="." instance=ExtResource("14_6cn4f")]
 position = Vector2(298, -94)
 
+[node name="detecplayer_2ndroom" type="Area2D" parent="."]
+position = Vector2(294, -52)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detecplayer_2ndroom"]
+position = Vector2(0.5, -3.875)
+shape = SubResource("RectangleShape2D_hpw4k")
+
+[node name="slime_spawn3" type="Marker2D" parent="."]
+position = Vector2(262, -74)
+
+[node name="slime_spawn4" type="Marker2D" parent="."]
+position = Vector2(327, -39)
+
 [connection signal="body_entered" from="detectplayer" to="." method="_on_detectplayer_body_entered"]
+[connection signal="body_entered" from="detecplayer_2ndroom" to="." method="_on_detecplayer_2_ndroom_body_entered"]

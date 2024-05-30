@@ -5,6 +5,7 @@ extends Node2D
 @export var door: NodePath
 @export var enemy_scene: PackedScene
 @export var spawn_points: Array[NodePath]
+@export var spawn_points_2: Array[NodePath]
 var enemies = []
 
 
@@ -22,8 +23,8 @@ func _on_detectplayer_body_entered(body):
 
 
 func close_door():
-	$door/AnimationPlayer.play("wallup") 
-	$door2/AnimationPlayer.play("wallup")
+	$door3/AnimationPlayer.play("wallup") 
+	$door4/AnimationPlayer.play("wallup")
 
 func spawn_enemies():
 	for spawn_point_path in spawn_points:
@@ -39,12 +40,25 @@ func spawn_enemies():
 		enemy.tree_exited.connect(_on_enemy_defeated)
 
 
-
+func spawn_enemies_2():
+	for spawn_point_path in spawn_points:
+		var spawn_point = get_node(spawn_point_path)
+		if spawn_point == null:
+			continue
+		var enemy = enemy_scene.instantiate()
+		if enemy == null:
+			continue
+		add_child(enemy)
+		enemy.position = spawn_point.position
+		enemies.append(enemy)
+		enemy.tree_exited.connect(_on_enemy_defeated)
+		
+		
 func _on_enemy_defeated():
-	enemies.remove_at(2)
+	$detectplayer.monitoring = false
 	print("enemy defeated")
 	print(enemies)  
-	if enemies.is_empty():
+	if enemies.size() == 2:
 		print("room cleared")
 		open_door()
 	
@@ -55,5 +69,6 @@ func open_door():
 	$door2/AnimationPlayer.play("walldown")
 	
 
-		
-
+func _on_detecplayer_2_ndroom_body_entered(body):
+	spawn_enemies_2()
+	close_door()
