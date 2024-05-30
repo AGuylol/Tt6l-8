@@ -9,12 +9,13 @@ var enemies = []
 
 
 func _ready():
-	pass
+	print(enemies)
 	
 func _process(delta):
 	pass
 	
 func _on_detectplayer_body_entered(body):
+	$detectplayer.monitoring = false
 	if body.is_in_group("player"):
 		close_door()
 		spawn_enemies()
@@ -35,10 +36,18 @@ func spawn_enemies():
 		add_child(enemy)
 		enemy.position = spawn_point.position
 		enemies.append(enemy)
+		enemy.tree_exited.connect(_on_enemy_defeated)
+
 
 
 func _on_enemy_defeated():
-	pass
+	enemies.remove_at(2)
+	print("enemy defeated")
+	print(enemies)  
+	if enemies.is_empty():
+		print("room cleared")
+		open_door()
+	
 
 	
 func open_door():

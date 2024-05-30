@@ -90,6 +90,7 @@ size = Vector2(96, 90)
 
 [node name="spikes" type="Area2D" groups=["spikes"]]
 script = ExtResource("1_36b7x")
+spike_transition_time = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.38419e-07, -2.38419e-07)

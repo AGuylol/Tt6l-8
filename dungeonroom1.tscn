@@ -573,7 +573,7 @@ sources/6 = SubResource("TileSetAtlasSource_howyd")
 sources/7 = SubResource("TileSetAtlasSource_ofbnr")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4axp"]
-size = Vector2(149, 149)
+size = Vector2(149, 154.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5u4e"]
 atlas = ExtResource("6_ptiwa")
@@ -868,7 +868,7 @@ door = NodePath("../door")
 enemy_scene = ExtResource("10_bo2mn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectplayer"]
-position = Vector2(8, -45)
+position = Vector2(8, -42.25)
 shape = SubResource("RectangleShape2D_j4axp")
 
 [node name="door" type="AnimatedSprite2D" parent="."]
