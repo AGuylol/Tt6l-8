@@ -81,7 +81,8 @@ func take_damage(damage):
 	$AnimatedSprite2D.play("default")
 	if health <= 0:
 		moving = false
-		$CollisionShape2D.disabled
+		$hitarea/CollisionShape2D.disabled = true
+		$hitbox/CollisionShape2D.disabled = true
 		$AnimatedSprite2D.play("death")
 		await get_tree().create_timer(0.8).timeout
 		queue_free()

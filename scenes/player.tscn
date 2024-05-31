@@ -467,7 +467,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_4rks7"]
 resource_name = "e_attack"
-length = 0.5
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1098,7 +1098,7 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.75, 1.75)
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)
