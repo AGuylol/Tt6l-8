@@ -1,30 +1,30 @@
 [gd_scene load_steps=14 format=3 uid="uid://evtggxv8uoam"]
 
-[ext_resource type="Script" path="res://script/Area2D.gd" id="1_2l7m2"]
-[ext_resource type="Texture2D" uid="uid://crcekaok46jgq" path="res://arts/tilesets/Flamethrower.png" id="2_gwg4i"]
+[ext_resource type="Script" path="res://script/Area2D.gd" id="1_grbud"]
+[ext_resource type="Texture2D" uid="uid://crcekaok46jgq" path="res://arts/tilesets/Flamethrower.png" id="2_opdc4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylb55"]
-atlas = ExtResource("2_gwg4i")
+atlas = ExtResource("2_opdc4")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5t7ol"]
-atlas = ExtResource("2_gwg4i")
+atlas = ExtResource("2_opdc4")
 region = Rect2(16, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bqua0"]
-atlas = ExtResource("2_gwg4i")
+atlas = ExtResource("2_opdc4")
 region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hef0t"]
-atlas = ExtResource("2_gwg4i")
+atlas = ExtResource("2_opdc4")
 region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kr5x7"]
-atlas = ExtResource("2_gwg4i")
+atlas = ExtResource("2_opdc4")
 region = Rect2(64, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v4mpf"]
-atlas = ExtResource("2_gwg4i")
+atlas = ExtResource("2_opdc4")
 region = Rect2(80, 0, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_do8vm"]
@@ -143,7 +143,7 @@ _data = {
 }
 
 [node name="Area2D" type="Area2D" groups=["flame"]]
-script = ExtResource("1_2l7m2")
+script = ExtResource("1_grbud")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_do8vm")

@@ -48,7 +48,7 @@ radius = 16.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qog2a")
-frame_progress = 0.857593
+frame_progress = 0.572401
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0xh8r")
