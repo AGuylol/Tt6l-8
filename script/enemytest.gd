@@ -11,6 +11,7 @@ var knockback_force = Vector2()
 var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
+var coin = coin.instantiate()
 
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -67,7 +68,7 @@ func _on_hitbox_area_entered(area):
 	elif area.is_in_group("sword"):
 		knockback_multiplier = 10
 		print("worked")
-		damage = 20
+		damage = 90
 		take_damage(damage)
 		healthbar.health = health
 		apply_knockback(area.position , knockback_multiplier)
@@ -77,15 +78,21 @@ func take_damage(damage):
 	health -= damage
 	print(health)
 	$AnimatedSprite2D.play("hit")
+	
+	if health <= 0:
+		disable_collisions()
+		moving = false
+		
+		$AnimatedSprite2D.play("death")
+		await get_tree().create_timer(0.6).timeout
+		queue_free()
+		
 	await get_tree().create_timer(1).timeout
 	$AnimatedSprite2D.play("default")
-	if health <= 0:
-		moving = false
-		$hitarea/CollisionShape2D.disabled = true
-		$hitbox/CollisionShape2D.disabled = true
-		$AnimatedSprite2D.play("death")
-		await get_tree().create_timer(0.8).timeout
-		queue_free()
+		
+func disable_collisions():
+	$hitarea/CollisionShape2D.disabled = true
+	$hitbox/CollisionShape2D.disabled = true
 		
 func apply_knockback(source_position , knockback_multiplier):
 	var direction = (position - source_position).normalized()

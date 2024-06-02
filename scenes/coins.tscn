@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://d4bbi7f5hbqpk"]
+
+[ext_resource type="Texture2D" uid="uid://dem8o1kyaraah" path="res://arts/dungeon/item and and trap/coin/coin_1.png" id="1_jcag0"]
+[ext_resource type="Texture2D" uid="uid://bogqbl0v2oqi4" path="res://arts/dungeon/item and and trap/coin/coin_2.png" id="2_tou4n"]
+[ext_resource type="Texture2D" uid="uid://bo7wa5kfw7nrr" path="res://arts/dungeon/item and and trap/coin/coin_3.png" id="3_j616x"]
+[ext_resource type="Texture2D" uid="uid://eafpjepm7xmr" path="res://arts/dungeon/item and and trap/coin/coin_4.png" id="4_gjeuv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g41o5"]
+atlas = ExtResource("1_jcag0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kt4a"]
+atlas = ExtResource("2_tou4n")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm8vw"]
+atlas = ExtResource("3_j616x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbfsi"]
+atlas = ExtResource("4_gjeuv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qog2a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g41o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kt4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm8vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbfsi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xh8r"]
+radius = 16.0
+
+[node name="coins" type="Area2D" groups=["coin"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qog2a")
+frame_progress = 0.857593
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0xh8r")

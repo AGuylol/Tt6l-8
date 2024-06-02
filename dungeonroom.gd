@@ -1,64 +1,67 @@
 extends Node2D
 
 
-@export var slime_scene = PackedScene
-@export var door: NodePath
 @export var enemy_scene: PackedScene
 @export var spawn_points: Array[NodePath]
 @export var spawn_points_2: Array[NodePath]
 @export var spawn_points_3: Array[NodePath]
+@export var spawn_points_4: Array[NodePath]
 var enemies = []
+var doors_open = true
 
 
+
+func open_all_doors():
+	if not doors_open:
+		$doors/door/AnimationPlayer.play("wall_going_down")
+		$doors/door2/AnimationPlayer.play("wall_going_down")
+		$doors/door3/AnimationPlayer.play("wall_going_down")
+		$doors/door4/AnimationPlayer.play("wall_going_down")
+		$doors/door5/AnimationPlayer.play("wall_going_down")
+		$doors/door6/AnimationPlayer.play("wall_going_down")
+		$doors/door7/AnimationPlayer.play("wall_going_down")
+
+		doors_open = true
+		
+func close_all_doors():
+	if doors_open:
+		$doors/door/AnimationPlayer.play("wall_going_up")
+		$doors/door2/AnimationPlayer.play("wall_going_up")
+		$doors/door3/AnimationPlayer.play("wall_going_up")
+		$doors/door4/AnimationPlayer.play("wall_going_up")
+		$doors/door5/AnimationPlayer.play("wall_going_up")
+		$doors/door6/AnimationPlayer.play("wall_going_up")
+		$doors/door7/AnimationPlayer.play("wall_going_up")
+		doors_open = false
+		
 func _ready():
-	print(enemies)
+	pass
 	
 func _process(delta):
 	pass
 	
 func _on_detectplayer_body_entered(body):
-	$detectplayer.monitoring = false
+	$detectplayerarea/detectplayer.monitoring = false
 	if body.is_in_group("player"):
-		close_door()
+		
+		close_all_doors()
 		spawn_enemies()
-
-
-func close_door():
-	$door3/AnimationPlayer.play("wallup") 
-	$door4/AnimationPlayer.play("wallup")
-	$door/AnimationPlayer.play("wallup")
-	$door2/AnimationPlayer.play("wallup")
-
+		
 func spawn_enemies():
-	for spawn_point_path in spawn_points:
-		var spawn_point = get_node(spawn_point_path)
-		if spawn_point == null:
-			continue
-		var enemy = enemy_scene.instantiate()
-		if enemy == null:
-			continue
-		add_child(enemy)
-		enemy.position = spawn_point.position
-		enemies.append(enemy)
-		enemy.tree_exited.connect(_on_enemy_defeated)
-
-
-func spawn_enemies_2():
-	for spawn_point_path in spawn_points_2:
-		var spawn_point = get_node(spawn_point_path)
-		if spawn_point == null:
-			continue
-		var enemy = enemy_scene.instantiate()
-		if enemy == null:
-			continue
-		add_child(enemy)
-		enemy.position = spawn_point.position
-		enemies.append(enemy)
-		enemy.tree_exited.connect(_on_enemy_defeated)
+	spawn_from_points(spawn_points)
 	
-		
+func spawn_enemies_2():
+	spawn_from_points(spawn_points_2)
+	
 func spawn_enemies_3():
-	for spawn_point_path in spawn_points_3:
+	spawn_from_points(spawn_points_3)
+	
+func spawn_enemies_4():
+	spawn_from_points(spawn_points_4)
+
+
+func spawn_from_points(points):
+	for spawn_point_path in points:
 		var spawn_point = get_node(spawn_point_path)
 		if spawn_point == null:
 			continue
@@ -69,35 +72,33 @@ func spawn_enemies_3():
 		enemy.position = spawn_point.position
 		enemies.append(enemy)
 		enemy.tree_exited.connect(_on_enemy_defeated)
-		
-		
 		
 		
 func _on_enemy_defeated():
-	$detectplayer.monitoring = false
-	print("enemy defeated")
-	print(enemies)  
-	if enemies.size() == 2:
+	print("enemy")
+	enemies.erase(enemies[-1])  
+	print(enemies)
+	if enemies.size() == 0:
 		print("room cleared")
-		open_door()
-	
-
-	
-func open_door():
-	$door/AnimationPlayer.play("walldown")
-	$door2/AnimationPlayer.play("walldown")
-	$door3/AnimationPlayer.play("walldown")
-	$door4/AnimationPlayer.play("walldown")
-	
+		open_all_doors()
 	
 
 func _on_detecplayer_2_ndroom_body_entered(body):
 	if body.is_in_group("player"):
+		$detectplayerarea/detectplayer2.monitoring = false
 		spawn_enemies_2()
-		close_door()
+		close_all_doors()
 
 
 func _on_detectplayer_3_body_entered(body):
 	if body.is_in_group("player"):
+		$detectplayerarea/detectplayer3.monitoring = false
 		spawn_enemies_3()
-		close_door()
+		close_all_doors()
+
+func _on_detectplayer_4_body_entered(body):
+	if body.is_in_group("player"):
+		$detectplayerarea/detectplayer4.monitoring = false
+		spawn_enemies_4()
+		close_all_doors()
+

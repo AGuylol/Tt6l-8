@@ -22,7 +22,7 @@ var arrow = preload(\"res://scenes/arrow.tscn\")
 
 var max_speed = 100
 var accel = 800
-var friction = 400
+var friction = 600
 enum {idle , walk}
 var state = idle
 
@@ -42,6 +42,8 @@ var dash_direction : Vector2
 var knockback_force = 100
 var knockback_duration = 0.5
 var is_knocked_back = false
+var inventory = []
+
 
 func _ready():
 	animation_tree.active = true
@@ -209,7 +211,22 @@ func apply_knockback(direction: Vector2):
 
 func _on_playerhitbox_area_entered(area):
 	if area.is_in_group(\"spikes\"):
-		print(\"owwww\")
+		player_health -=5
+		healthbar.health = player_health
+	elif area.is_in_group(\"lava\"):
+		player_health -=10
+		print(player_health)
+		healthbar.health = player_health
+	elif area.is_in_group(\"flame\"):
+		player_health -=5
+		healthbar.health = player_health
+	elif area.is_in_group(\"key\"):
+		inventory.append(\"key\")
+		print(inventory)
+	elif area.is_in_group(\"coin\"):
+		inventory.append(\"coin\")
+		
+
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
