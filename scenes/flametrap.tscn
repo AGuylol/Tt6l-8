@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://evtggxv8uoam"]
 
-[ext_resource type="Script" path="res://Area2D.gd" id="1_2l7m2"]
+[ext_resource type="Script" path="res://script/Area2D.gd" id="1_2l7m2"]
 [ext_resource type="Texture2D" uid="uid://crcekaok46jgq" path="res://arts/tilesets/Flamethrower.png" id="2_gwg4i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylb55"]

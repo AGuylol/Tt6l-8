@@ -11,7 +11,7 @@ var knockback_force = Vector2()
 var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
-var coin = coin.instantiate()
+var coins = coins.instantiate()
 
 func _ready():
 	$AnimatedSprite2D.play("default")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=50 format=3 uid="uid://bq03udps8dlie"]
 
-[ext_resource type="Script" path="res://dungeonroom.gd" id="1_cjri4"]
+[ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
 [ext_resource type="Texture2D" uid="uid://dmenfn0432uwj" path="res://arts/mines/Water.png" id="3_8i56k"]
 [ext_resource type="Texture2D" uid="uid://by7v8eucker37" path="res://arts/mines/Set 4.5.png" id="4_ktwja"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://crcekaok46jgq" path="res://arts/tilesets/Flamethrower.png" id="12_nji81"]
 [ext_resource type="PackedScene" uid="uid://b4gwjtpa0kbwk" path="res://scenes/spikes.tscn" id="14_6cn4f"]
 [ext_resource type="PackedScene" uid="uid://68xdu80spkc7" path="res://scenes/key.tscn" id="16_r3q1m"]
-[ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://flametrap.tscn" id="17_go1gu"]
+[ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")
@@ -4868,46 +4868,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnv6n"]
 size = Vector2(51, 3)
 
-[sub_resource type="Animation" id="Animation_ajtk2"]
-resource_name = "wall_going_up"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"wall_going_up"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_fukhe"]
 length = 0.001
 tracks/0/type = "value"
@@ -4984,6 +4944,46 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ajtk2"]
+resource_name = "wall_going_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"wall_going_up"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6606"]
