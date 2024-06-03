@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var healthbar = $Healthbar
+@onready var coin_scene = preload("res://scenes/coins.tscn")
 var speed = 35
 var player_chase = false
 var player = null
@@ -11,11 +12,12 @@ var knockback_force = Vector2()
 var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
-var coins = coins.instantiate()
+
 
 func _ready():
 	$AnimatedSprite2D.play("default")
 	healthbar.init_health(health)
+	$hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
 func _physics_process(_delta):
 	movement(_delta)
@@ -26,16 +28,17 @@ func movement(_delta):
 	if knockback_timer > 0:
 		velocity = knockback_force
 		knockback_timer -= _delta
-		move_and_slide()
+		
 	else:
 		if player_chase and player:
 			if moving:
-				var direction = (player.position - position).normalized()
+				var direction = (player.position -  position).normalized()
 				velocity = direction * speed
-				move_and_slide()
+				
 		else:
 			velocity = Vector2.ZERO
-
+			
+	move_and_slide()
 func slime_damaged():
 	if player_attacked == true:
 		health -= 20
@@ -44,7 +47,7 @@ func slime_damaged():
 			self.queue_free()
 
 func _on_detection_body_entered(body):
-	if not body.is_in_group("enemy"):
+	if body.is_in_group("player"):
 		player = body
 		player_chase = true
 		moving = true
@@ -82,12 +85,15 @@ func take_damage(damage):
 	if health <= 0:
 		disable_collisions()
 		moving = false
+		$hitbox.monitoring = false
+		$hitbox.area_entered.disconnect(_on_hitbox_area_entered)
 		
 		$AnimatedSprite2D.play("death")
 		await get_tree().create_timer(0.6).timeout
+		spawn_coins()
 		queue_free()
 		
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(6).timeout
 	$AnimatedSprite2D.play("default")
 		
 func disable_collisions():
@@ -99,4 +105,11 @@ func apply_knockback(source_position , knockback_multiplier):
 	knockback_force = direction * knockback_multiplier
 	knockback_timer = knockback_duration
 	
-
+func spawn_coins():
+	var coin_count = randi() % 3 + 1
+	for i in range(coin_count):
+		var coin_instance = coin_scene.instantiate()
+		coin_instance.position = position
+		print("Spawning coin at position: ", coin_instance.position)
+		get_parent().add_child(coin_instance)
+		print("Coin spawned")

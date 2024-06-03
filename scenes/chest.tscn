@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://jrw8xnclqdi8"]
+[gd_scene load_steps=15 format=3 uid="uid://jrw8xnclqdi8"]
 
 [ext_resource type="Texture2D" uid="uid://cl2mahgc5r47h" path="res://arts/dungeon/item and and trap/chest/chest_3.png" id="1_pmgg4"]
+[ext_resource type="Script" path="res://script/chest.gd" id="1_qok50"]
 [ext_resource type="Texture2D" uid="uid://bmh6d4kccug55" path="res://arts/dungeon/item and and trap/chest/chest_open_3.png" id="2_paa2l"]
 [ext_resource type="Texture2D" uid="uid://b5131mvqopcjg" path="res://arts/dungeon/item and and trap/chest/chest_open_4.png" id="3_7yjw5"]
 
@@ -14,6 +15,10 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0cwe"]
 atlas = ExtResource("3_7yjw5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2458u"]
+atlas = ExtResource("1_pmgg4")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dmel8"]
@@ -31,37 +36,18 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2458u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r4med"]
 radius = 15.0
-
-[sub_resource type="Animation" id="Animation_oth3d"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"default"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.025, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 0, 0, 1, 1, 2, 2, 2]
-}
 
 [sub_resource type="Animation" id="Animation_d6mp8"]
 length = 0.001
@@ -90,13 +76,44 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_oth3d"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.025, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 0, 1, 1, 2, 2, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ffxk"]
 _data = {
 "RESET": SubResource("Animation_d6mp8"),
 "open": SubResource("Animation_oth3d")
 }
 
-[node name="chest" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkwyh"]
+size = Vector2(9, 5)
+
+[node name="chest" type="Area2D" groups=["chest"]]
+script = ExtResource("1_qok50")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dmel8")
@@ -108,3 +125,11 @@ shape = SubResource("CircleShape2D_r4med")
 libraries = {
 "": SubResource("AnimationLibrary_0ffxk")
 }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nkwyh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

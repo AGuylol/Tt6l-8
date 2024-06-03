@@ -12,5 +12,5 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if global.player_interaction:
+	if body.is_in_group("player"):
 		queue_free()

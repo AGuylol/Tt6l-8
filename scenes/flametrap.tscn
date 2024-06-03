@@ -54,7 +54,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1yem"]
-size = Vector2(9, 28)
+size = Vector2(7, 26)
 
 [sub_resource type="Animation" id="Animation_hgero"]
 length = 0.001
@@ -149,7 +149,7 @@ script = ExtResource("1_grbud")
 sprite_frames = SubResource("SpriteFrames_do8vm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1)
+position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_c1yem")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

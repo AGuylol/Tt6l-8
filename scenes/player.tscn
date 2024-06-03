@@ -11,7 +11,7 @@ script/source = "extends CharacterBody2D
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
 
-var player_health = 100.0
+var player_health = 1000.0
 var player_alive = false
 var attacking = false
 var sword_equiped = true
@@ -20,7 +20,7 @@ var bow_equiped = false
 var bow_cooldown = true
 var arrow = preload(\"res://scenes/arrow.tscn\")
 
-var max_speed = 100
+var max_speed = 300
 var accel = 800
 var friction = 600
 enum {idle , walk}
@@ -42,7 +42,6 @@ var dash_direction : Vector2
 var knockback_force = 100
 var knockback_duration = 0.5
 var is_knocked_back = false
-var inventory = []
 
 
 func _ready():
@@ -56,6 +55,9 @@ func _physics_process(delta):
 	_on_attack_timeout()
 	bow_shoot()
 	
+	if Input.is_action_just_pressed(\"interaction\"):
+		global.player_interaction = true
+		print(\"interaction\")
 	
 	if Input.is_action_just_pressed(\"equip_bow\"):
 		if bow_equiped:
@@ -164,7 +166,7 @@ func _on_playerhitbox_body_exited(body):
 		
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown:
-		player_health -= 20
+		player_health -= 15
 		print(player_health)
 		print(\"enemy attacked you\")
 		await get_tree().create_timer(0.5).timeout
@@ -185,7 +187,7 @@ func bow_shoot():
 		arrow_instance.global_position = $Marker2D.global_position
 		add_child(arrow_instance)
 		
-		await get_tree().create_timer(20).timeout
+		await get_tree().create_timer(10).timeout
 		bow_cooldown = true
 		
  
@@ -212,20 +214,23 @@ func apply_knockback(direction: Vector2):
 func _on_playerhitbox_area_entered(area):
 	if area.is_in_group(\"spikes\"):
 		player_health -=5
-		healthbar.health = player_health
 	elif area.is_in_group(\"lava\"):
 		player_health -=10
 		print(player_health)
-		healthbar.health = player_health
 	elif area.is_in_group(\"flame\"):
 		player_health -=5
-		healthbar.health = player_health
 	elif area.is_in_group(\"key\"):
-		inventory.append(\"key\")
-		print(inventory)
+		global.player_inventory.append(\"key\")
+		print(global.player_inventory)
 	elif area.is_in_group(\"coin\"):
-		inventory.append(\"coin\")
-		
+		global.player_inventory.append(\"coin\")
+		print(global.player_inventory)
+	elif area.is_in_group(\"flamethrower\"):
+		player_health -=10
+		print(player_health)
+	
+	healthbar.health = player_health
+	print(player_health)
 
 "
 

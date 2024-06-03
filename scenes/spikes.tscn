@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://b4gwjtpa0kbwk"]
 
-[ext_resource type="Script" path="res://scenes/spikes.gd" id="1_36b7x"]
+[ext_resource type="Script" path="res://script/spikes.gd" id="1_cgpgk"]
 [ext_resource type="Texture2D" uid="uid://guetmq1kpwkv" path="res://arts/mines/Spike.png" id="2_cluvo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7bof"]
@@ -83,7 +83,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3bwo"]
-size = Vector2(12.9063, 12.25)
+size = Vector2(8, 7)
 
 [sub_resource type="Animation" id="Animation_yrrk7"]
 length = 0.001
@@ -172,7 +172,7 @@ _data = {
 }
 
 [node name="spikes" type="Area2D" groups=["spikes"]]
-script = ExtResource("1_36b7x")
+script = ExtResource("1_cgpgk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.38419e-07, -2.38419e-07)
