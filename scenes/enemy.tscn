@@ -113,7 +113,7 @@ radius = 4.0
 radius = 8.06226
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_40npp"]
-radius = 33.0
+radius = 75.0267
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_busrp"]
 radius = 11.0
@@ -154,7 +154,7 @@ offset_bottom = 12.0
 
 [node name="hitarea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitarea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitarea" groups=["enemy"]]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_busrp")
 

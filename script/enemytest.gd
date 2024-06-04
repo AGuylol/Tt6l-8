@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 @onready var healthbar = $Healthbar
+@onready var coin_scene = preload("res://scenes/coins.tscn")
 var speed = 35
 var player_chase = false
 var player = null
-var health = 100
+var health = 50
 var player_attacked = false
 
 var knockback_force = Vector2()
@@ -12,29 +13,32 @@ var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
 
+
 func _ready():
 	$AnimatedSprite2D.play("default")
 	healthbar.init_health(health)
+	$hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
 func _physics_process(_delta):
 	movement(_delta)
 	slime_damaged()
 	
 	
-func movement(_delta):
+func movement(delta):
 	if knockback_timer > 0:
 		velocity = knockback_force
-		knockback_timer -= _delta
-		move_and_slide()
+		knockback_timer -= delta
+		
 	else:
 		if player_chase and player:
 			if moving:
-				var direction = (player.position - position).normalized()
+				var direction = (player.position -  position).normalized()
 				velocity = direction * speed
-				move_and_slide()
+				
 		else:
 			velocity = Vector2.ZERO
-
+			
+	move_and_slide()
 func slime_damaged():
 	if player_attacked == true:
 		health -= 20
@@ -43,7 +47,7 @@ func slime_damaged():
 			self.queue_free()
 
 func _on_detection_body_entered(body):
-	if not body.is_in_group("enemy"):
+	if body.is_in_group("player"):
 		player = body
 		player_chase = true
 		moving = true
@@ -77,18 +81,35 @@ func take_damage(damage):
 	health -= damage
 	print(health)
 	$AnimatedSprite2D.play("hit")
-	await get_tree().create_timer(1).timeout
-	$AnimatedSprite2D.play("default")
+	
 	if health <= 0:
+		disable_collisions()
 		moving = false
-		$CollisionShape2D.disabled
+		$hitbox.monitoring = false
+		$hitbox.area_entered.disconnect(_on_hitbox_area_entered)
+		
 		$AnimatedSprite2D.play("death")
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(0.6).timeout
+		spawn_coins()
 		queue_free()
+		
+	await get_tree().create_timer(6).timeout
+	$AnimatedSprite2D.play("default")
+		
+func disable_collisions():
+	$hitarea/CollisionShape2D.disabled = true
+	$hitbox/CollisionShape2D.disabled = true
 		
 func apply_knockback(source_position , knockback_multiplier):
 	var direction = (position - source_position).normalized()
 	knockback_force = direction * knockback_multiplier
 	knockback_timer = knockback_duration
 	
-
+func spawn_coins():
+	var coin_count = randi() % 3 + 1
+	for i in range(coin_count):
+		var coin_instance = coin_scene.instantiate()
+		coin_instance.position = position
+		print("Spawning coin at position: ", coin_instance.position)
+		get_parent().add_child(coin_instance)
+		print("Coin spawned")
