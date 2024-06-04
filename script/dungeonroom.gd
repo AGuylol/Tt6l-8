@@ -2,12 +2,13 @@ extends Node2D
 
 
 @export var enemy_scene: PackedScene
-@export var spawn_points: Array[NodePath]
-@export var spawn_points_2: Array[NodePath]
-@export var spawn_points_3: Array[NodePath]
-@export var spawn_points_4: Array[NodePath]
-@export var spawn_points_5: Array[NodePath]
-@export var spawn_points_6: Array[NodePath]
+var spawn_points: Array[NodePath]
+var spawn_points_2: Array[NodePath]
+var spawn_points_3: Array[NodePath]
+var spawn_points_4: Array[NodePath]
+var spawn_points_5: Array[NodePath]
+var spawn_points_6: Array[NodePath]
+
 
 var enemies = []
 var doors_open = true
@@ -59,8 +60,53 @@ func _ready():
 	$detectplayerarea/detectplayer4.body_entered.connect(_on_detectplayer_4_body_entered)
 	$detectplayerarea/detectplayer5.body_entered.connect(_on_detectplayer_5_body_entered)
 	$detectplayerarea/detectplayer6.body_entered.connect(_on_detectplayer_6_body_entered)
+	print(spawn_points)
+
+
+	spawn_points = [
+		$enemy_spawns/spawn_point.get_path(),
+		$enemy_spawns/spawn_point2.get_path(),
+	]
+	spawn_points_2 = [
+		$enemy_spawns/spawn_point3.get_path(),
+		$enemy_spawns/spawn_point4.get_path(),
+	]
+	spawn_points_3 = [
+		$enemy_spawns/spawn_point5.get_path(),
+		$enemy_spawns/spawn_point6.get_path(),
+		$enemy_spawns/spawn_point7.get_path()
+	]
+	spawn_points_4 = [
+		$enemy_spawns/spawn_point8.get_path(),
+		$enemy_spawns/spawn_point9.get_path(),
+		$enemy_spawns/spawn_point10.get_path(),
+		$enemy_spawns/spawn_point11.get_path()
+	]
+	spawn_points_5 = [
+		
+		$enemy_spawns/spawn_point12.get_path(),
+		$enemy_spawns/spawn_point13.get_path(),
+		$enemy_spawns/spawn_point14.get_path(),
+		$enemy_spawns/spawn_point15.get_path()
+		
+	]
+	spawn_points_6 = [
+		$enemy_spawns/spawn_point16.get_path(),
+		$enemy_spawns/spawn_point17.get_path(),
+		$enemy_spawns/spawn_point18.get_path(),
+		$enemy_spawns/spawn_point19.get_path(),
+		$enemy_spawns/spawn_point20.get_path()
+	]
+
+	$detectplayerarea/detectplayer.body_entered.connect(_on_detectplayer_body_entered)
+	$detectplayerarea/detectplayer2.body_entered.connect(_on_detecplayer_2_ndroom_body_entered)
+	$detectplayerarea/detectplayer3.body_entered.connect(_on_detectplayer_3_body_entered)
+	$detectplayerarea/detectplayer4.body_entered.connect(_on_detectplayer_4_body_entered)
+	$detectplayerarea/detectplayer5.body_entered.connect(_on_detectplayer_5_body_entered)
+	$detectplayerarea/detectplayer6.body_entered.connect(_on_detectplayer_6_body_entered)
+
 	
-	
+
 func _process(delta):
 	pass
 	
@@ -150,9 +196,6 @@ func _on_detectplayer_5_body_entered(body):
 		
 func _on_detectplayer_6_body_entered(body):
 	if body.is_in_group("player"):
-		print("Spawning enemies for Room 6")
-		print("Spawn Points:", spawn_points_6)
-		spawn_from_points(spawn_points_6)
 		$detectplayerarea/detectplayer6.monitoring = false
 		$detectplayerarea/detectplayer6.body_entered.disconnect(_on_detectplayer_6_body_entered)
 		spawn_enemies_6()

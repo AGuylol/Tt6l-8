@@ -5,7 +5,7 @@ extends CharacterBody2D
 var speed = 35
 var player_chase = false
 var player = null
-var health = 100
+var health = 50
 var player_attacked = false
 
 var knockback_force = Vector2()
@@ -24,10 +24,10 @@ func _physics_process(_delta):
 	slime_damaged()
 	
 	
-func movement(_delta):
+func movement(delta):
 	if knockback_timer > 0:
 		velocity = knockback_force
-		knockback_timer -= _delta
+		knockback_timer -= delta
 		
 	else:
 		if player_chase and player:
@@ -71,7 +71,7 @@ func _on_hitbox_area_entered(area):
 	elif area.is_in_group("sword"):
 		knockback_multiplier = 10
 		print("worked")
-		damage = 90
+		damage = 20
 		take_damage(damage)
 		healthbar.health = health
 		apply_knockback(area.position , knockback_multiplier)

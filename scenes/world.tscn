@@ -5007,9 +5007,7 @@ layer_2/tile_data = PackedInt32Array()
 visible = false
 
 [node name="dungeonroom1" parent="." instance=ExtResource("14_4m8ot")]
-position = Vector2(18, -159)
-spawn_points_5 = Array[NodePath]([])
-spawn_points_6 = Array[NodePath]([])
+position = Vector2(484, 73)
 
 [node name="player" parent="dungeonroom1" instance=ExtResource("5_fdaxo")]
-position = Vector2(-5, 197)
+position = Vector2(8, 154)

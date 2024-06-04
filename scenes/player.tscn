@@ -11,7 +11,7 @@ script/source = "extends CharacterBody2D
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
 
-var player_health = 1000.0
+var player_health = 100.0
 var player_alive = false
 var attacking = false
 var sword_equiped = true
@@ -20,7 +20,7 @@ var bow_equiped = false
 var bow_cooldown = true
 var arrow = preload(\"res://scenes/arrow.tscn\")
 
-var max_speed = 300
+var max_speed = 100
 var accel = 800
 var friction = 600
 enum {idle , walk}
@@ -147,7 +147,7 @@ func _on_playerhitbox_body_entered(body):
 		
 		var knockback_direction = (global_position - body.global_position).normalized()
 		apply_knockback(knockback_direction)
-		player_health -= 20
+		player_health -= 10
 		healthbar.health = player_health
 		print(\"Player health:\", player_health)
 		if player_health <= 0:
@@ -1120,7 +1120,7 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.75, 1.75)
+zoom = Vector2(2, 2)
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)
