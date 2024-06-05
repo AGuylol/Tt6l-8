@@ -1,16 +1,17 @@
-extends Area2D
+extends Node2D
 
 
-# Called when the node enters the scene tree for the first time.
+@onready var interaction_area :interaction_area = $Interaction_area
+
+ 
 func _ready():
 	$AnimatedSprite2D.play("default")
+	interaction_area.interact = Callable (self, "_on_pickup")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_pickup():
+	global.player_inventory.append("key")
+	queue_free()
+	print(global.player_inventory)
+	
 
-
-func _on_body_entered(body):
-	if global.player_interaction:
-		queue_free()

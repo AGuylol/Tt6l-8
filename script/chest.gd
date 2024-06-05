@@ -12,7 +12,7 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body.is_in_group("player") and "key" in global.player_inventory and global.player_interaction:
+	if body.is_in_group("player") and "key" in global.player_inventory:
 		$AnimationPlayer.play("open")
 		global.player_inventory.erase("key")
 		print(global.player_inventory)

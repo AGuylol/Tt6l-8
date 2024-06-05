@@ -54,10 +54,7 @@ func _physics_process(delta):
 	enemy_attack()
 	_on_attack_timeout()
 	bow_shoot()
-	
-	if Input.is_action_just_pressed(\"interaction\"):
-		global.player_interaction = true
-		print(\"interaction\")
+
 	
 	if Input.is_action_just_pressed(\"equip_bow\"):
 		if bow_equiped:

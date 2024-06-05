@@ -1,4 +1,16 @@
 extends Area2D
 class_name interaction_area
 
-@export var action_name : string = "interact"
+@export var action_name : String = "interact"
+
+var interact: Callable  = func():
+	pass
+	
+
+
+func _on_body_entered(body):
+	InteractionManager.register_area(self)
+
+
+func _on_body_exited(body):
+	InteractionManager.unregistered_area(self)

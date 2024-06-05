@@ -1,59 +1,61 @@
-[gd_scene load_steps=12 format=3 uid="uid://68xdu80spkc7"]
+[gd_scene load_steps=13 format=3 uid="uid://68xdu80spkc7"]
 
 [ext_resource type="Script" path="res://script/key.gd" id="1_q3x0v"]
 [ext_resource type="Texture2D" uid="uid://mdqsmpqeg2f5" path="res://arts/dungeon/item and and trap/keys/keys_1_1.png" id="1_reejv"]
 [ext_resource type="Texture2D" uid="uid://ctv7dbopiev7n" path="res://arts/dungeon/item and and trap/keys/keys_1_2.png" id="2_l1ejr"]
 [ext_resource type="Texture2D" uid="uid://ccrajdvel5mwu" path="res://arts/dungeon/item and and trap/keys/keys_1_3.png" id="3_04rn3"]
 [ext_resource type="Texture2D" uid="uid://djv2kaqyf0rn0" path="res://arts/dungeon/item and and trap/keys/keys_1_4.png" id="4_vusm6"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="6_1nlks"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_elb0i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlvmk"]
 atlas = ExtResource("1_reejv")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ugwf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjvh7"]
 atlas = ExtResource("2_l1ejr")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0luaw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4atog"]
 atlas = ExtResource("3_04rn3")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i03d1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldlny"]
 atlas = ExtResource("4_vusm6")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ng37d"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_t43dr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_elb0i")
+"texture": SubResource("AtlasTexture_tlvmk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1ugwf")
+"texture": SubResource("AtlasTexture_pjvh7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0luaw")
+"texture": SubResource("AtlasTexture_4atog")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i03d1")
+"texture": SubResource("AtlasTexture_ldlny")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x7fom"]
-radius = 15.0333
+[sub_resource type="CircleShape2D" id="CircleShape2D_45wfc"]
+radius = 17.0294
 
-[node name="Area2D" type="Area2D" groups=["key"]]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_q3x0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ng37d")
+sprite_frames = SubResource("SpriteFrames_t43dr")
 frame = 1
-frame_progress = 0.720703
+frame_progress = 0.216454
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_x7fom")
+[node name="Interaction_area" parent="." instance=ExtResource("6_1nlks")]
+action_name = "pick up"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
+shape = SubResource("CircleShape2D_45wfc")
