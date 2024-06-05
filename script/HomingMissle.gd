@@ -1,11 +1,23 @@
 extends State
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@export var bullet_node : PackedScene
+var can_transition:bool = false
 
+func enter():
+	super.enter()
+	animation_player.play("ranged_attack")
+	await animation_player.animation_finished
+	shoot()
+	can_transition = true
+	
+	
+func shoot():
+	var bullet = bullet_node.instantiate()
+	bullet.position = owner.position
+	get_tree().current_scene.add_child(bullet)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func transition():
+	if can_transition:
+		can_transition = false
+		get_parent().change_state("dash")

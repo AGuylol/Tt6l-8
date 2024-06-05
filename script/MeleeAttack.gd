@@ -7,4 +7,4 @@ func enter():
 
 func transition():
 	if owner.direction.length() > 30:
-		get_parent().change_state("MeleeAttack")
+		get_parent().change_state("follow")

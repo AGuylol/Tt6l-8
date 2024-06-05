@@ -8,6 +8,7 @@ radius = 3.0
 height = 8.0
 
 [node name="arrow" type="Area2D" groups=["bullet"]]
+collision_mask = 3
 script = ExtResource("1_gov41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -21,4 +22,5 @@ scale = Vector2(0.3, 0.2)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_sgsna")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
