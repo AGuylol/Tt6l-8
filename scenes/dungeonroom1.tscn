@@ -4732,6 +4732,7 @@ texture = ExtResource("4_ktwja")
 texture = ExtResource("5_xx0o5")
 0:0/size_in_atlas = Vector2i(1, 2)
 0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 4)
 0:0/0/y_sort_origin = 4
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -9941,7 +9942,6 @@ libraries = {
 }
 
 [node name="wall collision" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2(-23, 5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall collision"]
