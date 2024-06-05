@@ -1772,7 +1772,6 @@ layer_1/name = "2ndlayer"
 layer_1/tile_data = PackedInt32Array(-65535, 196612, 1, -131072, 196612, 2)
 
 [node name="boss" parent="." instance=ExtResource("9_3cne4")]
-visible = false
 position = Vector2(28, -165)
 
 [node name="player" parent="." instance=ExtResource("10_jkrqg")]

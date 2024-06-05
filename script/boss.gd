@@ -13,7 +13,7 @@ var health = 100:
 		healthbar.value = value
 		if value <= 0:
 			healthbar.visible = false
-			find_child("FiniteStateMachine")
+			find_child("FiniteStateMachine").change_state("death")
 		elif value <= healthbar.max_value / 2 and defence == 0:
 			defence = 5
 			find_child("FiniteStateMachine").change_state("ArmorBuff")

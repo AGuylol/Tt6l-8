@@ -4,7 +4,7 @@ var can_transition : bool = false
 
 func enter():
 	super.enter()
-	animation_player.play("ArmorBuff")
+	animation_player.play("armor_buff")
 	await animation_player.animation_finished
 	can_transition = true
 	

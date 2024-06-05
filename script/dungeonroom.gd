@@ -203,9 +203,6 @@ func _on_detectplayer_6_body_entered(body):
 
 
 
-
-
-
 func _on_boss_room_body_entered(body):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://scenes/boss_fight.tscn")

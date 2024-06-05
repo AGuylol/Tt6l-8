@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://bgs218rc1e2wo" path="res://arts/boss/Mecha-stone Golem 0.1/weapon PNG/Laser_sheet.png" id="2_mducq"]
 [ext_resource type="Script" path="res://script/FiniteStateMachine.gd" id="3_f1dbm"]
 [ext_resource type="Script" path="res://script/idle.gd" id="4_bjca8"]
-[ext_resource type="Script" path="res://state.gd" id="4_o6hsr"]
 [ext_resource type="Script" path="res://script/follow.gd" id="6_sdrcw"]
 [ext_resource type="Script" path="res://script/MeleeAttack.gd" id="7_f0p6r"]
 [ext_resource type="Script" path="res://script/HomingMissle.gd" id="8_o65hd"]
 [ext_resource type="PackedScene" uid="uid://c8jlhs65ft2ic" path="res://scenes/boss_projectile.tscn" id="9_0fwb0"]
 [ext_resource type="Script" path="res://script/ArmorBuff.gd" id="10_agnc4"]
 [ext_resource type="Script" path="res://script/dash.gd" id="11_wbdet"]
+[ext_resource type="Script" path="res://script/death.gd" id="12_dghc0"]
 [ext_resource type="Script" path="res://script/laser.gd" id="12_jcsme"]
 
 [sub_resource type="Animation" id="Animation_v5wub"]
@@ -415,7 +415,7 @@ script = ExtResource("10_agnc4")
 script = ExtResource("11_wbdet")
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("4_o6hsr")
+script = ExtResource("12_dghc0")
 
 [node name="laser" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("12_jcsme")

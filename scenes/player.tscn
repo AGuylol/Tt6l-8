@@ -1096,7 +1096,7 @@ states/idle/position = Vector2(301, 116)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_n2ujf")
 states/walk/position = Vector2(657, 116)
 transitions = ["idle", "attacking", SubResource("AnimationNodeStateMachineTransition_v4sq8"), "attacking", "walk", SubResource("AnimationNodeStateMachineTransition_ei4mp"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_swuin"), "attacking", "idle", SubResource("AnimationNodeStateMachineTransition_mybas"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_sijrr"), "walk", "attacking", SubResource("AnimationNodeStateMachineTransition_jjixr"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_dqowr")]
-graph_offset = Vector2(-90, -72)
+graph_offset = Vector2(-236, -54)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1q7mt"]
 radius = 7.0
