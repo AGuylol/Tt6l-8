@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var healthbar = $Healthbar
 @onready var coin_scene = preload("res://scenes/coins.tscn")
+@onready var item_scene = preload("res://scenes/item.tscn")
 var speed = 35
 var player_chase = false
 var player = null
@@ -13,6 +14,7 @@ var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
 
+@export var item_drop_chance = 50
 
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -91,6 +93,7 @@ func take_damage(damage):
 		$AnimatedSprite2D.play("death")
 		await get_tree().create_timer(0.6).timeout
 		spawn_coins()
+		spawn_item()
 		queue_free()
 		
 	await get_tree().create_timer(6).timeout
@@ -113,3 +116,10 @@ func spawn_coins():
 		print("Spawning coin at position: ", coin_instance.position)
 		get_parent().add_child(coin_instance)
 		print("Coin spawned")
+
+func spawn_item():
+	if randi() % 100 < item_drop_chance:
+		var item_instance = item_scene.instantiate()
+		item_instance.position = position
+		get_parent().add_child(item_instance)
+		print("Item spawned at position: ", item_instance.position)
