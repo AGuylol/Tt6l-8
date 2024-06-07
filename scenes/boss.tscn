@@ -491,6 +491,7 @@ script = ExtResource("12_dghc0")
 script = ExtResource("12_jcsme")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -23.0
 offset_top = -51.0
 offset_right = 26.0

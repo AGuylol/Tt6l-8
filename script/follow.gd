@@ -23,10 +23,17 @@ func transition():
 				get_parent().change_state("dash")
 		
 		
-	elif distance > 100:
-		var chance = randi() % 2
+	elif distance > 80:
+		var chance = randi() % 5
 		match chance:
-			0:
-				get_parent().change_state("HomingMissle")
-			1:
-				get_parent().change_state("laser")
+				0:
+					get_parent().change_state("dash")
+				1, 2, 4:
+					pass
+				3:
+					var range_chance = randi() % 2
+					match range_chance:
+						0:
+							get_parent().change_state("HomingMissle")
+						1:
+							get_parent().change_state("laser")
