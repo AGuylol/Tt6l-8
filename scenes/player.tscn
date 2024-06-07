@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://c8tishbphs8e8"]
+[gd_scene load_steps=86 format=3 uid="uid://c8tishbphs8e8"]
 
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
@@ -35,10 +35,11 @@ var dash_duration = 0.075
 var is_dashing = false
 var can_dash = true
 var dash_direction : Vector2
+var can_move : bool = true
 
 @onready var dash_period = $dash_period
 @onready var dash_cooldown_timer = $dash_cooldown
-
+@onready var anim_player = $AnimationPlayer
 var knockback_force = 100
 var knockback_duration = 0.5
 var is_knocked_back = false
@@ -47,17 +48,14 @@ var is_knocked_back = false
 func _ready():
 	animation_tree.active = true
 	healthbar.init_health(player_health)
-	
+	$playerhitbox.area_entered.connect(_on_playerhitbox_area_entered)
 
 func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
 	_on_attack_timeout()
 	bow_shoot()
-	
-	if Input.is_action_just_pressed(\"interaction\"):
-		global.player_interaction = true
-		print(\"interaction\")
+
 	
 	if Input.is_action_just_pressed(\"equip_bow\"):
 		if bow_equiped:
@@ -74,31 +72,32 @@ func _physics_process(delta):
 		
 	if player_health <= 0:
 		player_alive = false 
-		print(\"player died\") 
+		$playerhitbox.monitoring = false
+		$playerhitbox.area_entered.disconnect(_on_playerhitbox_area_entered)
 		get_tree().change_scene_to_file(\"res://gameover/gameover.tscn\")
 	
 		
 	
 func player_movement(delta):
-	var input_vector = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
-	if is_knocked_back:
-		apply_friction(friction * delta)
-	else:
-		
-		if input_vector == Vector2.ZERO and not is_dashing:
-			state = idle
+	if can_move:
+		var input_vector = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+		if is_knocked_back:
 			apply_friction(friction * delta)
-		elif not is_dashing:
-			state = walk
-			apply_movement(input_vector * accel * delta)
-			blend_position = input_vector
+		else:
+			
+			if input_vector == Vector2.ZERO and not is_dashing:
+				state = idle
+				apply_friction(friction * delta)
+			elif not is_dashing:
+				state = walk
+				apply_movement(input_vector * accel * delta)
+				blend_position = input_vector
 
-		if Input.is_action_just_pressed(\"dash\") and can_dash:
-			start_dash(input_vector)
-	
-	move_and_slide()
-	update_parameters(input_vector)
-	
+			if Input.is_action_just_pressed(\"dash\") and can_dash:
+				start_dash(input_vector)
+		
+		move_and_slide()
+		update_parameters(input_vector)
 
 func start_dash(input_vector):
 	is_dashing = true
@@ -152,8 +151,7 @@ func _on_playerhitbox_body_entered(body):
 		print(\"Player health:\", player_health)
 		if player_health <= 0:
 			player_alive = false
-			print(\"Player died\")
-			get_tree().change_scene_to_file(\"res://gameover/gameover.tscn\")
+			
 			
 	
 
@@ -228,6 +226,16 @@ func _on_playerhitbox_area_entered(area):
 	elif area.is_in_group(\"flamethrower\"):
 		player_health -=10
 		print(player_health)
+	elif area.is_in_group(\"BossProjectile\"):
+		player_health -= 20
+		can_move = false
+		await get_tree().create_timer(2).timeout
+		can_move = true
+	elif area.is_in_group(\"bossmelee\"):
+		player_health -= 25
+	elif area.is_in_group(\"laser\"):
+		player_health -= 40
+		
 	
 	healthbar.health = player_health
 	print(player_health)
@@ -270,6 +278,54 @@ region = Rect2(224, 192, 32, 32)
 atlas = ExtResource("1_2pnou")
 region = Rect2(256, 192, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti078"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(544, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8dyb"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(576, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08u55"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(608, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pae1e"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(544, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ipfa"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(576, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hx3n"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(608, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x8d6"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(544, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf5w0"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(576, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfbxk"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(608, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a7eq"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(544, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkbat"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(576, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpg2a"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(608, 192, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_00nt5"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(0, 0, 32, 32)
@@ -301,6 +357,18 @@ region = Rect2(0, 192, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bnyf"]
 atlas = ExtResource("1_2pnou")
 region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0klpv"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(544, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0yvu"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(576, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vx47"]
+atlas = ExtResource("1_2pnou")
+region = Rect2(608, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8lq1"]
 atlas = ExtResource("1_2pnou")
@@ -367,6 +435,47 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ti078")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8dyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08u55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pae1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ipfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hx3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x8d6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf5w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfbxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a7eq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkbat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpg2a")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_00nt5")
 }, {
 "duration": 1.0,
@@ -389,6 +498,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1bnyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0klpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0yvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vx47")
 }],
 "loop": true,
 "name": &"idle",
@@ -485,6 +603,34 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-6, 2.62268e-07)]
+}
+
+[sub_resource type="Animation" id="Animation_6yd63"]
+resource_name = "death"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_animation:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_4rks7"]
@@ -970,6 +1116,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_th5yy"]
 _data = {
 "RESET": SubResource("Animation_7qviw"),
+"death": SubResource("Animation_6yd63"),
 "e_attack": SubResource("Animation_4rks7"),
 "e_idle": SubResource("Animation_x337b"),
 "e_walk": SubResource("Animation_q3t63"),
@@ -1094,9 +1241,9 @@ states/attacking/position = Vector2(492, -51)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_pegm0")
 states/idle/position = Vector2(301, 116)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_n2ujf")
-states/walk/position = Vector2(657, 116)
+states/walk/position = Vector2(661, 116)
 transitions = ["idle", "attacking", SubResource("AnimationNodeStateMachineTransition_v4sq8"), "attacking", "walk", SubResource("AnimationNodeStateMachineTransition_ei4mp"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_swuin"), "attacking", "idle", SubResource("AnimationNodeStateMachineTransition_mybas"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_sijrr"), "walk", "attacking", SubResource("AnimationNodeStateMachineTransition_jjixr"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_dqowr")]
-graph_offset = Vector2(-90, -72)
+graph_offset = Vector2(-236, -54)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1q7mt"]
 radius = 7.0
@@ -1120,7 +1267,6 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)

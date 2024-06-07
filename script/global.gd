@@ -2,6 +2,7 @@ extends Node
 
 var player_current_attack = false
 
-var player_inventory =  []
+var player_inventory =  ["key"]
 
-var player_interaction = false
+var boss_can_take_damage = true
+
