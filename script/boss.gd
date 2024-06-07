@@ -10,7 +10,7 @@ var took_damage :float = false
 
 
 
-var health = 100:
+var health = 500:
 	set(value):
 		health = value
 		healthbar.value = value
@@ -48,7 +48,7 @@ func _on_hitbox_area_entered(area):
 	if area.is_in_group("sword"):
 		health -= 10 - defence
 			
-	elif area.is_in_group("arrow"):
+	elif area.is_in_group("bullet"):
 		health -= 30 - defence
 		
 
