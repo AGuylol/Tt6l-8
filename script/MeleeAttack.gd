@@ -6,5 +6,5 @@ func enter():
 	animation_player.play("melee_attack")
 
 func transition():
-	if owner.direction.length() > 30:
+	if owner.direction.length() > 40:
 		get_parent().change_state("follow")

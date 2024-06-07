@@ -9666,14 +9666,14 @@ position = Vector2(65, 59)
 position = Vector2(33, -110)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door2"]
-position = Vector2(-7, -2.29767)
+position = Vector2(-3, -2)
 rotation = 1.5708
 scale = Vector2(1.52069, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door2"]
-position = Vector2(-11, -2)
+position = Vector2(-7, -2)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
@@ -9687,13 +9687,13 @@ libraries = {
 position = Vector2(-47, -19)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door"]
-position = Vector2(-9.652, -6)
+position = Vector2(-10, 1)
 scale = Vector2(1.79075, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door"]
-position = Vector2(-20, -2)
+position = Vector2(-10, 6)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -9707,13 +9707,13 @@ position = Vector2(135, -112)
 rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door3"]
-position = Vector2(-1.90174, -5)
+position = Vector2(-1.99999, 2)
 scale = Vector2(1.56471, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door3"]
-position = Vector2(-2, 0)
+position = Vector2(-0.999978, 6)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -9745,13 +9745,12 @@ libraries = {
 position = Vector2(246, -275)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door5"]
-position = Vector2(-1, -8)
 scale = Vector2(1.625, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door5"]
-position = Vector2(0, -3)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -9804,13 +9803,13 @@ libraries = {
 position = Vector2(246, -275)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door8"]
-position = Vector2(25, -261)
+position = Vector2(24, -256)
 scale = Vector2(1.26858, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door8"]
-position = Vector2(25, -257)
+position = Vector2(24, -251)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -9842,14 +9841,14 @@ libraries = {
 position = Vector2(246, -275)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door10"]
-position = Vector2(127, -550.851)
+position = Vector2(122, -550)
 rotation = 4.71239
 scale = Vector2(1.12922, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door10"]
-position = Vector2(131, -553)
+position = Vector2(126, -551)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true

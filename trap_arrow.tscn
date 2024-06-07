@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtjk3r4psc6je"]
+
+[ext_resource type="Texture2D" uid="uid://fywcelo6pqq6" path="res://arts/dungeon/item and and trap/arrow/arrow_2.png" id="1_egvui"]
+[ext_resource type="Texture2D" uid="uid://cn01h7gfnp3oo" path="res://arts/dungeon/item and and trap/arrow/arrow_3.png" id="2_1s74q"]
+[ext_resource type="Texture2D" uid="uid://cvi4j6ekvcaeu" path="res://arts/dungeon/item and and trap/arrow/arrow_4.png" id="3_73ud3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0ayt"]
+atlas = ExtResource("1_egvui")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_874kd"]
+atlas = ExtResource("2_1s74q")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70fut"]
+atlas = ExtResource("3_73ud3")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v7rp4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0ayt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_874kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70fut")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v7rp4")
+frame = 2
+frame_progress = 0.404161

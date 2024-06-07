@@ -1,20 +1,28 @@
-extends Area2D
+extends StaticBody2D
 
 
-# Called when the node enters the scene tree for the first time.
+@onready var interaction_area :interaction_area = $Interaction_area
+@onready var anim_chest = $AnimationPlayer
+@onready var weapon = preload("res://scenes/arquebus.tscn")
+
+
 func _ready():
 	$AnimatedSprite2D.play("idle")
-
+	interaction_area.interact = Callable (self, "_on_open_chest")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
-func _on_body_entered(body):
-	if body.is_in_group("player") and "key" in global.player_inventory:
-		$AnimationPlayer.play("open")
-		global.player_inventory.erase("key")
-		print(global.player_inventory)
-		await get_tree().create_timer(1).timeout
+func _on_open_chest():
+	if "key" in global.player_inventory:
+		anim_chest.play("open")
+		await anim_chest.animation_finished
+		spawn_weapon()
 		queue_free()
+	
+func spawn_weapon():
+	if weapon:
+		var weapon_instance = weapon.instantiate()
+		weapon_instance.position = global_position    
+		get_tree().current_scene.add_child(weapon_instance)

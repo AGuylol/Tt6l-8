@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bcyc8qgbo462v"]
+[gd_scene load_steps=32 format=3 uid="uid://bcyc8qgbo462v"]
 
 [ext_resource type="Texture2D" uid="uid://7ol6c3jio0ak" path="res://arts/boss/Mecha-stone Golem 0.1/PNG sheet/Character_sheet.png" id="1_3ib1x"]
 [ext_resource type="Script" path="res://script/boss.gd" id="1_arqcm"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://script/dash.gd" id="11_wbdet"]
 [ext_resource type="Script" path="res://script/death.gd" id="12_dghc0"]
 [ext_resource type="Script" path="res://script/laser.gd" id="12_jcsme"]
+[ext_resource type="Script" path="res://script/block.gd" id="14_7ojbg"]
 
 [sub_resource type="Animation" id="Animation_v5wub"]
 length = 0.001
@@ -39,6 +40,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("melee_area/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("laser_area/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_i41tp"]
@@ -215,6 +240,18 @@ tracks/1/keys = {
 "method": &"set_target"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("laser_area/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_j1aiw"]
 resource_name = "laser_cast"
@@ -274,6 +311,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("melee_area/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_cywy3"]
 resource_name = "ranged_attack"
@@ -328,6 +377,15 @@ radius = 172.4
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v088j"]
 size = Vector2(48, 45.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8317"]
+size = Vector2(36.5, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1amv"]
+size = Vector2(72, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqnfp"]
+size = Vector2(247, 20)
+
 [node name="boss" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 0
@@ -354,11 +412,13 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 2
 position = Vector2(-1, -4)
 shape = SubResource("CapsuleShape2D_xlhvq")
 
 [node name="player_detection" type="Area2D" parent="."]
+visible = false
 light_mask = 0
 collision_layer = 0
 
@@ -420,6 +480,9 @@ script = ExtResource("12_dghc0")
 [node name="laser" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("12_jcsme")
 
+[node name="block" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("14_7ojbg")
+
 [node name="debug" type="Label" parent="."]
 offset_left = -23.0
 offset_top = -51.0
@@ -433,6 +496,25 @@ text = "debug
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(-1, -2.25)
 shape = SubResource("RectangleShape2D_v088j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1.25, -1)
+shape = SubResource("RectangleShape2D_h8317")
+
+[node name="melee_area" type="Area2D" parent="." groups=["bossmelee"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="melee_area"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_d1amv")
+
+[node name="laser_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="laser_area"]
+position = Vector2(129.5, -17)
+shape = SubResource("RectangleShape2D_rqnfp")
+disabled = true
 
 [connection signal="body_entered" from="player_detection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

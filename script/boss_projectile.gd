@@ -18,8 +18,9 @@ func _physics_process(delta):
  
 	position += velocity * delta
  
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(3).timeout
 	queue_free()
 	
 func _on_body_entered(body):
-	queue_free()
+	if body.is_in_group("player"):
+		queue_free()
