@@ -233,6 +233,8 @@ func _on_playerhitbox_area_entered(area):
 		can_move = true
 	elif area.is_in_group(\"bossmelee\"):
 		player_health -= 25
+	elif area.is_in_group(\"laser\"):
+		player_health -= 40
 		
 	
 	healthbar.health = player_health
@@ -1265,7 +1267,6 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.75, 1.75)
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)

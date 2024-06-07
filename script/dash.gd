@@ -11,7 +11,7 @@ func enter():
 	
 func dash():
 	var tween = create_tween()
-	tween.tween_property(owner, "position", player.position, 0.2)
+	tween.tween_property(owner, "position", player.position, 0.6)
 	await tween.finished
  
 func transition():

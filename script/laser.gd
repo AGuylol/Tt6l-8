@@ -3,7 +3,7 @@ extends State
 
 @onready var pivot = $"../../pivot"
 var can_transition : bool = false
-@onready var collision_shape = $laser_area/CollisionShape2D
+@onready var laser_pivot = $"../../pivot_laser"
 
 func enter():
 	super.enter()
@@ -17,9 +17,7 @@ func play_animation(anim_name):
  
 func set_target():
 	pivot.rotation = (owner.direction - pivot.position).angle()
-	var player = get_parent().find_child("player")
-	if player:
-		collision_shape.rotation = (owner.direction - pivot.position).angle()
+	laser_pivot.rotation= (owner.direction - pivot.position).angle()
 		
 		
 func transition():

@@ -6,9 +6,8 @@ extends CharacterBody2D
 
 var direction: Vector2
 var defence: float = 0.0
-var is_blocking : float = false
 var took_damage :float = false
-var can_take_damage :float = false
+
 
 
 var health = 100:
@@ -18,7 +17,7 @@ var health = 100:
 		if value <= 0:
 			healthbar.visible = false
 			find_child("FiniteStateMachine").change_state("death")
-		elif value <= healthbar.max_value / 2 and defence == 0 and global.boss_can_take_damage:
+		elif value <= healthbar.max_value / 2 and defence == 0 :
 			defence = 5
 			took_damage = true
 			find_child("FiniteStateMachine").change_state("ArmorBuff")
@@ -46,11 +45,10 @@ func _physics_process(delta):
 	
 
 func _on_hitbox_area_entered(area):
-	if is_blocking:
-		if area.is_in_group("sword"):
-			health -= 10 - defence
+	if area.is_in_group("sword"):
+		health -= 10 - defence
 			
-		elif area.is_in_group("arrow"):
-			health -= 30 - defence
+	elif area.is_in_group("arrow"):
+		health -= 30 - defence
 		
 
