@@ -5214,7 +5214,7 @@ layer_1/tile_data = PackedInt32Array(-65535, 196612, 1, -131072, 196612, 2, 1310
 position = Vector2(11, -246)
 
 [node name="player" parent="." instance=ExtResource("10_jkrqg")]
-position = Vector2(-7, -15)
+position = Vector2(9, -8)
 
 [node name="traps" type="Node2D" parent="."]
 
