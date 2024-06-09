@@ -5214,7 +5214,7 @@ layer_1/tile_data = PackedInt32Array(-65535, 196612, 1, -131072, 196612, 2, 1310
 position = Vector2(11, -246)
 
 [node name="player" parent="." instance=ExtResource("10_jkrqg")]
-position = Vector2(-7, -15)
+position = Vector2(9, -8)
 
 [node name="traps" type="Node2D" parent="."]
 
@@ -5295,3 +5295,6 @@ visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-36, -75, -36, 21, 53, 20, 94, 102, -136, 65, -409, -147, -283, -550, -22, -543, 381, -426, 283, -35, 53, 20, 52, -76, 261, -75, 261, -419, -244, -419, -244, -75)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.858824, 0.858824, 0.858824, 1)

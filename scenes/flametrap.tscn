@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://evtggxv8uoam"]
+[gd_scene load_steps=16 format=3 uid="uid://evtggxv8uoam"]
 
 [ext_resource type="Script" path="res://script/Area2D.gd" id="1_grbud"]
 [ext_resource type="Texture2D" uid="uid://crcekaok46jgq" path="res://arts/tilesets/Flamethrower.png" id="2_opdc4"]
@@ -94,6 +94,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_1hr3x"]
 resource_name = "flame"
@@ -135,12 +147,33 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_whdip"]
 _data = {
 "RESET": SubResource("Animation_hgero"),
 "flame": SubResource("Animation_1hr3x")
 }
+
+[sub_resource type="Gradient" id="Gradient_lv87y"]
+offsets = PackedFloat32Array(0, 0.675497)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hfn68"]
+gradient = SubResource("Gradient_lv87y")
+fill = 1
+fill_from = Vector2(0.506977, 0.483721)
 
 [node name="Area2D" type="Area2D" groups=["flame"]]
 script = ExtResource("1_grbud")
@@ -156,3 +189,9 @@ shape = SubResource("RectangleShape2D_c1yem")
 libraries = {
 "": SubResource("AnimationLibrary_whdip")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, -1.0625)
+scale = Vector2(0.648438, 0.623047)
+enabled = false
+texture = SubResource("GradientTexture2D_hfn68")

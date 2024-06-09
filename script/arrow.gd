@@ -18,4 +18,4 @@ func _on_visible_on_screen_enabler_2d_screen_exited():
 
 
 func _on_body_entered(body):
-	pass
+	queue_free()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=86 format=3 uid="uid://c8tishbphs8e8"]
+[gd_scene load_steps=87 format=3 uid="uid://c8tishbphs8e8"]
 
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
+[ext_resource type="Script" path="res://script/Camera2D.gd" id="1_g3rp2"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
 [ext_resource type="PackedScene" uid="uid://bh8bxuvh53ilb" path="res://staminabar/staminabar.tscn" id="4_s1jka"]
 
@@ -44,12 +45,18 @@ var knockback_force = 100
 var knockback_duration = 0.5
 var is_knocked_back = false
 
+@onready var camera = $Camera2D
+var normal_zoom = Vector2(1.5, 1.5)
+var zoomed_in = Vector2(0.5, 0.5)
+
 
 func _ready():
 	animation_tree.active = true
 	healthbar.init_health(player_health)
 	$playerhitbox.area_entered.connect(_on_playerhitbox_area_entered)
 
+	
+	
 func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
@@ -106,6 +113,7 @@ func start_dash(input_vector):
 	velocity = dash_direction * dash_speed
 	dash_period.start(dash_duration)
 	$dash_cooldown.start()
+
 
 	
 func update_parameters(input_vector):
@@ -167,6 +175,7 @@ func enemy_attack():
 		player_health -= 15
 		print(player_health)
 		print(\"enemy attacked you\")
+		
 		await get_tree().create_timer(0.5).timeout
 		enemy_attack_cooldown = false
 		healthbar.health = player_health
@@ -239,6 +248,7 @@ func _on_playerhitbox_area_entered(area):
 	
 	healthbar.health = player_health
 	print(player_health)
+
 
 "
 
@@ -1267,6 +1277,8 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("1_g3rp2")
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)

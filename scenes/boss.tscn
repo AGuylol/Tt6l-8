@@ -287,7 +287,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_hd8o5"]
 resource_name = "melee_attack"
 length = 0.875013
-loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -421,13 +420,11 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 2
 position = Vector2(-1, -4)
 shape = SubResource("CapsuleShape2D_xlhvq")
 
 [node name="player_detection" type="Area2D" parent="."]
-visible = false
 light_mask = 0
 collision_layer = 0
 
@@ -462,7 +459,6 @@ offset_bottom = 23.0
 size_flags_vertical = 8
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_f1dbm")
 
 [node name="idle" type="Node2D" parent="FiniteStateMachine"]
@@ -491,6 +487,7 @@ script = ExtResource("12_dghc0")
 script = ExtResource("12_jcsme")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -23.0
 offset_top = -51.0
 offset_right = 26.0

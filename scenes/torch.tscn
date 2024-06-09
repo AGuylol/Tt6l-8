@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://di8m0agl8f188"]
+
+[ext_resource type="Texture2D" uid="uid://bv88eu3skyjvw" path="res://arts/dungeon/item and and trap/torch/torch_1.png" id="1_5agu1"]
+[ext_resource type="Texture2D" uid="uid://dx4avrgjv052k" path="res://arts/dungeon/item and and trap/torch/torch_2.png" id="2_ve7tw"]
+[ext_resource type="Texture2D" uid="uid://cyfhh5x0pvoa2" path="res://arts/dungeon/item and and trap/torch/torch_3.png" id="3_23fwy"]
+[ext_resource type="Texture2D" uid="uid://by076t0divxlj" path="res://arts/dungeon/item and and trap/torch/torch_4.png" id="4_uqqpm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10yni"]
+atlas = ExtResource("1_5agu1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nibbj"]
+atlas = ExtResource("2_ve7tw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5etsk"]
+atlas = ExtResource("3_23fwy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mydm2"]
+atlas = ExtResource("4_uqqpm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7xddw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10yni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nibbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5etsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mydm2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="torch" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_7xddw")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
