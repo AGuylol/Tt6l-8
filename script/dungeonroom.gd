@@ -2,6 +2,8 @@ extends Node2D
 
 
 @export var enemy_scene: PackedScene
+@onready var chest_scene = preload("res://scenes/silver_chest.tscn")
+
 var spawn_points: Array[NodePath]
 var spawn_points_2: Array[NodePath]
 var spawn_points_3: Array[NodePath]
@@ -12,7 +14,7 @@ var spawn_points_7: Array[NodePath]
 
 var enemies = []
 var doors_open = true
-
+var current_rooms = 0
 
 
 func open_all_doors():
@@ -116,25 +118,31 @@ func _process(delta):
 		
 func spawn_enemies():
 	spawn_from_points(spawn_points)
+	current_rooms = 1
 	
 func spawn_enemies_2():
 	spawn_from_points(spawn_points_2)
+	current_rooms = 2
 	
 func spawn_enemies_3():
 	spawn_from_points(spawn_points_3)
+	current_rooms = 3
 	
 func spawn_enemies_4():
 	spawn_from_points(spawn_points_4)
+	current_rooms = 4
 	
 func spawn_enemies_5():
 	spawn_from_points(spawn_points_5)
+	current_rooms = 5
 	
 func spawn_enemies_6():
 	spawn_from_points(spawn_points_6)
+	current_rooms = 6
 	
 func spawn_enemies_7():
 	spawn_from_points(spawn_points_7)
-	
+	current_rooms = 7
 
 
 func spawn_from_points(points):
@@ -158,6 +166,8 @@ func _on_enemy_defeated():
 	if enemies.size() == 0:
 		print("room cleared")
 		open_all_doors()
+		if current_rooms == 7:
+			spawn_chest()
 
 func _on_detectplayer_body_entered(body):
 	if body.is_in_group("player"):
@@ -222,4 +232,8 @@ func _on_secret_room_body_entered(body):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://scenes/secret_room.tscn")
 
-
+func spawn_chest():
+	var chest = chest_scene.instantiate()
+	if chest:
+		add_child(chest)
+		chest.position = Vector2(597, -1231)
