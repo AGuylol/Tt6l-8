@@ -232,6 +232,12 @@ func _on_playerhitbox_area_entered(area):
 	healthbar.health = player_health
 	print(player_health)
 
+func get_item(itemData):
+	$Bag.get
+
+
+func player():
+	pass
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]

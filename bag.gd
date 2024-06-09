@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @onready var bagContainer = $NinePatchRect
-@onready var itemSlotContainer = $NinePatchRect/MarginContainer/SlotItem
+@onready var itemSlotContainer = $NinePatchRect/MarginContainer/SlotItems
 
 var items = []
 

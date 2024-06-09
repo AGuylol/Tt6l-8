@@ -14,7 +14,7 @@ var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
 
-@export var item_drop_chance = 50
+@export var item_drop_chance = 100
 
 func _ready():
 	$AnimatedSprite2D.play("default")

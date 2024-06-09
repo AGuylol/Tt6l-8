@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvpmgvvur04d5"]
+[gd_scene load_steps=5 format=3 uid="uid://bvpmgvvur04d5"]
 
 [ext_resource type="Texture2D" uid="uid://dvmfcj3m5blgm" path="res://arts/icon/unnamed.png" id="1_0vfex"]
 [ext_resource type="Script" path="res://bag.gd" id="1_2cog5"]
 [ext_resource type="Texture2D" uid="uid://dsobs2nb3g6g1" path="res://arts/icon/sack.jpg" id="2_xcpg6"]
 [ext_resource type="Texture2D" uid="uid://d0txhlxftocts" path="res://arts/icon/invslot1.png" id="3_qkm12"]
-[ext_resource type="Texture2D" uid="uid://dfqc75dehg52p" path="res://arts/icon/herb1.png" id="4_0opmx"]
 
 [node name="Bag" type="CanvasLayer"]
 script = ExtResource("1_2cog5")
@@ -46,20 +45,16 @@ region_rect = Rect2(5.32366, 4.32366, 14.5941, 15.2697)
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.444
+anchor_left = 0.027
 anchor_top = -1.08
 anchor_right = 1.444
-anchor_bottom = 1.486
-offset_left = 218.944
-offset_top = 312.56
-offset_right = -218.944
-offset_bottom = -133.052
+anchor_bottom = 1.0
+offset_left = -0.0460005
+offset_top = 318.56
+offset_right = -150.312
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="SlotBackground" type="GridContainer" parent="NinePatchRect/MarginContainer"]
 layout_mode = 2
@@ -162,88 +157,87 @@ layout_mode = 2
 texture = ExtResource("3_qkm12")
 expand_mode = 1
 
-[node name="SlotItem" type="GridContainer" parent="NinePatchRect/MarginContainer"]
+[node name="SlotItems" type="GridContainer" parent="NinePatchRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 columns = 4
 
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-texture = ExtResource("4_0opmx")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect3" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect2" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect4" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect3" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect5" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect4" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect6" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect5" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect7" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect6" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect8" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect7" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect9" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect8" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect10" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect9" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect11" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect10" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect12" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect11" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect13" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect12" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect14" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect13" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect15" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect14" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
 
-[node name="TextureRect16" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItem"]
+[node name="TextureRect15" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+expand_mode = 1
+
+[node name="TextureRect16" type="TextureRect" parent="NinePatchRect/MarginContainer/SlotItems"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 expand_mode = 1
