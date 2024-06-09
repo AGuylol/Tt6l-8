@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://duv00ggr7vd8t"]
+
+[ext_resource type="Script" path="res://script/button.gd" id="1_6257m"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="1_yxi00"]
+[ext_resource type="Texture2D" uid="uid://c30innpjpxiw5" path="res://arts/mines/Button.png" id="2_3c8fa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tcgfp"]
+radius = 28.6356
+
+[sub_resource type="Animation" id="Animation_eynd8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ujhdn"]
+resource_name = "pressed"
+length = 0.625013
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a00r3"]
+_data = {
+"RESET": SubResource("Animation_eynd8"),
+"pressed": SubResource("Animation_ujhdn")
+}
+
+[node name="button" type="Node2D"]
+script = ExtResource("1_6257m")
+
+[node name="Interaction_area" parent="." instance=ExtResource("1_yxi00")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
+shape = SubResource("CircleShape2D_tcgfp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3c8fa")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a00r3")
+}

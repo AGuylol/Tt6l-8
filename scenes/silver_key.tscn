@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://y7e5ynwm3ij4"]
+
+[ext_resource type="Script" path="res://script/silver_key.gd" id="1_58sid"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="2_yhf3f"]
+[ext_resource type="Texture2D" uid="uid://bs80mgk6xf51q" path="res://arts/dungeon/item and and trap/keys/keys_2_1.png" id="3_6g8x7"]
+[ext_resource type="Texture2D" uid="uid://c8oum5bqhqi45" path="res://arts/dungeon/item and and trap/keys/keys_2_2.png" id="4_18yjd"]
+[ext_resource type="Texture2D" uid="uid://d35ebouew2dl" path="res://arts/dungeon/item and and trap/keys/keys_2_3.png" id="5_hkuix"]
+[ext_resource type="Texture2D" uid="uid://bej7fgcleo1eq" path="res://arts/dungeon/item and and trap/keys/keys_2_4.png" id="6_yphrj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pkofw"]
+radius = 21.095
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uiqf"]
+atlas = ExtResource("3_6g8x7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt8me"]
+atlas = ExtResource("4_18yjd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb4eh"]
+atlas = ExtResource("5_hkuix")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hec35"]
+atlas = ExtResource("6_yphrj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dl624"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uiqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt8me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb4eh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hec35")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_58sid")
+
+[node name="Interaction_area" parent="." instance=ExtResource("2_yhf3f")]
+action_name = "pick up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
+shape = SubResource("CircleShape2D_pkofw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dl624")
+frame = 2
+frame_progress = 0.774074

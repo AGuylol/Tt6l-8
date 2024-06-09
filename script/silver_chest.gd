@@ -15,7 +15,7 @@ func _process(delta):
 	pass
 
 func _on_open_chest():
-	if "key" in global.player_inventory:
+	if "silver_key" in global.player_inventory:
 		anim_chest.play("open")
 		await anim_chest.animation_finished
 		spawn_weapon()

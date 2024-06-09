@@ -2,7 +2,10 @@ extends Node
 
 var player_current_attack = false
 
-var player_inventory =  []
+var player_inventory =  ["key"]
+
+var button_pressed = false
+
 
 var player_interaction = false
 
@@ -22,3 +25,4 @@ func finish_changescenes():
 			current_scene = "forest"
 		else:
 			current_scene = "world"
+

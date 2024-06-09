@@ -2,17 +2,19 @@ extends Node2D
 
 
 @export var enemy_scene: PackedScene
+@onready var chest_scene = preload("res://scenes/silver_chest.tscn")
+
 var spawn_points: Array[NodePath]
 var spawn_points_2: Array[NodePath]
 var spawn_points_3: Array[NodePath]
 var spawn_points_4: Array[NodePath]
 var spawn_points_5: Array[NodePath]
 var spawn_points_6: Array[NodePath]
-
+var spawn_points_7: Array[NodePath]
 
 var enemies = []
 var doors_open = true
-
+var current_rooms = 0
 
 
 func open_all_doors():
@@ -54,13 +56,6 @@ func close_all_doors():
 		doors_open = false
 		
 func _ready():
-	$detectplayerarea/detectplayer.body_entered.connect(_on_detectplayer_body_entered)
-	$detectplayerarea/detectplayer2.body_entered.connect(_on_detecplayer_2_ndroom_body_entered)
-	$detectplayerarea/detectplayer3.body_entered.connect(_on_detectplayer_3_body_entered)
-	$detectplayerarea/detectplayer4.body_entered.connect(_on_detectplayer_4_body_entered)
-	$detectplayerarea/detectplayer5.body_entered.connect(_on_detectplayer_5_body_entered)
-	$detectplayerarea/detectplayer6.body_entered.connect(_on_detectplayer_6_body_entered)
-	print(spawn_points)
 
 
 	spawn_points = [
@@ -97,6 +92,14 @@ func _ready():
 		$enemy_spawns/spawn_point19.get_path(),
 		$enemy_spawns/spawn_point20.get_path()
 	]
+	spawn_points_7 = [
+		$enemy_spawns/spawn_point21.get_path(),
+		$enemy_spawns/spawn_point22.get_path(),
+		$enemy_spawns/spawn_point23.get_path(),
+		$enemy_spawns/spawn_point24.get_path(),
+		$enemy_spawns/spawn_point25.get_path()
+		
+	]
 
 	$detectplayerarea/detectplayer.body_entered.connect(_on_detectplayer_body_entered)
 	$detectplayerarea/detectplayer2.body_entered.connect(_on_detecplayer_2_ndroom_body_entered)
@@ -104,6 +107,7 @@ func _ready():
 	$detectplayerarea/detectplayer4.body_entered.connect(_on_detectplayer_4_body_entered)
 	$detectplayerarea/detectplayer5.body_entered.connect(_on_detectplayer_5_body_entered)
 	$detectplayerarea/detectplayer6.body_entered.connect(_on_detectplayer_6_body_entered)
+	$detectplayerarea/detectplayer7.body_entered.connect(_on_detectplayer_7_body_entered)
 
 	
 
@@ -114,23 +118,31 @@ func _process(delta):
 		
 func spawn_enemies():
 	spawn_from_points(spawn_points)
+	current_rooms = 1
 	
 func spawn_enemies_2():
 	spawn_from_points(spawn_points_2)
+	current_rooms = 2
 	
 func spawn_enemies_3():
 	spawn_from_points(spawn_points_3)
+	current_rooms = 3
 	
 func spawn_enemies_4():
 	spawn_from_points(spawn_points_4)
+	current_rooms = 4
 	
 func spawn_enemies_5():
 	spawn_from_points(spawn_points_5)
+	current_rooms = 5
 	
 func spawn_enemies_6():
 	spawn_from_points(spawn_points_6)
+	current_rooms = 6
 	
-
+func spawn_enemies_7():
+	spawn_from_points(spawn_points_7)
+	current_rooms = 7
 
 
 func spawn_from_points(points):
@@ -154,6 +166,8 @@ func _on_enemy_defeated():
 	if enemies.size() == 0:
 		print("room cleared")
 		open_all_doors()
+		if current_rooms == 7:
+			spawn_chest()
 
 func _on_detectplayer_body_entered(body):
 	if body.is_in_group("player"):
@@ -201,7 +215,25 @@ func _on_detectplayer_6_body_entered(body):
 		spawn_enemies_6()
 		close_all_doors()
 
+func _on_detectplayer_7_body_entered(body):
+	if body.is_in_group("player"):
+		$detectplayerarea/detectplayer7.monitoring = false
+		$detectplayerarea/detectplayer7.body_entered.disconnect(_on_detectplayer_7_body_entered)
+		spawn_enemies_7()
+		close_all_doors()
+
+func _on_boss_room_body_entered(body):
+	if body.is_in_group("player"):
+		get_tree().change_scene_to_file("res://scenes/boss_fight.tscn")
+		
 
 
-func _on_area_2d_body_entered(body):
-	pass # Replace with function body.
+func _on_secret_room_body_entered(body):
+	if body.is_in_group("player"):
+		get_tree().change_scene_to_file("res://scenes/secret_room.tscn")
+
+func spawn_chest():
+	var chest = chest_scene.instantiate()
+	if chest:
+		add_child(chest)
+		chest.position = Vector2(597, -1231)
