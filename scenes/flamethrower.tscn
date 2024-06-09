@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ci1e1dd0fmt1l"]
+[gd_scene load_steps=17 format=3 uid="uid://ci1e1dd0fmt1l"]
 
 [ext_resource type="Script" path="res://script/flamethrower.gd" id="1_5t4gf"]
 [ext_resource type="Texture2D" uid="uid://b5mf3vdu2gvh6" path="res://arts/dungeon/item and and trap/flamethrower/flamethrower_1_4.png" id="2_pdbnb"]
@@ -80,6 +80,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_f68sc"]
 resource_name = "shoot"
@@ -121,6 +145,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 6), Vector2(0, -3)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vj1sb"]
 _data = {
@@ -130,6 +178,15 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwmor"]
 size = Vector2(10, 15)
+
+[sub_resource type="Gradient" id="Gradient_knksb"]
+offsets = PackedFloat32Array(0, 0.556291)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_41kg6"]
+gradient = SubResource("Gradient_knksb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="flamethrower" type="Area2D" groups=["flamethrower"]]
 script = ExtResource("1_5t4gf")
@@ -146,3 +203,8 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_jwmor")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 6)
+scale = Vector2(0.703125, 0.59375)
+texture = SubResource("GradientTexture2D_41kg6")

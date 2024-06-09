@@ -54,7 +54,7 @@ func _ready():
 	animation_tree.active = true
 	healthbar.init_health(player_health)
 	$playerhitbox.area_entered.connect(_on_playerhitbox_area_entered)
-	change_scene(\"normal_scene\")
+
 	
 	
 func _physics_process(delta):
@@ -113,7 +113,7 @@ func start_dash(input_vector):
 	velocity = dash_direction * dash_speed
 	dash_period.start(dash_duration)
 	$dash_cooldown.start()
-	get_current_scene_name()
+
 
 	
 func update_parameters(input_vector):
@@ -250,32 +250,6 @@ func _on_playerhitbox_area_entered(area):
 	print(player_health)
 
 
-func zoom_in():
-	camera.zoom = zoomed_in
-	
-func reset_zoom():
-	camera.zoom = normal_zoom
-	
-func change_scene(scene_name: String):
-	match scene_name:
-		\"secret_scene\":
-			zoom_in()
-			pan_to_position(Vector2(0, 0), 2.0)  
-		\"normal_scene\":
-			reset_zoom()
-			pan_to_position(Vector2(0, 0), 2.0)
-	
-func pan_to_position(target_position: Vector2, duration: float):
-	var tween = create_tween()
-	tween.tween_property(camera, \"offset\", target_position, duration)
-	
-	
-func get_current_scene_name() -> String:
-	var current_scene = get_tree().get_current_scene()
-	if current_scene:
-		return current_scene.name
-		print(current_scene)
-	return \"No current scene\"
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
