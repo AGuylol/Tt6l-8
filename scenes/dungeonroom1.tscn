@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=86 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -14335,7 +14335,22 @@ polygon = PackedVector2Array(241, -85, 245, -83, 254, -85, 254, -88, 254, -89, 2
 polygon = PackedVector2Array(-164, -1043, -156, -1041, -156, -1038, -157, -1031, -164, -1030, -165, -1036)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s7xno"]
-polygon = PackedVector2Array(9, -376, 86, -376, 86, -211, -10, -211, -9, -132, 38, -131, 38, 28, -142, 28, -142, -16, -263, -16, -263, 47, -310, 47, -310, 139, -278, 140, -278, 236, 251, 312, 301, -282, 455, -1241, 379, -1340, 265, -1417, 259, -1373, 262, -1351, 266, -1350, 266, -1304, 362, -1304, 361, -1120, 131, -1120, 130, -1305, 226, -1305, 226, -1353, 232, -1353, 232, -1368, 239, -1376, 251, -1376, 261, -1373, 257, -1377, 246, -1386, 31, -1442, -54, -1448, -241, -1438, -319, -1350, -255, -1230, -359, -1113, -472, -1095, -498, -1026, -427, -955, -341, -909, -49, -863, -53, -769, -239, -610, -180, -401, -439, -383, -475, -266, -416, -193, -234, -228, -260, -137, -463, -142, -472, -50, -454, 155, -369, 288, -274, 224, -398, 224, -398, 140, -366, 140, -366, 48, -414, 48, -414, -112, -262, -112, -262, -65, -142, -64, -141, -129, -62, -129, -63, -208, -110, -208, -110, -272, -342, -272, -342, -240, -430, -240, -430, -340, -343, -340, -342, -313, -126, -313, -126, -377, -30, -377, -31, -464, -110, -464, -110, -641, -14, -640, -14, -768, 98, -768, 98, -912, -222, -912, -222, -1008, -359, -1008, -359, -996, -426, -996, -425, -1076, -359, -1076, -359, -1060, -222, -1060, -222, -1105, -142, -1104, -143, -1264, -190, -1264, -189, -1348, -55, -1347, -55, -1264, -102, -1264, -102, -1113, -7, -1113, -7, -952, 226, -952, 227, -1007, 228, -1015, 233, -1017, 237, -1023, 247, -1025, 256, -1021, 265, -1016, 266, -953, 345, -953, 345, -735, 25, -737, 25, -640, 105, -640, 106, -464, 9, -465)
+polygon = PackedVector2Array(9, -376, 86, -376, 86, -211, -10, -211, -9, -132, 38, -131, 38, 28, -142, 28, -142, -16, -263, -16, -263, 47, -310, 47, -310, 139, -278, 140, -278, 236, 251, 312, 301, -282, 455, -1241, 379, -1340, 265, -1417, 259, -1373, 262, -1351, 266, -1350, 266, -1304, 362, -1304, 361, -1120, 131, -1120, 130, -1305, 226, -1305, 226, -1353, 232, -1353, 232, -1368, 239, -1376, 251, -1376, 261, -1373, 257, -1377, 246, -1386, 31, -1442, -54, -1448, -241, -1438, -319, -1350, -255, -1230, -359, -1113, -472, -1095, -498, -1026, -427, -955, -341, -909, -49, -863, -53, -769, -239, -610, -180, -401, -439, -383, -475, -266, -416, -193, -234, -228, -260, -137, -463, -142, -472, -50, -454, 155, -369, 288, -274, 224, -398, 224, -398, 140, -366, 140, -366, 48, -414, 48, -414, -112, -262, -112, -262, -65, -142, -64, -141, -129, -62, -129, -62, -208, -110, -208, -110, -272, -342, -272, -342, -240, -430, -240, -430, -340, -343, -340, -342, -313, -126, -313, -126, -377, -30, -377, -31, -464, -110, -464, -110, -641, -14, -640, -14, -768, 98, -768, 98, -912, -222, -912, -222, -1008, -359, -1008, -359, -996, -426, -996, -425, -1076, -359, -1076, -359, -1060, -222, -1060, -222, -1105, -142, -1104, -143, -1264, -190, -1264, -189, -1348, -55, -1347, -55, -1264, -102, -1264, -102, -1113, -7, -1113, -7, -952, 226, -952, 227, -1007, 228, -1015, 233, -1017, 237, -1023, 247, -1025, 256, -1021, 265, -1016, 266, -953, 345, -953, 345, -736, 25, -736, 25, -640, 105, -640, 106, -464, 9, -465)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_43vu3"]
+polygon = PackedVector2Array(-84, -995, -86, -992, -86, -989, -86, -987, -85, -985, -84, -984, -83, -983, -82, -982, -80, -982, -79, -986, -79, -989, -78, -992, -80, -996)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_agsn0"]
+polygon = PackedVector2Array(-5, -95, -7, -93, -8, -91, -9, -88, -7, -87, -4, -86, 1, -86, 4, -88, 5, -89, -1, -95)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ixpmt"]
+polygon = PackedVector2Array(59, -224, 59, -223, 58, -223, 58, -222, 57, -222, 57, -221, 56, -221, 56, -219, 55, -219, 55, -216, 56, -216, 58, -214, 65, -214, 69, -216, 69, -218, 68, -218, 68, -219, 67, -219, 67, -220, 66, -220, 66, -221, 65, -221, 65, -222, 64, -222, 64, -223, 63, -223, 63, -224, 62, -224)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vivrn"]
+polygon = PackedVector2Array(-25, -566, -11, -566, -11, -580, -16, -580, -24, -572)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1g8wd"]
+polygon = PackedVector2Array(-81, -575, -75, -569, -77, -567, -82, -565, -86, -566, -89, -568, -89, -571, -88, -571, -88, -573, -87, -573, -87, -574, -86, -574, -86, -575, -85, -575, -85, -576, -81, -576)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_cjri4")
@@ -14704,7 +14719,7 @@ sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door"]
-position = Vector2(-10, 6)
+position = Vector2(-9, 5)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -14718,13 +14733,13 @@ position = Vector2(135, -112)
 rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door3"]
-position = Vector2(-1.99999, 2)
+position = Vector2(2.6226e-06, 0.999993)
 scale = Vector2(1.56471, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door3"]
-position = Vector2(-0.999978, 6)
+position = Vector2(1.83781e-05, 5)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -14756,12 +14771,13 @@ libraries = {
 position = Vector2(246, -275)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door5"]
+position = Vector2(-1, 0)
 scale = Vector2(1.625, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door5"]
-position = Vector2(0, 4)
+position = Vector2(-3, 5)
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
 
@@ -15138,6 +15154,21 @@ occluder = SubResource("OccluderPolygon2D_chn83")
 
 [node name="LightOccluder2D6" type="LightOccluder2D" parent="shadow"]
 occluder = SubResource("OccluderPolygon2D_s7xno")
+
+[node name="LightOccluder2D7" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_43vu3")
+
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_agsn0")
+
+[node name="LightOccluder2D9" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_ixpmt")
+
+[node name="LightOccluder2D10" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_vivrn")
+
+[node name="LightOccluder2D11" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_1g8wd")
 
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]
