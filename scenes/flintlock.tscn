@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cokcr3v8snkrw"]
+
+[ext_resource type="Script" path="res://script/flintlock.gd" id="1_mp6io"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="2_o63f6"]
+[ext_resource type="Texture2D" uid="uid://dnqmi53raifmh" path="res://arts/guns/USSR.png" id="3_ehc5m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etymy"]
+radius = 12.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_mp6io")
+
+[node name="Interaction_area" parent="." instance=ExtResource("2_o63f6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
+shape = SubResource("CircleShape2D_etymy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Interaction_area"]
+texture = ExtResource("3_ehc5m")
+hframes = 4
+vframes = 3
+frame = 3

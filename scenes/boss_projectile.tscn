@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8jlhs65ft2ic"]
+
+[ext_resource type="Script" path="res://script/boss_projectile.gd" id="1_28h4y"]
+[ext_resource type="Texture2D" uid="uid://inbwocx3dcyw" path="res://arts/boss/Mecha-stone Golem 0.1/weapon PNG/arm_projectile_glowing.png" id="1_sjmc5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i87xx"]
+size = Vector2(34, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt3lb"]
+atlas = ExtResource("1_sjmc5")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foash"]
+atlas = ExtResource("1_sjmc5")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bhbn"]
+atlas = ExtResource("1_sjmc5")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcxco"]
+atlas = ExtResource("1_sjmc5")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vecse"]
+atlas = ExtResource("1_sjmc5")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ca4e"]
+atlas = ExtResource("1_sjmc5")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ml5t2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt3lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foash")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bhbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcxco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vecse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ca4e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BossProjectile" type="Area2D" groups=["BossProjectile"]]
+script = ExtResource("1_28h4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_i87xx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-26, 13)
+sprite_frames = SubResource("SpriteFrames_ml5t2")
+autoplay = "default"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
