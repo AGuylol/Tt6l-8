@@ -173,6 +173,7 @@ func enemy_attack():
 		await get_tree().create_timer(0.5).timeout
 		enemy_attack_cooldown = false
 		healthbar.health = player_health
+		regen_timer.start()
 		
 func _on_attack_timeout():
 	enemy_attack_cooldown = false
@@ -242,19 +243,21 @@ func _on_playerhitbox_area_entered(area):
 	
 	healthbar.health = player_health
 	print(player_health)
-
+	regen_timer.start()
+	
+	
 func apply_upgrades():
 	if \"health_upgrade1\" in global.player_inventory:
 		player_max_health += 50
 		player_health += 50
 
 			
-
-
-
+			
 func _on_regen_timer_timeout():
-	if player_health < player_max_health / 2:
-		player_health += 1
+	if player_health < player_max_health/3:
+		player_health = min(player_health + (player_max_health / 3), player_max_health) 
+		healthbar.health = player_health
+		print(\"Player health after regen:\", player_health)
 		
 "
 
@@ -1297,6 +1300,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_th5yy")
+}
 tree_root = SubResource("AnimationNodeStateMachine_usk0s")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attacking = false
