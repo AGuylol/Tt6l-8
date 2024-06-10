@@ -19,7 +19,6 @@ var player_alive = false
 var attacking = false
 var sword_equiped = true
 
-var bow_equiped = false
 var bow_cooldown = true
 var arrow = preload(\"res://scenes/arrow.tscn\")
 
@@ -68,20 +67,8 @@ func _physics_process(delta):
 	_on_attack_timeout()
 	bow_shoot()
 	apply_upgrades()
-	regen_health()
 	print(player_health)
 	
-	if Input.is_action_just_pressed(\"equip_bow\"):
-		if bow_equiped:
-			bow_equiped = false
-		else:
-			bow_equiped = true
-			
-	if Input.is_action_just_pressed(\"equip_sword\"):
-		if sword_equiped:
-			sword_equiped = false
-		else:
-			sword_equiped = true
 		
 		
 	if player_health <= 0:
@@ -194,7 +181,7 @@ func bow_shoot():
 	var mouse_pos = get_global_mouse_position()
 	$Marker2D.look_at(mouse_pos)
 	
-	if Input.is_action_just_pressed(\"bow\") and bow_equiped and bow_cooldown:
+	if Input.is_action_just_pressed(\"bow\") and bow_cooldown:
 		bow_cooldown = false
 		var arrow_instance = arrow.instantiate()
 		arrow_instance.rotation = $Marker2D.rotation 
@@ -261,12 +248,6 @@ func apply_upgrades():
 		player_max_health += 50
 		player_health += 50
 
-func regen_health():
-	if player_health < player_max_health /2 :
-		if took_damage:
-			await get_tree().create_timer(5).timeout
-			took_damage = false
-			player_health += 1
 			
 
 
