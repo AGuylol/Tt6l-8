@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
 [ext_resource type="Script" path="res://script/Camera2D.gd" id="1_g3rp2"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
-[ext_resource type="PackedScene" uid="uid://bvpmgvvur04d5" path="res://scenes/bag.tscn" id="3_nkeuo"]
+[ext_resource type="PackedScene" path="res://scenes/bag.tscn" id="3_nkeuo"]
 
 [sub_resource type="GDScript" id="GDScript_g0g3h"]
 script/source = "extends CharacterBody2D
@@ -1296,6 +1296,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_th5yy")
+}
 tree_root = SubResource("AnimationNodeStateMachine_usk0s")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attacking = false

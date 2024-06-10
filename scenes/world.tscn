@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cegu0vtt1je2c" path="res://arts/mines/ores.png" id="8_3aod5"]
 [ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="8_vnxne"]
 [ext_resource type="PackedScene" uid="uid://bq03udps8dlie" path="res://scenes/dungeonroom1.tscn" id="14_4m8ot"]
-[ext_resource type="PackedScene" uid="uid://dyunjpdj84uop" path="res://scenes/item.tscn" id="16_56ows"]
+[ext_resource type="PackedScene" path="res://scenes/item.tscn" id="16_56ows"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oesec"]
 texture = ExtResource("3_yrbrb")
