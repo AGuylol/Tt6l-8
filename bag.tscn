@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cfsw28miudcxt"]
 
-[ext_resource type="Texture2D" uid="uid://dvmfcj3m5blgm" path="res://icon/unnamed.png" id="1_0vfex"]
+[ext_resource type="Texture2D" uid="uid://dvmfcj3m5blgm" path="res://arts/icon/unnamed.png" id="1_0vfex"]
 [ext_resource type="Script" path="res://bag.gd" id="1_2cog5"]
-[ext_resource type="Texture2D" uid="uid://dsobs2nb3g6g1" path="res://icon/sack.jpg" id="2_xcpg6"]
-[ext_resource type="Texture2D" uid="uid://d0txhlxftocts" path="res://icon/invslot1.png" id="3_qkm12"]
-[ext_resource type="Texture2D" uid="uid://dfqc75dehg52p" path="res://icon/herb1.png" id="4_0opmx"]
+[ext_resource type="Texture2D" uid="uid://dsobs2nb3g6g1" path="res://arts/icon/sack.jpg" id="2_xcpg6"]
+[ext_resource type="Texture2D" uid="uid://d0txhlxftocts" path="res://arts/icon/invslot1.png" id="3_qkm12"]
+[ext_resource type="Texture2D" uid="uid://dfqc75dehg52p" path="res://arts/icon/herb1.png" id="4_0opmx"]
 
 [node name="Bag" type="CanvasLayer"]
 script = ExtResource("1_2cog5")

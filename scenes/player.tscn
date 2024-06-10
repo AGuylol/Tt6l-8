@@ -1,9 +1,10 @@
-[gd_scene load_steps=87 format=3 uid="uid://c8tishbphs8e8"]
+[gd_scene load_steps=88 format=3 uid="uid://c8tishbphs8e8"]
 
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
 [ext_resource type="Script" path="res://script/Camera2D.gd" id="1_g3rp2"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
 [ext_resource type="PackedScene" uid="uid://bh8bxuvh53ilb" path="res://staminabar/staminabar.tscn" id="4_s1jka"]
+[ext_resource type="PackedScene" uid="uid://cfsw28miudcxt" path="res://bag.tscn" id="5_ecd18"]
 
 [sub_resource type="GDScript" id="GDScript_g0g3h"]
 script/source = "extends CharacterBody2D
@@ -12,8 +13,8 @@ script/source = "extends CharacterBody2D
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
 
-var player_health = 100.0
-var player_max_health = 100.0
+var player_health = global.player_health
+var player_max_health = global.player_max_health
 var max_regen_health = player_max_health / 2
 var player_alive = false
 var attacking = false
@@ -67,7 +68,6 @@ func _physics_process(delta):
 	_on_attack_timeout()
 	bow_shoot()
 	apply_upgrades()
-	print(player_health)
 	
 		
 		
@@ -100,6 +100,8 @@ func player_movement(delta):
 		move_and_slide()
 		update_parameters(input_vector)
 
+
+
 func start_dash(input_vector):
 	is_dashing = true
 	can_dash = false
@@ -109,6 +111,7 @@ func start_dash(input_vector):
 	$dash_cooldown.start()
 
 
+	
 	
 func update_parameters(input_vector):
 	if input_vector == Vector2.ZERO:
@@ -136,10 +139,13 @@ func apply_friction(amount) -> void:
 	else:
 		velocity = Vector2.ZERO
 		
+		
+		
 func apply_movement(amount) -> void:
 	velocity += amount
 	velocity = velocity.limit_length(max_speed)
 	
+
 
 func _on_playerhitbox_body_entered(body):
 	if body.is_in_group(\"enemy\"):
@@ -189,10 +195,20 @@ func bow_shoot():
 		arrow_instance.global_position = $Marker2D.global_position
 		add_child(arrow_instance)
 		
+		
+		if \"arquebus\" in global.player_inventory:
+			shoot_arrow($Marker2D.global_position, $Marker2D.rotation + 0.4)
+		
 		await get_tree().create_timer(10).timeout
 		bow_cooldown = true
 		
- 
+func shoot_arrow(position, rotation):
+	var arrow_instance = arrow.instantiate()
+	arrow_instance.rotation = rotation
+	arrow_instance.global_position = position
+	add_child(arrow_instance)
+	
+	
 func _on_enemy_attack_timer_timeout():
 	enemy_attack_cooldown = true
 
@@ -250,7 +266,12 @@ func apply_upgrades():
 	if \"health_upgrade1\" in global.player_inventory:
 		player_max_health += 50
 		player_health += 50
-
+		
+	elif \"weapon_upgrade1\" in global.player_inventory:
+		global.player_sword_damage +=10
+	
+	elif \"arquebus\" in global.player_inventory:
+		global.player_gun_damage += 10
 			
 			
 func _on_regen_timer_timeout():
@@ -259,6 +280,14 @@ func _on_regen_timer_timeout():
 		healthbar.health = player_health
 		print(\"Player health after regen:\", player_health)
 		
+		
+		
+func get_item(itemData):
+	$Bag.get
+
+
+func player():
+	pass
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
@@ -1349,6 +1378,8 @@ offset_bottom = -49.0
 
 [node name="regen_timer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="Bag" parent="." instance=ExtResource("5_ecd18")]
 
 [connection signal="area_entered" from="playerhitbox" to="." method="_on_playerhitbox_area_entered"]
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]

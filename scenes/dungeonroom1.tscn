@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=94 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://68xdu80spkc7" path="res://scenes/key.tscn" id="16_r3q1m"]
 [ext_resource type="PackedScene" uid="uid://jrw8xnclqdi8" path="res://scenes/chest.tscn" id="17_bcxu0"]
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
+[ext_resource type="PackedScene" uid="uid://cokcr3v8snkrw" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
 [ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
@@ -14369,7 +14370,7 @@ polygon = PackedVector2Array(-168, -947, -156, -940, -156, -934, -168, -934)
 polygon = PackedVector2Array(-125, -1308, -125, -1298, -117, -1297, -117, -1308)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o5v6y"]
-polygon = PackedVector2Array(186, -765, 195, -763, 197, -761, 195, -759, 186, -758, 183, -761)
+polygon = PackedVector2Array(185, -766, 187, -768, 191, -768, 195, -763, 197, -761, 195, -759, 186, -758, 183, -761)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xupy5"]
 polygon = PackedVector2Array(251, -862, 249, -859, 250, -857, 256, -856, 258, -857, 258, -860, 255, -863)
@@ -15045,6 +15046,7 @@ position = Vector2(597, -1231)
 position = Vector2(-35, -302)
 
 [node name="key" parent="items" instance=ExtResource("16_r3q1m")]
+position = Vector2(-2, -22)
 
 [node name="chest" parent="items" instance=ExtResource("17_bcxu0")]
 position = Vector2(260, -1014)
@@ -15054,6 +15056,9 @@ visible = false
 
 [node name="CollisionShape2D" parent="items/chest" index="2"]
 visible = false
+
+[node name="Node2D" parent="items" instance=ExtResource("25_2g5mk")]
+position = Vector2(-2, 24)
 
 [node name="rooms" type="Node2D" parent="."]
 
@@ -15105,6 +15110,7 @@ position = Vector2(211, -295)
 position = Vector2(322, -318)
 
 [node name="lantern8" parent="light_source" instance=ExtResource("26_aksei")]
+visible = false
 position = Vector2(-142, -270)
 
 [node name="lantern9" parent="light_source" instance=ExtResource("26_aksei")]
@@ -15230,5 +15236,4 @@ occluder = SubResource("OccluderPolygon2D_xupy5")
 [connection signal="body_entered" from="rooms/cave" to="." method="_on_secret_room_body_entered"]
 
 [editable path="traps/spikes4"]
-[editable path="items/key"]
 [editable path="items/chest"]

@@ -21,9 +21,13 @@ func _ready():
 	healthbar.init_health(health)
 	$hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
+	
+	
 func _physics_process(_delta):
 	movement(_delta)
 	slime_damaged()
+	
+	
 	
 	
 func movement(delta):
@@ -48,11 +52,17 @@ func slime_damaged():
 		if health <= 0 :
 			self.queue_free()
 
+
+
+
 func _on_detection_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		player_chase = true
 		moving = true
+
+
+
 
 func _on_detection_body_exited(_body):
 	player = null
@@ -64,7 +74,7 @@ func _on_hitbox_area_entered(area):
 	var damage
 	var knockback_multiplier 
 	if area.is_in_group("bullet"):
-		damage = 50
+		damage = global.player_gun_damage
 		knockback_multiplier = 100
 		take_damage(damage)
 		healthbar.health = health
@@ -73,7 +83,7 @@ func _on_hitbox_area_entered(area):
 	elif area.is_in_group("sword"):
 		knockback_multiplier = 10
 		print("worked")
-		damage = 20
+		damage = global.player_sword_damage
 		take_damage(damage)
 		healthbar.health = health
 		apply_knockback(area.position , knockback_multiplier)
@@ -102,11 +112,16 @@ func take_damage(damage):
 func disable_collisions():
 	$hitarea/CollisionShape2D.disabled = true
 	$hitbox/CollisionShape2D.disabled = true
-		
+
+
+
+
 func apply_knockback(source_position , knockback_multiplier):
 	var direction = (position - source_position).normalized()
 	knockback_force = direction * knockback_multiplier
 	knockback_timer = knockback_duration
+	
+	
 	
 func spawn_coins():
 	var coin_count = randi() % 3 + 1
@@ -116,6 +131,9 @@ func spawn_coins():
 		print("Spawning coin at position: ", coin_instance.position)
 		get_parent().add_child(coin_instance)
 		print("Coin spawned")
+
+
+
 
 func spawn_item():
 	if randi() % 100 < item_drop_chance:

@@ -2,12 +2,15 @@ extends Node
 
 var player_current_attack = false
 
-var player_inventory =  ["key"]
+var player_inventory =  []
 
 var button_pressed = false
 
+var player_health = 100.0
+var player_max_health = 100.0
+var player_sword_damage = 20
+var player_gun_damage = 30
 
-var player_interaction = false
 
 var current_scene = "world"
 var transition_scene = false

@@ -315,6 +315,9 @@ sprite_frames = SubResource("SpriteFrames_c162v")
 animation = &"idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ln2y8")
+}
 tree_root = SubResource("AnimationNodeStateMachine_b8rxs")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/TimeScale/scale = 0.4

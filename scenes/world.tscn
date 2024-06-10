@@ -5014,4 +5014,4 @@ position = Vector2(438, 59)
 position = Vector2(6, 109)
 
 [node name="player" parent="dungeonroom1" instance=ExtResource("5_fdaxo")]
-position = Vector2(462, -879)
+position = Vector2(581, -989)

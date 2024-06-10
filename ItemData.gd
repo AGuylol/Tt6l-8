@@ -14,6 +14,8 @@ func _ready():
 	}
 
 func _on_body_entered(body):
-	if "player" in body.name:
+	if body.is_in_group("player"):
 		body.get_item(itemData)
 		queue_free()
+		
+
