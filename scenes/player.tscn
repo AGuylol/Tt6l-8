@@ -224,7 +224,7 @@ func apply_knockback(direction: Vector2):
 	is_knocked_back = false
 	
 
-
+# damage to player
 func _on_playerhitbox_area_entered(area):
 	if area.is_in_group(\"spikes\"):
 		player_health -=5
@@ -1355,6 +1355,8 @@ offset_bottom = -49.0
 [node name="dash_period" type="Timer" parent="."]
 
 [node name="dash_cooldown" type="Timer" parent="."]
+
+[node name="regen_timer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="playerhitbox" to="." method="_on_playerhitbox_area_entered"]
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]
