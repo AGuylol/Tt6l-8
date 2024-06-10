@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://68xdu80spkc7" path="res://scenes/key.tscn" id="16_r3q1m"]
 [ext_resource type="PackedScene" uid="uid://jrw8xnclqdi8" path="res://scenes/chest.tscn" id="17_bcxu0"]
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
-[ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
+[ext_resource type="PackedScene" path="res://scenes/lantern.tscn" id="26_aksei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")

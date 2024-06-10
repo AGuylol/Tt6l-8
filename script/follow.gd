@@ -18,14 +18,14 @@ func transition():
 		
 		
 		
-	elif distance > 80:
+	elif distance > 70:
 		var chance = randi() % 5
 		match chance:
 				0:
 					get_parent().change_state("dash")
-				1, 2, 4:
+				1, 2:
 					pass
-				3:
+				3 , 4:
 					var range_chance = randi() % 2
 					match range_chance:
 						0:

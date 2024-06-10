@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cotxqgua8wgnn"]
+[gd_scene load_steps=3 format=3 uid="uid://cotxqgua8wgnn"]
 
 [ext_resource type="Script" path="res://script/interaction_manager.gd" id="1_i78t7"]
+
+[sub_resource type="FontFile" id="FontFile_fyy4w"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="Interaction_manager" type="Node2D"]
 script = ExtResource("1_i78t7")
@@ -13,6 +21,7 @@ offset_left = -54.0
 offset_right = 54.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontFile_fyy4w")
 text = "[E] To interact"
 horizontal_alignment = 1
 vertical_alignment = 1
