@@ -49,6 +49,8 @@ var knockback_force = 100
 var knockback_duration = 0.5
 var is_knocked_back = false
 
+var gun_cooldown = 10
+
 @onready var camera = $Camera2D
 var normal_zoom = Vector2(1.5, 1.5)
 var zoomed_in = Vector2(0.5, 0.5)
@@ -76,6 +78,7 @@ func _physics_process(delta):
 		$playerhitbox.monitoring = false
 		$playerhitbox.area_entered.disconnect(_on_playerhitbox_area_entered)
 		get_tree().change_scene_to_file(\"res://gameover/gameover.tscn\")
+		global.reset_stats()
 	
 		
 	
@@ -199,7 +202,7 @@ func bow_shoot():
 		if \"arquebus\" in global.player_inventory:
 			shoot_arrow($Marker2D.global_position, $Marker2D.rotation + 0.4)
 		
-		await get_tree().create_timer(10).timeout
+		await get_tree().create_timer(gun_cooldown).timeout
 		bow_cooldown = true
 		
 func shoot_arrow(position, rotation):
@@ -273,7 +276,12 @@ func apply_upgrades():
 	elif \"arquebus\" in global.player_inventory:
 		global.player_gun_damage += 10
 			
+	elif \"flintlock\" in global.player_inventory:
+		gun_cooldown = 5
 			
+
+
+
 func _on_regen_timer_timeout():
 	if player_health < player_max_health/3:
 		player_health = min(player_health + (player_max_health / 3), player_max_health) 

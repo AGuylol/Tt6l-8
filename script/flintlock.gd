@@ -10,3 +10,4 @@ func _ready():
 func _on_pickup():
 	global.player_inventory.append("flintlock")
 	queue_free()
+	print(global.player_inventory)
