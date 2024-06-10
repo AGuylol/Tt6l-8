@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://d31e05ugntsej"]
+[gd_scene load_steps=16 format=3 uid="uid://y5jclu0ac6yj"]
 
-[ext_resource type="Script" path="res://script/johorbeach.gd" id="1_1cui0"]
+[ext_resource type="Script" path="res://scenes/johorbeach.gd" id="1_1cui0"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="1_nx1ql"]
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="2_61hxq"]
 [ext_resource type="Texture2D" uid="uid://cxjqqosgxw4qw" path="res://arts/beach (not the other b)/32x32/Beach/BeachPlants.png" id="3_i61m6"]

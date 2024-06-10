@@ -6,6 +6,7 @@ var player_inventory =  ["key"]
 
 var button_pressed = false
 
+
 var player_interaction = false
 
 var current_scene = "world"
@@ -24,3 +25,4 @@ func finish_changescenes():
 			current_scene = "forest"
 		else:
 			current_scene = "world"
+
