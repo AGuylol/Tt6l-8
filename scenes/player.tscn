@@ -13,6 +13,8 @@ var enemy_inattack_range = false
 var enemy_attack_cooldown = true
 
 var player_health = 100.0
+var player_max_health = 100.0
+var max_regen_health = player_max_health / 2
 var player_alive = false
 var attacking = false
 var sword_equiped = true
@@ -29,6 +31,7 @@ var state = idle
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var healthbar = $Healthbar
+@onready var regen_timer = $regen_timer
 var blend_position : Vector2 = Vector2.ZERO
 
 var dash_speed = 400
@@ -37,6 +40,7 @@ var is_dashing = false
 var can_dash = true
 var dash_direction : Vector2
 var can_move : bool = true
+
 
 @onready var dash_period = $dash_period
 @onready var dash_cooldown_timer = $dash_cooldown
@@ -49,12 +53,13 @@ var is_knocked_back = false
 var normal_zoom = Vector2(1.5, 1.5)
 var zoomed_in = Vector2(0.5, 0.5)
 
+var took_damage : bool = false
 
 func _ready():
 	animation_tree.active = true
 	healthbar.init_health(player_health)
 	$playerhitbox.area_entered.connect(_on_playerhitbox_area_entered)
-
+	apply_upgrades() 
 	
 	
 func _physics_process(delta):
@@ -62,7 +67,9 @@ func _physics_process(delta):
 	enemy_attack()
 	_on_attack_timeout()
 	bow_shoot()
-
+	apply_upgrades()
+	regen_health()
+	print(player_health)
 	
 	if Input.is_action_just_pressed(\"equip_bow\"):
 		if bow_equiped:
@@ -175,7 +182,7 @@ func enemy_attack():
 		player_health -= 15
 		print(player_health)
 		print(\"enemy attacked you\")
-		
+		took_damage = true
 		await get_tree().create_timer(0.5).timeout
 		enemy_attack_cooldown = false
 		healthbar.health = player_health
@@ -249,6 +256,17 @@ func _on_playerhitbox_area_entered(area):
 	healthbar.health = player_health
 	print(player_health)
 
+func apply_upgrades():
+	if \"health_upgrade1\" in global.player_inventory:
+		player_max_health += 50
+		player_health += 50
+
+func regen_health():
+	if player_health < player_max_health /2 :
+		if took_damage:
+			await get_tree().create_timer(5).timeout
+			took_damage = false
+			player_health += max_regen_health
 
 "
 
