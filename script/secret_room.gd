@@ -3,19 +3,13 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if SceneManager.spawn_door_tag != null:
+		_on_level_spawn(SceneManager.spawn_door_tag)
+		
+func _on_level_spawn(destination_tag : String):
+	var door_path  = "door" + destination_tag
+	var door = get_node(door_path) as Door
+	SceneManager.trigger_player_spawn(door.spawn.global_position , door.spawn_direction)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("player"):
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
-
-
-func _on_area_2d_2_body_entered(body):
-	if body.is_in_group("player"):
-		get_tree().change_scene_to_file("res://scenes/world.tscn")

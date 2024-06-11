@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=94 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
 [ext_resource type="PackedScene" uid="uid://cokcr3v8snkrw" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
 [ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
+[ext_resource type="PackedScene" uid="uid://b7p4uwtp5pqco" path="res://scenes/scene_trigger.tscn" id="27_3rqjc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")
@@ -14313,13 +14314,6 @@ _data = {
 "wall_going_up": SubResource("Animation_ajtk2")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3q72j"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_n2rr8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx8ns"]
-size = Vector2(32, 25.5)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k0s75"]
 polygon = PackedVector2Array(-34, -77, -41, -77, -47, -77, -47, -64, -46, -57, -46, -52, -46, -47, -44, -47, -44, -49, -44, -57, -44, -65, -34, -65)
 
@@ -15068,26 +15062,6 @@ position = Vector2(-2, 24)
 
 [node name="rooms" type="Node2D" parent="."]
 
-[node name="boss_room" type="Area2D" parent="rooms"]
-position = Vector2(0, -1)
-
-[node name="Sprite2D" type="Sprite2D" parent="rooms/boss_room"]
-texture = SubResource("ViewportTexture_3q72j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="rooms/boss_room"]
-position = Vector2(-39, -1047)
-shape = SubResource("CircleShape2D_n2rr8")
-
-[node name="cave" type="Area2D" parent="rooms"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="rooms/cave"]
-position = Vector2(592, -1024)
-shape = SubResource("RectangleShape2D_tx8ns")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="rooms/cave"]
-position = Vector2(593, -1376)
-shape = SubResource("RectangleShape2D_tx8ns")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.666667, 0.666667, 0.666667, 1)
 
@@ -15170,6 +15144,7 @@ position = Vector2(469, -1165)
 position = Vector2(-82, 180)
 
 [node name="shadow" type="Node2D" parent="."]
+visible = false
 position = Vector2(346, -13)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="shadow"]
@@ -15238,6 +15213,16 @@ occluder_light_mask = 2
 occluder = SubResource("OccluderPolygon2D_qfhoy")
 occluder_light_mask = 2
 
+[node name="scene_trigger" parent="." instance=ExtResource("27_3rqjc")]
+destination_level_tag = "maze_room"
+destination_door_tag = "N"
+
+[node name="CollisionShape2D" parent="scene_trigger" index="0"]
+position = Vector2(591, -1032)
+
+[node name="Marker2D" parent="scene_trigger" index="1"]
+position = Vector2(593, -1006)
+
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer2" to="." method="_on_detecplayer_2_ndroom_body_entered"]
@@ -15245,8 +15230,7 @@ occluder_light_mask = 2
 [connection signal="body_entered" from="detectplayerarea/detectplayer5" to="." method="_on_detectplayer_5_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer6" to="." method="_on_detectplayer_6_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer7" to="." method="_on_detectplayer_7_body_entered"]
-[connection signal="body_entered" from="rooms/boss_room" to="." method="_on_boss_room_body_entered"]
-[connection signal="body_entered" from="rooms/cave" to="." method="_on_secret_room_body_entered"]
 
 [editable path="traps/spikes4"]
 [editable path="items/chest"]
+[editable path="scene_trigger"]

@@ -56,7 +56,8 @@ func close_all_doors():
 		doors_open = false
 		
 func _ready():
-
+		
+		
 	spawn_points = [
 		$enemy_spawns/spawn_point.get_path(),
 		$enemy_spawns/spawn_point2.get_path(),
