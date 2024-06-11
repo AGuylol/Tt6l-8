@@ -223,14 +223,14 @@ position = Vector2(93, 198)
 position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_4rfrb")
 
-[node name="malacca_transition_point2" type="Area2D" parent="."]
+[node name="mineoutside_transition_point" type="Area2D" parent="."]
 position = Vector2(1738, 304)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="malacca_transition_point2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mineoutside_transition_point"]
 position = Vector2(7, 0.5)
 shape = SubResource("RectangleShape2D_4rfrb")
 
 [connection signal="body_entered" from="johorbeach_transition_point" to="." method="_on_johorbeach_transition_point_body_entered"]
 [connection signal="body_exited" from="johorbeach_transition_point" to="." method="_on_johorbeach_transition_point_body_exited"]
-[connection signal="body_entered" from="malacca_transition_point2" to="." method="_on_malacca_transition_point_2_body_entered"]
-[connection signal="body_exited" from="malacca_transition_point2" to="." method="_on_malacca_transition_point_2_body_exited"]
+[connection signal="body_entered" from="mineoutside_transition_point" to="." method="_on_malacca_transition_point_2_body_entered"]
+[connection signal="body_exited" from="mineoutside_transition_point" to="." method="_on_malacca_transition_point_2_body_exited"]
