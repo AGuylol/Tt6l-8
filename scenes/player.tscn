@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
 [ext_resource type="Script" path="res://script/Camera2D.gd" id="1_g3rp2"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
-[ext_resource type="PackedScene" uid="uid://bh8bxuvh53ilb" path="res://staminabar/staminabar.tscn" id="4_s1jka"]
-[ext_resource type="PackedScene" uid="uid://cfsw28miudcxt" path="res://bag.tscn" id="5_ecd18"]
 
 [sub_resource type="GDScript" id="GDScript_g0g3h"]
 script/source = "extends CharacterBody2D
@@ -1393,6 +1391,7 @@ wait_time = 5.0
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]
 [connection signal="body_exited" from="playerhitbox" to="." method="_on_playerhitbox_body_exited"]
 [connection signal="timeout" from="enemy_attack_timer" to="." method="_on_enemy_attack_timer_timeout"]
+[connection signal="timeout" from="enemy_attack_timer" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="enemy_attack_timer" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
 [connection signal="timeout" from="dash_period" to="." method="_on_dash_period_timeout"]
