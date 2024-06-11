@@ -5011,7 +5011,7 @@ visible = false
 position = Vector2(28, -40)
 
 [node name="Item" parent="dungeonroom1" instance=ExtResource("16_56ows")]
-position = Vector2(6, 109)
+position = Vector2(7, 104)
 
 [node name="player" parent="dungeonroom1" instance=ExtResource("5_fdaxo")]
-position = Vector2(-3, -309)
+position = Vector2(599, -994)

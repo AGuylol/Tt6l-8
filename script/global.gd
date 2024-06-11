@@ -54,3 +54,20 @@ func finish_changescenes_gold_mines():
 			# Reset player position or any other relevant game state
 		else:
 			current_scene = "world"  # Default transition, should not happen unless you add more scenes
+
+
+var spawn_states = {
+	"spawn_area_1": false,
+	"spawn_area_2": false,
+	"spawn_area_3": false,
+	"spawn_area_4": false,
+	"spawn_area_5": false,
+	"spawn_area_6": false,
+	"spawn_area_7": false,
+}
+
+func set_spawn_state(area_name: String, state: bool):
+	spawn_states[area_name] = state
+
+func get_spawn_state(area_name: String) -> bool:
+	return spawn_states.get(area_name, false)

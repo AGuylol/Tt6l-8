@@ -267,17 +267,17 @@ func _on_playerhitbox_area_entered(area):
 	
 func apply_upgrades():
 	if \"health_upgrade1\" in global.player_inventory:
-		player_max_health += 50
-		player_health += 50
+		player_max_health = player_max_health + 50
+		player_health = player_health + 50
 		
 	elif \"weapon_upgrade1\" in global.player_inventory:
-		global.player_sword_damage +=10
+		global.player_sword_damage = global.player_sword_damage + 10
 	
 	elif \"arquebus\" in global.player_inventory:
-		global.player_gun_damage += 10
+		global.player_gun_damage = global.player_gun_damage + 10
 			
 	elif \"flintlock\" in global.player_inventory:
-		gun_cooldown = 5
+		gun_cooldown = gun_cooldown - 3
 			
 
 
