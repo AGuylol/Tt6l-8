@@ -1,55 +1,55 @@
-[gd_scene load_steps=21 format=3 uid="uid://0vngswwsrm1"]
+[gd_scene load_steps=21 format=3 uid="uid://cg4l0pc708uoa"]
 
-[ext_resource type="Script" path="res://script/enemytest.gd" id="1_ohw3y"]
-[ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_0bap4"]
-[ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_0vc2j"]
+[ext_resource type="Script" path="res://script/enemytest.gd" id="1_7x6fx"]
+[ext_resource type="Texture2D" uid="uid://7ajwe1puw7vl" path="res://arts/characters/slime.png" id="2_005gq"]
+[ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_6mjtm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2qmk"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(0, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bwc7"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(32, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sgso6"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(64, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_veops"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(96, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8wld"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(128, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gh6h1"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ot6t7"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orfnd"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5x5u7"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6y7ix"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xclxq"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2vld"]
-atlas = ExtResource("2_0bap4")
+atlas = ExtResource("2_005gq")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgept"]
@@ -119,7 +119,7 @@ radius = 75.0267
 radius = 11.0
 
 [node name="enemytest" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_ohw3y")
+script = ExtResource("1_7x6fx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fgept")
@@ -148,7 +148,7 @@ shape = SubResource("CircleShape2D_40npp")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.251
 
-[node name="Healthbar" parent="." instance=ExtResource("3_0vc2j")]
+[node name="Healthbar" parent="." instance=ExtResource("3_6mjtm")]
 offset_left = -7.0
 offset_top = 10.0
 offset_right = 8.0
