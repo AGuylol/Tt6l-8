@@ -46,9 +46,9 @@ func _physics_process(delta):
 
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("sword"):
-		health -= 10 - defence
+		health -= global.player_sword_damage - defence
 			
 	elif area.is_in_group("bullet"):
-		health -= 30 - defence
+		health -= global.player_gun_damage - defence
 		
 

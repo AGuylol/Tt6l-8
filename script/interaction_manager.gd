@@ -19,7 +19,7 @@ func unregistered_area(area : interaction_area):
 		
 		
 func _process(delta):
-	if active_area.size() > 0 and can_interact:
+	if active_area.size() > 0 && can_interact:
 		active_area.sort_custom(_sort_by_distance_to_player)
 		label.text = base_text + active_area[0].action_name
 		label.global_position = active_area[0].global_position
@@ -27,15 +27,13 @@ func _process(delta):
 		label.global_position.x -= label.size.x / 2
 		label.show()
 	else:
-		label.hide()
+		pass
 
 func _sort_by_distance_to_player(area1 , area2):
-	if player == null or area1 == null or area2 == null:
-		print("One of the instances is null:", area1, area2, player)
-		return 0  
 	var area1_to_player = player.global_position.distance_to(area1.global_position)
 	var area2_to_player = player.global_position.distance_to(area2.global_position)
 	return area1_to_player < area2_to_player
+	
 	
 	
 func _input(event):

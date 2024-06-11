@@ -33,7 +33,7 @@ func open_all_doors():
 		$doors/door12/AnimationPlayer.play("wall_going_down")
 		$doors/door13/AnimationPlayer.play("wall_going_down")
 		$doors/door14/AnimationPlayer.play("wall_going_down")
-
+		$doors/door15/AnimationPlayer.play("wall_going_down")
 		doors_open = true
 		
 func close_all_doors():
@@ -52,11 +52,10 @@ func close_all_doors():
 		$doors/door12/AnimationPlayer.play("wall_going_up")
 		$doors/door13/AnimationPlayer.play("wall_going_up")
 		$doors/door14/AnimationPlayer.play("wall_going_up")
-
+		$doors/door15/AnimationPlayer.play("wall_going_up")
 		doors_open = false
 		
 func _ready():
-
 
 	spawn_points = [
 		$enemy_spawns/spawn_point.get_path(),
@@ -179,6 +178,9 @@ func _on_detectplayer_body_entered(body):
 
 func _on_detecplayer_2_ndroom_body_entered(body):
 	if body.is_in_group("player"):
+		if global.get_spawn_state("spawn_area_1"):
+			return
+		global.set_spawn_state("spawn_area_1", true)
 		$detectplayerarea/detectplayer2.monitoring = false
 		$detectplayerarea/detectplayer2.body_entered.disconnect(_on_detecplayer_2_ndroom_body_entered)
 		spawn_enemies_2()
@@ -200,13 +202,18 @@ func _on_detectplayer_4_body_entered(body):
 		close_all_doors()
 
 
-
 func _on_detectplayer_5_body_entered(body):
 	if body.is_in_group("player"):
+		if global.get_spawn_state("spawn_area_5"):
+			return
+		global.set_spawn_state("spawn_area_5", true)
 		$detectplayerarea/detectplayer5.monitoring = false
 		$detectplayerarea/detectplayer5.body_entered.disconnect(_on_detectplayer_5_body_entered)
 		spawn_enemies_5()
 		close_all_doors()
+		$doors/door16/AnimationPlayer.play("wall_going_up")
+		if global.button_pressed:
+			$doors/door16/AnimationPlayer.play("wall_going_down")
 		
 func _on_detectplayer_6_body_entered(body):
 	if body.is_in_group("player"):
@@ -221,7 +228,9 @@ func _on_detectplayer_7_body_entered(body):
 		$detectplayerarea/detectplayer7.body_entered.disconnect(_on_detectplayer_7_body_entered)
 		spawn_enemies_7()
 		close_all_doors()
-
+	
+	
+	
 func _on_boss_room_body_entered(body):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://scenes/boss_fight.tscn")
@@ -231,6 +240,7 @@ func _on_boss_room_body_entered(body):
 func _on_secret_room_body_entered(body):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://scenes/secret_room.tscn")
+
 
 func spawn_chest():
 	var chest = chest_scene.instantiate()

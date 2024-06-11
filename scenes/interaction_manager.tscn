@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cotxqgua8wgnn"]
+[gd_scene load_steps=3 format=3 uid="uid://cotxqgua8wgnn"]
 
 [ext_resource type="Script" path="res://script/interaction_manager.gd" id="1_i78t7"]
+[ext_resource type="FontFile" uid="uid://bp54rgoiy71ga" path="res://PixeloidSans-mLxMm.ttf" id="2_mlmt5"]
 
 [node name="Interaction_manager" type="Node2D"]
 script = ExtResource("1_i78t7")
@@ -13,6 +14,7 @@ offset_left = -54.0
 offset_right = 54.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_mlmt5")
 text = "[E] To interact"
 horizontal_alignment = 1
 vertical_alignment = 1

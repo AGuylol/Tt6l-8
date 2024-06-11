@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=96 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://68xdu80spkc7" path="res://scenes/key.tscn" id="16_r3q1m"]
 [ext_resource type="PackedScene" uid="uid://jrw8xnclqdi8" path="res://scenes/chest.tscn" id="17_bcxu0"]
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
+[ext_resource type="PackedScene" uid="uid://cokcr3v8snkrw" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
 [ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
@@ -14324,7 +14325,7 @@ polygon = PackedVector2Array(-34, -77, -41, -77, -47, -77, -47, -64, -46, -57, -
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ettlb"]
 cull_mode = 1
-polygon = PackedVector2Array(-46, -47, -34, -47, -34, -50, -36, -51, -36, -64, -44, -64, -44, -51, -46, -50, -46, -48)
+polygon = PackedVector2Array(-46, -47, -34, -47, -34, -50, -36, -51, -36, -59, -44, -59, -44, -51, -46, -50, -46, -48)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s0113"]
 polygon = PackedVector2Array(353, -33, 355, -31, 357, -30, 359, -29, 361, -27, 364, -24, 366, -19, 366, -33)
@@ -14336,7 +14337,7 @@ polygon = PackedVector2Array(241, -85, 245, -83, 254, -85, 254, -88, 254, -89, 2
 polygon = PackedVector2Array(-164, -1043, -156, -1041, -156, -1038, -157, -1031, -164, -1030, -165, -1036)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s7xno"]
-polygon = PackedVector2Array(9, -376, 86, -376, 86, -211, -10, -211, -9, -132, 38, -131, 38, 28, -142, 28, -142, -16, -263, -16, -263, 47, -310, 47, -310, 139, -278, 140, -278, 236, 251, 312, 301, -282, 455, -1241, 379, -1340, 265, -1417, 259, -1373, 262, -1351, 266, -1350, 266, -1304, 362, -1304, 361, -1120, 131, -1120, 130, -1305, 226, -1305, 226, -1353, 232, -1353, 232, -1368, 239, -1376, 251, -1376, 261, -1373, 257, -1377, 246, -1386, 31, -1442, -54, -1448, -241, -1438, -319, -1350, -255, -1230, -359, -1113, -472, -1095, -498, -1026, -427, -955, -341, -909, -49, -863, -53, -769, -239, -610, -180, -401, -439, -383, -475, -266, -416, -193, -234, -228, -260, -137, -463, -142, -472, -50, -454, 155, -369, 288, -274, 224, -398, 224, -398, 140, -366, 140, -366, 48, -414, 48, -414, -112, -262, -112, -262, -65, -142, -64, -141, -129, -62, -129, -62, -208, -110, -208, -110, -272, -342, -272, -342, -240, -430, -240, -430, -340, -343, -340, -342, -313, -126, -313, -126, -377, -30, -377, -31, -464, -110, -464, -110, -641, -14, -640, -14, -768, 98, -768, 98, -912, -222, -912, -222, -1008, -359, -1008, -359, -996, -426, -996, -425, -1076, -359, -1076, -359, -1060, -222, -1060, -222, -1105, -142, -1104, -142, -1264, -190, -1264, -189, -1348, -55, -1347, -55, -1264, -102, -1264, -102, -1113, -7, -1113, -7, -952, 226, -952, 227, -1007, 228, -1015, 233, -1017, 237, -1023, 247, -1025, 256, -1021, 265, -1016, 266, -953, 345, -953, 345, -736, 25, -736, 25, -640, 105, -640, 106, -464, 9, -465)
+polygon = PackedVector2Array(9, -376, 86, -376, 86, -211, -10, -211, -9, -132, 38, -131, 38, 28, -142, 28, -142, -16, -263, -16, -263, 47, -310, 47, -310, 139, -278, 140, -278, 236, 251, 312, 301, -282, 455, -1241, 379, -1340, 265, -1417, 259, -1373, 262, -1351, 266, -1350, 266, -1304, 362, -1304, 361, -1120, 131, -1120, 130, -1305, 226, -1305, 226, -1353, 232, -1353, 232, -1368, 239, -1376, 251, -1376, 261, -1373, 257, -1377, 246, -1386, 31, -1442, -54, -1448, -241, -1438, -319, -1350, -255, -1230, -359, -1113, -472, -1095, -498, -1026, -427, -955, -341, -909, -49, -863, -53, -769, -239, -610, -180, -401, -439, -383, -475, -266, -416, -193, -234, -228, -260, -137, -463, -142, -472, -50, -454, 155, -369, 288, -274, 224, -398, 224, -398, 140, -366, 140, -366, 48, -414, 48, -414, -112, -262, -112, -262, -65, -142, -64, -141, -129, -62, -129, -62, -208, -110, -208, -110, -272, -342, -272, -342, -240, -430, -240, -429, -344, -342, -344, -342, -313, -126, -313, -126, -377, -30, -377, -31, -464, -110, -464, -110, -641, -14, -640, -14, -768, 98, -768, 98, -912, -222, -912, -222, -1008, -359, -1008, -359, -996, -426, -996, -425, -1076, -359, -1076, -359, -1060, -222, -1060, -222, -1105, -142, -1104, -142, -1264, -190, -1264, -189, -1348, -55, -1347, -55, -1264, -102, -1264, -102, -1113, -7, -1113, -7, -952, 226, -952, 227, -1007, 228, -1015, 233, -1017, 237, -1023, 247, -1025, 256, -1021, 265, -1016, 266, -953, 345, -953, 345, -736, 25, -736, 25, -640, 105, -640, 106, -464, 9, -465)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_43vu3"]
 polygon = PackedVector2Array(-81, -996, -83, -994, -83, -991, -83, -986, -81, -981, -75, -981, -75, -996)
@@ -14354,7 +14355,7 @@ polygon = PackedVector2Array(-25, -566, -11, -566, -11, -580, -16, -580, -24, -5
 polygon = PackedVector2Array(-81, -575, -75, -569, -77, -567, -82, -565, -86, -566, -89, -568, -89, -571, -88, -571, -88, -573, -87, -573, -87, -574, -86, -574, -86, -575, -85, -575, -85, -576, -81, -576)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rploq"]
-polygon = PackedVector2Array(-423, -268, -413, -268, -413, -258, -423, -258)
+polygon = PackedVector2Array(-423, -266, -422, -266, -422, -273, -414, -273, -414, -266, -413, -266, -413, -258, -423, -258)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r0bsg"]
 polygon = PackedVector2Array(-92, -355, -100, -352, -104, -342, -104, -355)
@@ -14369,10 +14370,16 @@ polygon = PackedVector2Array(-168, -947, -156, -940, -156, -934, -168, -934)
 polygon = PackedVector2Array(-125, -1308, -125, -1298, -117, -1297, -117, -1308)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o5v6y"]
-polygon = PackedVector2Array(186, -765, 195, -763, 197, -761, 195, -759, 186, -758, 183, -761)
+polygon = PackedVector2Array(185, -766, 187, -768, 191, -768, 195, -763, 197, -761, 195, -759, 186, -758, 183, -761)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xupy5"]
 polygon = PackedVector2Array(251, -862, 249, -859, 250, -857, 256, -856, 258, -857, 258, -860, 255, -863)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i2avd"]
+polygon = PackedVector2Array(-393, -64, -379, -64, -379, -51, -381, -51, -381, -49, -382, -49, -382, -46, -390, -46, -390, -49, -391, -49, -391, -51, -393, -51)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qfhoy"]
+polygon = PackedVector2Array(-425, -288, -411, -288, -411, -275, -413, -275, -413, -273, -423, -273, -423, -275, -425, -275)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_cjri4")
@@ -14930,14 +14937,14 @@ libraries = {
 position = Vector2(246, -275)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="doors/door12"]
-position = Vector2(42, -726)
+position = Vector2(42, -729)
 rotation = 1.5708
 scale = Vector2(1.26858, 0.875)
 sprite_frames = SubResource("SpriteFrames_1vywi")
 animation = &"wall_going_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doors/door12"]
-position = Vector2(37, -728)
+position = Vector2(38, -729)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_xnv6n")
 disabled = true
@@ -15033,7 +15040,7 @@ position = Vector2(-23, 5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall collision"]
 position = Vector2(3, 0)
-polygon = PackedVector2Array(-48, 30, -1, 31, 0, 125, -119, 126, -116, -187, 256, -187, -150, -188, -151, -330, -66, -400, 24, -403, -140, -1054, -102, -1139, 49, -1168, -60, -1100, -61, -1014, 9, -1013, 9, -1026, 143, -1026, 143, -929, 463, -928, 464, -792, 350, -791, 352, -664, 255, -666, 255, -482, 335, -481, 336, -397, 239, -396, 239, -331, 25, -332, 26, -359, -64, -360, -65, -258, 25, -256, 26, -289, 256, -290, 256, -225, 304, -225, 304, -147, 224, -147, 224, -83, 105, -83, 104, -130, -44, -130)
+polygon = PackedVector2Array(-48, 30, -1, 31, 0, 125, -119, 126, -116, -187, 256, -187, -150, -188, -151, -330, -66, -400, 24, -403, -140, -1054, -102, -1139, 49, -1168, -60, -1100, -61, -1014, 9, -1013, 9, -1026, 143, -1026, 143, -929, 463, -928, 464, -792, 350, -791, 352, -664, 255, -666, 255, -482, 335, -481, 336, -397, 239, -396, 239, -331, 24, -332, 24, -348, -63, -347, -65, -258, 25, -256, 26, -289, 256, -290, 256, -225, 304, -225, 304, -147, 224, -147, 224, -83, 105, -83, 104, -130, -44, -130)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="wall collision"]
 polygon = PackedVector2Array(108, -33, 225, -33, 226, 11, 409, 12, 408, -149, 361, -150, 359, -229, 456, -231, 455, -389, 455, -397, 380, -398, 380, -481, 476, -481, 474, -664, 395, -664, 396, -752, 714, -754, 714, -972, 635, -972, 635, -987, 636, -1018, 630, -1018, 628, -1038, 615, -1043, 601, -1034, 600, -1022, 595, -1017, 595, -971, 363, -967, 363, -1130, 267, -1131, 267, -1281, 315, -1281, 316, -1366, 179, -1367, 179, -1282, 226, -1281, 227, -1124, 146, -1124, 146, -1078, 11, -1078, 11, -1094, -58, -1094, 11, -1138, 122, -1221, 92, -1414, 315, -1434, 687, -1404, 847, -1326, 806, -1139, 732, -1138, 731, -1324, 636, -1323, 636, -1367, 631, -1369, 629, -1389, 620, -1395, 603, -1391, 601, -1369, 595, -1370, 595, -1323, 499, -1324, 498, -1166, 499, -1138, 523, -1021, 612, -1053, 498, -1138, 729, -1137, 811, -1139, 964, -746, 658, -549, 566, 153, 88, 319, -134, 217, -115, 126, -29, 125, -28, 206, 92, 207, 89, 122, 60, 120, 59, 31, 107, 31)
@@ -15045,6 +15052,7 @@ position = Vector2(597, -1231)
 position = Vector2(-35, -302)
 
 [node name="key" parent="items" instance=ExtResource("16_r3q1m")]
+position = Vector2(-2, -22)
 
 [node name="chest" parent="items" instance=ExtResource("17_bcxu0")]
 position = Vector2(260, -1014)
@@ -15054,6 +15062,9 @@ visible = false
 
 [node name="CollisionShape2D" parent="items/chest" index="2"]
 visible = false
+
+[node name="Node2D" parent="items" instance=ExtResource("25_2g5mk")]
+position = Vector2(-2, 24)
 
 [node name="rooms" type="Node2D" parent="."]
 
@@ -15219,6 +15230,14 @@ occluder = SubResource("OccluderPolygon2D_o5v6y")
 [node name="LightOccluder2D18" type="LightOccluder2D" parent="shadow"]
 occluder = SubResource("OccluderPolygon2D_xupy5")
 
+[node name="LightOccluder2D19" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_i2avd")
+occluder_light_mask = 2
+
+[node name="LightOccluder2D20" type="LightOccluder2D" parent="shadow"]
+occluder = SubResource("OccluderPolygon2D_qfhoy")
+occluder_light_mask = 2
+
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer2" to="." method="_on_detecplayer_2_ndroom_body_entered"]
@@ -15230,5 +15249,4 @@ occluder = SubResource("OccluderPolygon2D_xupy5")
 [connection signal="body_entered" from="rooms/cave" to="." method="_on_secret_room_body_entered"]
 
 [editable path="traps/spikes4"]
-[editable path="items/key"]
 [editable path="items/chest"]

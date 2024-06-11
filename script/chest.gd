@@ -19,6 +19,7 @@ func _on_open_chest():
 		anim_chest.play("open")
 		await anim_chest.animation_finished
 		spawn_weapon()
+		global.player_inventory.erase("key")
 		queue_free()
 	
 func spawn_weapon():

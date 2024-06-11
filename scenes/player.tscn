@@ -11,12 +11,13 @@ script/source = "extends CharacterBody2D
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true
 
-var player_health = 100.0
+var player_health = global.player_health
+var player_max_health = global.player_max_health
+var max_regen_health = player_max_health / 2
 var player_alive = false
 var attacking = false
 var sword_equiped = true
 
-var bow_equiped = false
 var bow_cooldown = true
 var arrow = preload(\"res://scenes/arrow.tscn\")
 
@@ -28,6 +29,7 @@ var state = idle
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var healthbar = $Healthbar
+@onready var regen_timer = $regen_timer
 var blend_position : Vector2 = Vector2.ZERO
 
 var dash_speed = 400
@@ -37,6 +39,7 @@ var can_dash = true
 var dash_direction : Vector2
 var can_move : bool = true
 
+
 @onready var dash_period = $dash_period
 @onready var dash_cooldown_timer = $dash_cooldown
 @onready var anim_player = $AnimationPlayer
@@ -44,16 +47,19 @@ var knockback_force = 100
 var knockback_duration = 0.5
 var is_knocked_back = false
 
+var gun_cooldown = 10
+
 @onready var camera = $Camera2D
 var normal_zoom = Vector2(1.5, 1.5)
 var zoomed_in = Vector2(0.5, 0.5)
 
+var took_damage : bool = false
 
 func _ready():
 	animation_tree.active = true
 	healthbar.init_health(player_health)
 	$playerhitbox.area_entered.connect(_on_playerhitbox_area_entered)
-
+	apply_upgrades() 
 	
 	
 func _physics_process(delta):
@@ -61,19 +67,8 @@ func _physics_process(delta):
 	enemy_attack()
 	_on_attack_timeout()
 	bow_shoot()
-
+	apply_upgrades()
 	
-	if Input.is_action_just_pressed(\"equip_bow\"):
-		if bow_equiped:
-			bow_equiped = false
-		else:
-			bow_equiped = true
-			
-	if Input.is_action_just_pressed(\"equip_sword\"):
-		if sword_equiped:
-			sword_equiped = false
-		else:
-			sword_equiped = true
 		
 		
 	if player_health <= 0:
@@ -81,6 +76,7 @@ func _physics_process(delta):
 		$playerhitbox.monitoring = false
 		$playerhitbox.area_entered.disconnect(_on_playerhitbox_area_entered)
 		get_tree().change_scene_to_file(\"res://gameover/gameover.tscn\")
+		global.reset_stats()
 	
 		
 	
@@ -105,6 +101,8 @@ func player_movement(delta):
 		move_and_slide()
 		update_parameters(input_vector)
 
+
+
 func start_dash(input_vector):
 	is_dashing = true
 	can_dash = false
@@ -114,6 +112,7 @@ func start_dash(input_vector):
 	$dash_cooldown.start()
 
 
+	
 	
 func update_parameters(input_vector):
 	if input_vector == Vector2.ZERO:
@@ -141,10 +140,13 @@ func apply_friction(amount) -> void:
 	else:
 		velocity = Vector2.ZERO
 		
+		
+		
 func apply_movement(amount) -> void:
 	velocity += amount
 	velocity = velocity.limit_length(max_speed)
 	
+
 
 func _on_playerhitbox_body_entered(body):
 	if body.is_in_group(\"enemy\"):
@@ -174,10 +176,11 @@ func enemy_attack():
 		player_health -= 15
 		print(player_health)
 		print(\"enemy attacked you\")
-		
+		took_damage = true
 		await get_tree().create_timer(0.5).timeout
 		enemy_attack_cooldown = false
 		healthbar.health = player_health
+		regen_timer.start()
 		
 func _on_attack_timeout():
 	enemy_attack_cooldown = false
@@ -186,17 +189,27 @@ func bow_shoot():
 	var mouse_pos = get_global_mouse_position()
 	$Marker2D.look_at(mouse_pos)
 	
-	if Input.is_action_just_pressed(\"bow\") and bow_equiped and bow_cooldown:
+	if Input.is_action_just_pressed(\"bow\") and bow_cooldown:
 		bow_cooldown = false
 		var arrow_instance = arrow.instantiate()
 		arrow_instance.rotation = $Marker2D.rotation 
 		arrow_instance.global_position = $Marker2D.global_position
 		add_child(arrow_instance)
 		
-		await get_tree().create_timer(10).timeout
+		
+		if \"arquebus\" in global.player_inventory:
+			shoot_arrow($Marker2D.global_position, $Marker2D.rotation + 0.4)
+		
+		await get_tree().create_timer(gun_cooldown).timeout
 		bow_cooldown = true
 		
- 
+func shoot_arrow(position, rotation):
+	var arrow_instance = arrow.instantiate()
+	arrow_instance.rotation = rotation
+	arrow_instance.global_position = position
+	add_child(arrow_instance)
+	
+	
 func _on_enemy_attack_timer_timeout():
 	enemy_attack_cooldown = true
 
@@ -216,7 +229,7 @@ func apply_knockback(direction: Vector2):
 	is_knocked_back = false
 	
 
-
+# damage to player
 func _on_playerhitbox_area_entered(area):
 	if area.is_in_group(\"spikes\"):
 		player_health -=5
@@ -247,8 +260,40 @@ func _on_playerhitbox_area_entered(area):
 	
 	healthbar.health = player_health
 	print(player_health)
+	regen_timer.start()
+	
+	
+func apply_upgrades():
+	if \"health_upgrade1\" in global.player_inventory:
+		player_max_health = player_max_health + 50
+		player_health = player_health + 50
+		
+	elif \"weapon_upgrade1\" in global.player_inventory:
+		global.player_sword_damage = global.player_sword_damage + 10
+	
+	elif \"arquebus\" in global.player_inventory:
+		global.player_gun_damage = global.player_gun_damage + 10
+			
+	elif \"flintlock\" in global.player_inventory:
+		gun_cooldown = gun_cooldown - 3
+			
 
 
+
+func _on_regen_timer_timeout():
+	if player_health < player_max_health/3:
+		player_health = min(player_health + (player_max_health / 3), player_max_health) 
+		healthbar.health = player_health
+		print(\"Player health after regen:\", player_health)
+		
+		
+		
+func get_item(itemData):
+	$Bag.get
+
+
+func player():
+	pass
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
@@ -1331,6 +1376,9 @@ offset_bottom = -55.0
 
 [node name="dash_cooldown" type="Timer" parent="."]
 
+[node name="regen_timer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="area_entered" from="playerhitbox" to="." method="_on_playerhitbox_area_entered"]
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]
 [connection signal="body_exited" from="playerhitbox" to="." method="_on_playerhitbox_body_exited"]
@@ -1339,3 +1387,4 @@ offset_bottom = -55.0
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
 [connection signal="timeout" from="dash_period" to="." method="_on_dash_period_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="regen_timer" to="." method="_on_regen_timer_timeout"]
