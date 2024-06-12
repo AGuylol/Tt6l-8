@@ -10,4 +10,5 @@ func _ready():
 
 func _on_pick_up():
 	global.player_inventory.append("weapon_upgrade1")
+	print(global.player_inventory)
 	queue_free()

@@ -20,6 +20,9 @@ config/icon="res://arts/objects/icon.svg"
 
 global="*res://script/global.gd"
 InteractionManager="*res://scenes/interaction_manager.tscn"
+Upgrades="*res://script/upgrades.gd"
+SceneManager="*res://script/scene_manager.gd"
+scene_manager2="*res://script/scene_manager2.gd"
 
 [display]
 
