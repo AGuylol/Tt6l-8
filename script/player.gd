@@ -265,7 +265,8 @@ func _on_regen_timer_timeout():
 		healthbar.health = global.player_health
 		print("Player health after regen:", global.player_health)
 		
-		
+func current_camera():
+	if SceneManager.level_tag 
 		
 func get_item(itemData):
 	$Bag.get

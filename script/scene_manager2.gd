@@ -1,12 +1,10 @@
 extends Node
 
-var scene_data = {
-	"dungeonroom1": {
-		"cave_entrance": Vector2(593, -1006),  
-		"maze_exit": Vector2(523, -1306)       
-	},
-	"maze": {
-		"maze_entrance": Vector2(-2, -27),
-		"maze_exit": Vector2(-64 , -456) 
-	}
-}
+var current_scene = "world"
+var scene_transition = false
+
+var player_start_position_posx = 599
+var player_start_position_posy = -984
+var exit_maze_posx = 591
+var exit_maze_posy = -1001
+

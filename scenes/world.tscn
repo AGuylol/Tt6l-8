@@ -5016,7 +5016,7 @@ visible = false
 position = Vector2(-16, 15)
 
 [node name="player" parent="dungeonroom1" instance=ExtResource("5_fdaxo")]
-position = Vector2(592, -983)
+position = Vector2(591, -1001)
 
 [node name="scene_trigger" parent="." instance=ExtResource("17_4uga2")]
 

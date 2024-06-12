@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://u6wbyp42abtf"]
+[gd_scene load_steps=28 format=3 uid="uid://u6wbyp42abtf"]
 
 [ext_resource type="Script" path="res://script/secret_room.gd" id="1_gwwxe"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="2_gcimo"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="15_do2du"]
 [ext_resource type="PackedScene" uid="uid://b7p4uwtp5pqco" path="res://scenes/scene_trigger.tscn" id="16_m57no"]
 [ext_resource type="Script" path="res://script/sword_upgrade.gd" id="16_uai2a"]
+[ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="17_b6b2s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ci3a"]
 texture = ExtResource("2_gcimo")
@@ -762,16 +763,18 @@ scale = Vector2(10.7039, 6.92483)
 texture = SubResource("GradientTexture2D_5rsd8")
 texture_scale = 1.43
 
-[node name="door_S" parent="." instance=ExtResource("16_m57no")]
+[node name="doorS" parent="." instance=ExtResource("16_m57no")]
 position = Vector2(1, 5)
 destination_level_tag = "world"
 destination_door_tag = "S"
-spawn_direction = "down"
 
-[node name="CollisionShape2D" parent="door_S" index="0"]
+[node name="CollisionShape2D" parent="doorS" index="0"]
 position = Vector2(1, 2)
 
-[node name="Marker2D" parent="door_S" index="1"]
-position = Vector2(-2, -27)
+[node name="spawn" parent="doorS" index="1"]
+position = Vector2(-1, -24)
 
-[editable path="door_S"]
+[node name="player" parent="." instance=ExtResource("17_b6b2s")]
+position = Vector2(0, -87)
+
+[editable path="doorS"]

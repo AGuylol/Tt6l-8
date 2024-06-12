@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
 [ext_resource type="PackedScene" uid="uid://cokcr3v8snkrw" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
 [ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
-[ext_resource type="PackedScene" uid="uid://b7p4uwtp5pqco" path="res://scenes/scene_trigger.tscn" id="27_3rqjc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")
@@ -14375,6 +14374,9 @@ polygon = PackedVector2Array(-393, -64, -379, -64, -379, -51, -381, -51, -381, -
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qfhoy"]
 polygon = PackedVector2Array(-425, -288, -411, -288, -411, -275, -413, -275, -413, -273, -423, -273, -423, -275, -425, -275)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4o47f"]
+size = Vector2(51, 32)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_cjri4")
 enemy_scene = ExtResource("10_bo2mn")
@@ -15213,15 +15215,12 @@ occluder_light_mask = 2
 occluder = SubResource("OccluderPolygon2D_qfhoy")
 occluder_light_mask = 2
 
-[node name="scene_trigger" parent="." instance=ExtResource("27_3rqjc")]
-destination_level_tag = "maze_room"
-destination_door_tag = "N"
+[node name="maze_room" type="Area2D" parent="."]
+position = Vector2(175, -165)
 
-[node name="CollisionShape2D" parent="scene_trigger" index="0"]
-position = Vector2(591, -1032)
-
-[node name="Marker2D" parent="scene_trigger" index="1"]
-position = Vector2(593, -1006)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="maze_room"]
+position = Vector2(417, -867)
+shape = SubResource("RectangleShape2D_4o47f")
 
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]
@@ -15230,7 +15229,8 @@ position = Vector2(593, -1006)
 [connection signal="body_entered" from="detectplayerarea/detectplayer5" to="." method="_on_detectplayer_5_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer6" to="." method="_on_detectplayer_6_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer7" to="." method="_on_detectplayer_7_body_entered"]
+[connection signal="body_entered" from="maze_room" to="." method="_on_maze_room_body_entered"]
+[connection signal="body_exited" from="maze_room" to="." method="_on_maze_room_body_exited"]
 
 [editable path="traps/spikes4"]
 [editable path="items/chest"]
-[editable path="scene_trigger"]

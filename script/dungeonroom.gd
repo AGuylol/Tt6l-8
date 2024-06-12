@@ -109,7 +109,7 @@ func _ready():
 	$detectplayerarea/detectplayer6.body_entered.connect(_on_detectplayer_6_body_entered)
 	$detectplayerarea/detectplayer7.body_entered.connect(_on_detectplayer_7_body_entered)
 
-	
+
 
 func _process(delta):
 	pass
@@ -235,12 +235,6 @@ func _on_detectplayer_7_body_entered(body):
 func _on_boss_room_body_entered(body):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://scenes/boss_fight.tscn")
-		
-
-
-func _on_secret_room_body_entered(body):
-	if body.is_in_group("player"):
-		get_tree().change_scene_to_file("res://scenes/secret_room.tscn")
 
 
 func spawn_chest():
@@ -248,3 +242,17 @@ func spawn_chest():
 	if chest:
 		add_child(chest)
 		chest.position = Vector2(597, -1231)
+
+
+func _on_maze_room_body_entered(body):
+	if body.is_in_group("player"):
+		SceneManager.scene_transition = true
+
+
+func _on_maze_room_body_exited(body):
+	if body.is_in_group("player"):
+		SceneManager.scene_transition = false
+
+func change_scenes():
+	if SceneManager.scene_transition:
+		if SceneManager.current_scene = "world"

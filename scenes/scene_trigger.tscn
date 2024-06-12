@@ -13,6 +13,6 @@ script = ExtResource("1_7lw0p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_p8ee5")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="spawn" type="Marker2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
