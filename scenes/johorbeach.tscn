@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://y5jclu0ac6yj"]
+[gd_scene load_steps=25 format=3 uid="uid://y5jclu0ac6yj"]
 
 [ext_resource type="Script" path="res://scenes/johorbeach.gd" id="1_1cui0"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="1_nx1ql"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://0vngswwsrm1" path="res://scenes/enemy.tscn" id="9_kj0sh"]
 [ext_resource type="PackedScene" uid="uid://173wxtnbds0l" path="res://scenes/enemygob.tscn" id="9_uebdt"]
 [ext_resource type="PackedScene" uid="uid://cg4l0pc708uoa" path="res://scenes/enemyfish.tscn" id="10_3iqsd"]
+[ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="11_ivlw0"]
+[ext_resource type="Script" path="res://scenes/meleebuff.gd" id="12_r0gf1"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="13_pr1oc"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b333k"]
 tile_data = PackedInt32Array(0, 2, 2, 65536, 2, 3, 131072, 2, 4, 196608, 2, 5, 1, 65538, 2, 65537, 65538, 3, 131073, 65538, 4, 196609, 65538, 5)
@@ -852,8 +855,20 @@ pattern_0 = SubResource("TileMapPattern_b333k")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vew2"]
 size = Vector2(78, 72)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0he0s"]
+size = Vector2(781, 186)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwvh0"]
+radius = 22.0907
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljhog"]
+size = Vector2(674, 20)
+
 [node name="johorbeach" type="Node2D"]
+position = Vector2(-7, -47)
 script = ExtResource("1_1cui0")
+flying_fish = ExtResource("10_3iqsd")
+toyol = ExtResource("9_uebdt")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -867,14 +882,14 @@ layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array(131079, 458753, 4, -2031615, 65538, 4, -1966079, 65538, 5, -1441794, 65538, 5, -2031595, 65538, 4, -1966059, 65538, 5, 196637, 2, 2, 262173, 2, 3, 327709, 2, 4, 393245, 2, 5, 196638, 65538, 2, 262174, 65538, 3, 327710, 65538, 4, 393246, 65538, 5, 3014679, 65538, 5, -196580, 2, 2, -131044, 2, 3, -65508, 2, 4, 28, 2, 5, -196579, 65538, 2, -131043, 65538, 3, -65507, 65538, 4, 29, 65538, 5, 589857, 2, 2, 655393, 2, 3, 720929, 2, 4, 786465, 2, 5, 589858, 65538, 2, 655394, 65538, 3, 720930, 65538, 4, 786466, 65538, 5, 1179685, 2, 2, 1245221, 2, 3, 1310757, 2, 4, 1376293, 2, 5, 1179686, 65538, 2, 1245222, 65538, 3, 1310758, 65538, 4, 1376294, 65538, 5, -983010, 2, 2, -917474, 2, 3, -851938, 2, 4, -786402, 2, 5, -720866, 2, 6, -983009, 65538, 2, -917473, 65538, 3, -851937, 65538, 4, -786401, 65538, 5, -720865, 65538, 6, -1834979, 2, 2, -1769443, 2, 3, -1703907, 2, 4, -1638371, 2, 5, -1572835, 2, 6, -1834978, 65538, 2, -1769442, 65538, 3, -1703906, 65538, 4, -1638370, 65538, 5, -1572834, 65538, 6, -1572833, 2, 2, -1507297, 2, 3, -1441761, 2, 4, -1376225, 2, 5, -1310689, 2, 6, -1572832, 65538, 2, -1507296, 65538, 3, -1441760, 65538, 4, -1376224, 65538, 5, -1310688, 65538, 6, 1179682, 2, 2, 1245218, 2, 3, 1310754, 2, 4, 1376290, 2, 5, 1441826, 2, 6, 1179683, 65538, 2, 1245219, 65538, 3, 1310755, 65538, 4, 1376291, 65538, 5, 1441827, 65538, 6, 1703971, 2, 2, 1769507, 2, 3, 1835043, 2, 4, 1900579, 2, 5, 1966115, 2, 6, 1703972, 65538, 2, 1769508, 65538, 3, 1835044, 65538, 4, 1900580, 65538, 5, 1966116, 65538, 6, 2162725, 2, 2, 2228261, 2, 3, 2293797, 2, 4, 2359333, 2, 5, 2424869, 2, 6, 2162726, 65538, 2, 2228262, 65538, 3, 2293798, 65538, 4, 2359334, 65538, 5, 2424870, 65538, 6, 2818085, 2, 2, 2883621, 2, 3, 2949157, 2, 4, 3014693, 2, 5, 3080229, 2, 6, 2818086, 65538, 2, 2883622, 65538, 3, 2949158, 65538, 4, 3014694, 65538, 5, 3080230, 65538, 6, -1114108, 2, 2, -1048572, 2, 3, -983036, 2, 4, -917500, 2, 5, -851964, 2, 6, -1114107, 65538, 2, -1048571, 65538, 3, -983035, 65538, 4, -917499, 65538, 5, -851963, 65538, 6)
 
 [node name="player" parent="." instance=ExtResource("6_ycrm7")]
-position = Vector2(541, 704)
+position = Vector2(252, -576)
 
 [node name="collisions" type="StaticBody2D" parent="."]
 position = Vector2(49, -627)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions"]
 position = Vector2(9, 20)
-polygon = PackedVector2Array(0, -2, -13, -88, 412, -29, 461, 364, 473, 632, 489, 778, 529, 910, 541, 860, 545, 910, 510, 914, 541, 1187, 550, 1246, 559, 1291, 615, 1280, 562, 1412, 802, 1469, -185, 1276, -202, 846, -373, 359, -143, 37, -3, -7, -23, -95, -375, 150, -421, 465, -223, 1168, -230, 1438, 765, 1516, 1045, 1499, 849, 1242, 649, 202, 684, -200, -59, -106)
+polygon = PackedVector2Array(0, -2, -13, -88, -1, -15, 408, -8, 461, 364, 473, 632, 489, 778, 529, 910, 541, 860, 545, 910, 510, 914, 541, 1187, 550, 1246, 559, 1291, 615, 1280, 562, 1412, 802, 1469, 246.947, 1360.46, -185, 1276, 192, 1264, 292, 1354, 560, 1386, 256, 1289, 205, 1132, 202, 1057, 99, 998, -2, 943, -22, 840, -163, 708, -196, 673, -154, 584, -221, 547, -242, 500, -270, 423, -271, 365, -143, 37, -3, -7, -23, -95, -375, 150, -421, 465, -223, 1168, -230, 1438, 765, 1516, 1045, 1499, 849, 1242, 649, 202, 684, -200, -59, -106)
 
 [node name="forest_transition_point" type="Area2D" parent="."]
 position = Vector2(591, 727)
@@ -892,5 +907,62 @@ position = Vector2(362, 474)
 [node name="enemytest3" parent="." instance=ExtResource("10_3iqsd")]
 position = Vector2(409, 386)
 
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-7, -45)
+
+[node name="Marker2D" type="Marker2D" parent="Node2D"]
+position = Vector2(239, -372)
+
+[node name="Marker2D2" type="Marker2D" parent="Node2D"]
+position = Vector2(101, -394)
+
+[node name="Marker2D3" type="Marker2D" parent="Node2D"]
+position = Vector2(239, 183)
+
+[node name="Marker2D4" type="Marker2D" parent="Node2D"]
+position = Vector2(192, 181)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(186, -458)
+shape = SubResource("RectangleShape2D_0he0s")
+
+[node name="spawn" type="Area2D" parent="."]
+position = Vector2(151, 571)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spawn"]
+position = Vector2(100.5, -430)
+shape = SubResource("RectangleShape2D_0he0s")
+
+[node name="meleebuff" type="Sprite2D" parent="."]
+position = Vector2(4, -314)
+texture = ExtResource("11_ivlw0")
+hframes = 8
+vframes = 9
+script = ExtResource("12_r0gf1")
+
+[node name="Interaction_area" parent="meleebuff" instance=ExtResource("13_pr1oc")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="meleebuff/Interaction_area"]
+shape = SubResource("CircleShape2D_vwvh0")
+
+[node name="wall" type="Node" parent="."]
+
+[node name="wall" type="StaticBody2D" parent="wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/wall"]
+position = Vector2(167, -415)
+shape = SubResource("RectangleShape2D_ljhog")
+
+[node name="wall2" type="StaticBody2D" parent="wall"]
+position = Vector2(117, 588)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/wall2"]
+position = Vector2(167, -415)
+shape = SubResource("RectangleShape2D_ljhog")
+
 [connection signal="body_entered" from="forest_transition_point" to="." method="_on_forest_transition_point_body_entered"]
 [connection signal="body_exited" from="forest_transition_point" to="." method="_on_forest_transition_point_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="spawn" to="." method="_on_spawn_body_entered"]
