@@ -272,9 +272,16 @@ func current_camera():
 	if scene_manager2.current_scene == "world":
 		$normal_zoom.enabled = true
 		$zoom_in.enabled = false
+		$zoom_out.enabled = false
 	elif scene_manager2.current_scene == "maze":
 		$normal_zoom.enabled = false
 		$zoom_in.enabled = true
+		$zoom_out.enabled = false
+	elif scene_manager2.current_scene == "boss_room":
+		$normal_zoom.enabled = false
+		$zoom_in.enabled = false
+		$zoom_out.enabled = true
+		
 		
 func get_item(itemData):
 	$Bag.get

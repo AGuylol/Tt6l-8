@@ -66,6 +66,10 @@ func _ready():
 	elif scene_manager2.transition_target == "secret_room":
 		$player.position.x = scene_manager2.exit_maze_to_room_posx
 		$player.position.y = scene_manager2.exit_maze_to_room_posy
+		
+	elif scene_manager2.transition_target == "start_world":
+		$player.position.x = scene_manager2.player_start_position_posx
+		$player.position.y = scene_manager2.player_start_position_posy
 	
 	spawn_points = [
 		$enemy_spawns/spawn_point.get_path(),

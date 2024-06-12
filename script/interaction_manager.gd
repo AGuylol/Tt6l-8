@@ -1,10 +1,10 @@
 extends Node2D
 
 
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var player : Player
 @onready var label = $Label
 
-const base_text = '[e] to interact'
+const base_text = '[e] to '
 
 var active_area = []
 var can_interact : bool = true

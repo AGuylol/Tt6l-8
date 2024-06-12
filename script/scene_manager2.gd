@@ -1,6 +1,6 @@
 extends Node
 
-var current_scene = "world"
+var current_scene = "outsidemine"
 var scene_transition = false
 var transition_target = ""
 
@@ -41,3 +41,7 @@ func finish_scene_changes():
 			current_scene = "secret_room"
 		elif current_scene == "secret_room" and transition_target == "maze_exit":
 			current_scene = "maze"
+		elif current_scene == "world" and transition_target == "boss_room":
+			current_scene = "boss_room"
+		elif current_scene == "outsidemine" and transition_target == "start_world":
+			current_scene = "world"
