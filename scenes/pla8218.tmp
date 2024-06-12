@@ -1037,7 +1037,6 @@ zoom = Vector2(1.5, 1.5)
 script = ExtResource("1_g3rp2")
 
 [node name="zoom_in" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)

@@ -1,17 +1,31 @@
 extends Node2D
 
 
-var specific_spawn_position: Vector2 = Vector2(-1, -24)
-
 func _ready():
-	if SceneManager.spawn_door_tag != null:
-		_on_level_spawn(SceneManager.spawn_door_tag)
+	pass
+
+func _physics_process(delta):
+	change_scenes()
+
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("player"):
+		scene_manager2.scene_transition = true
 		
-func _on_level_spawn(destination_tag : String):
-	var door = get_node("doorS") as Door
-	if door != null:
-		SceneManager.trigger_player_spawn(door.spawn.global_position)
-	else:
-		print("Error: Door not found at path: " + door)
+	
+
+
+func _on_area_2d_body_exited(body):
+	if body.is_in_group("player"):
+		scene_manager2.scene_transition = false
+
+
+func change_scenes():
+	if scene_manager2.scene_transition:
+		if scene_manager2.current_scene == "maze":
+			scene_manager2.finish_scene_changes()
+			get_tree().change_scene_to_file("res://scenes/world.tscn")
+			
 
 

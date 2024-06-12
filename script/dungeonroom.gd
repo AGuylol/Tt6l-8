@@ -56,6 +56,13 @@ func close_all_doors():
 		doors_open = false
 		
 func _ready():
+	if scene_manager2.game_first_load:
+		$player.position.x = scene_manager2.player_start_position_posx
+		$player.position.y = scene_manager2.player_start_position_posy
+	
+	else:
+		$player.position.x = scene_manager2.exit_maze_posx
+		$player.position.y = scene_manager2.exit_maze_posy
 		
 		
 	spawn_points = [
@@ -112,7 +119,7 @@ func _ready():
 
 
 func _process(delta):
-	pass
+	change_scenes()
 	
 
 		
@@ -246,13 +253,17 @@ func spawn_chest():
 
 func _on_maze_room_body_entered(body):
 	if body.is_in_group("player"):
-		SceneManager.scene_transition = true
+		scene_manager2.scene_transition = true
 
 
 func _on_maze_room_body_exited(body):
 	if body.is_in_group("player"):
-		SceneManager.scene_transition = false
+		scene_manager2.scene_transition = false
 
 func change_scenes():
-	if SceneManager.scene_transition:
-		if SceneManager.current_scene = "world"
+	if scene_manager2.scene_transition:
+		if scene_manager2.current_scene == "world":
+			scene_manager2.finish_scene_changes()
+			get_tree().change_scene_to_file("res://scenes/maze_room.tscn")
+			scene_manager2.game_first_load = false
+			

@@ -62,7 +62,7 @@ func _physics_process(delta):
 	enemy_attack()
 	_on_attack_timeout()
 	bow_shoot()
-
+	current_camera()
 
 	if global.player_health <= 0:
 		player_alive = false 
@@ -118,6 +118,7 @@ func update_parameters(input_vector):
 	if Input.is_action_just_pressed("attack"):
 		animation_tree["parameters/conditions/attacking"]= true
 		$AudioStreamPlayer2D.play()
+		print(scene_manager2.current_scene)
 	else:
 		animation_tree["parameters/conditions/attacking"]= false
 	
@@ -266,7 +267,12 @@ func _on_regen_timer_timeout():
 		print("Player health after regen:", global.player_health)
 		
 func current_camera():
-	if SceneManager.level_tag 
+	if scene_manager2.current_scene == "world":
+		$normal_zoom.enabled = true
+		$zoom_in.enabled = false
+	elif scene_manager2.current_scene == "maze":
+		$normal_zoom.enabled = false
+		$zoom_in.enabled = true
 		
 func get_item(itemData):
 	$Bag.get
