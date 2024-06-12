@@ -4,7 +4,7 @@ extends Node2D
 @onready var player : Player
 @onready var label = $Label
 
-const base_text = '[e] to '
+const base_text = '[E] to '
 
 var active_area = []
 var can_interact : bool = true

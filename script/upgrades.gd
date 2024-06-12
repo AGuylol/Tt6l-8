@@ -5,7 +5,7 @@ var health_upgrade1 = false
 var melee_upgrade1 = false
 var gun_damage_upgrade1 = false
 var gun_cooldown_upgrade1 = false
-
+var melee_upgrade2 = false
 
 	
 func apply_upgrades():
@@ -35,6 +35,10 @@ func apply_upgrades():
 			global.gun_cooldown -= 3
 			gun_cooldown_upgrade1 == true
 		
+	elif "melee_upgrade2" in global.player_inventory:
+		if melee_upgrade2 == false:
+			global.player_sword_damage += 5
+			melee_upgrade2 = true
 		
 func _physics_process(delta):
 	apply_upgrades()
