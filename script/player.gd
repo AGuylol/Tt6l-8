@@ -119,6 +119,8 @@ func update_parameters(input_vector):
 		animation_tree["parameters/conditions/attacking"]= true
 		$AudioStreamPlayer2D.play()
 		print(scene_manager2.current_scene)
+		print(scene_manager2.transition_target)
+		
 	else:
 		animation_tree["parameters/conditions/attacking"]= false
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://u6wbyp42abtf"]
+[gd_scene load_steps=29 format=3 uid="uid://u6wbyp42abtf"]
 
 [ext_resource type="Script" path="res://script/secret_room.gd" id="1_gwwxe"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="2_gcimo"]
@@ -625,6 +625,9 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0pgyc"]
 size = Vector2(50, 19)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui5ff"]
+size = Vector2(28.5, 20)
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(1, -1)
 script = ExtResource("1_gwwxe")
@@ -643,6 +646,7 @@ layer_2/tile_data = PackedInt32Array(-1966085, 5, 6, -1900549, 5, 7, -1966084, 6
 position = Vector2(97, -67)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.0431373, 0.0431373, 0.0431373, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -711,7 +715,7 @@ position = Vector2(-155, -304)
 position = Vector2(-52, -442)
 
 [node name="spikes10" parent="traps" instance=ExtResource("10_r48ar")]
-position = Vector2(-63, -442)
+position = Vector2(-64, -460)
 
 [node name="flametrap7" parent="traps" instance=ExtResource("9_alsde")]
 position = Vector2(-118, -274)
@@ -771,5 +775,13 @@ texture_scale = 1.43
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_0pgyc")
 
+[node name="secret_room" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="secret_room"]
+position = Vector2(-63.25, -480)
+shape = SubResource("RectangleShape2D_ui5ff")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="secret_room" to="." method="_on_secret_room_body_entered"]
+[connection signal="body_exited" from="secret_room" to="." method="_on_secret_room_body_exited"]

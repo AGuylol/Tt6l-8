@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dhyonjmbky8ni" path="res://arts/beach (not the other b)/32x32/Forest/GrassAndEarthTilemap.png" id="5_6gotf"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="6_ycrm7"]
 [ext_resource type="PackedScene" uid="uid://0vngswwsrm1" path="res://scenes/enemy.tscn" id="9_kj0sh"]
-[ext_resource type="PackedScene" uid="uid://173wxtnbds0l" path="res://scenes/enemygob.tscn" id="9_uebdt"]
-[ext_resource type="PackedScene" uid="uid://cg4l0pc708uoa" path="res://scenes/enemyfish.tscn" id="10_3iqsd"]
+[ext_resource type="PackedScene" path="res://scenes/enemygob.tscn" id="9_uebdt"]
+[ext_resource type="PackedScene" path="res://scenes/enemyfish.tscn" id="10_3iqsd"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b333k"]
 tile_data = PackedInt32Array(0, 2, 2, 65536, 2, 3, 131072, 2, 4, 196608, 2, 5, 1, 65538, 2, 65537, 65538, 3, 131073, 65538, 4, 196609, 65538, 5)

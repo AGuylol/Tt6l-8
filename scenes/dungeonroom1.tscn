@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=97 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
 [ext_resource type="PackedScene" uid="uid://cokcr3v8snkrw" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
 [ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="27_kudes"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")
@@ -14377,6 +14378,12 @@ polygon = PackedVector2Array(-425, -288, -411, -288, -411, -275, -413, -275, -41
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o47f"]
 size = Vector2(51, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvgut"]
+size = Vector2(28.5, 41)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1beu7"]
+radius = 25.0
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_cjri4")
 enemy_scene = ExtResource("10_bo2mn")
@@ -15042,7 +15049,7 @@ polygon = PackedVector2Array(-48, 30, -1, 31, 0, 125, -119, 126, -116, -187, 256
 polygon = PackedVector2Array(108, -33, 225, -33, 226, 11, 409, 12, 408, -149, 361, -150, 359, -229, 456, -231, 455, -389, 455, -397, 380, -398, 380, -481, 476, -481, 474, -664, 395, -664, 396, -752, 714, -754, 714, -972, 635, -972, 635, -987, 636, -1018, 630, -1018, 628, -1038, 615, -1043, 601, -1034, 600, -1022, 595, -1017, 595, -971, 363, -967, 363, -1130, 267, -1131, 267, -1281, 315, -1281, 316, -1366, 179, -1367, 179, -1282, 226, -1281, 227, -1124, 146, -1124, 146, -1078, 11, -1078, 11, -1094, -58, -1094, 11, -1138, 122, -1221, 92, -1414, 315, -1434, 687, -1404, 847, -1326, 806, -1139, 732, -1138, 731, -1324, 636, -1323, 636, -1367, 631, -1369, 629, -1389, 620, -1395, 603, -1391, 601, -1369, 595, -1370, 595, -1323, 499, -1324, 498, -1166, 499, -1138, 523, -1021, 612, -1053, 498, -1138, 729, -1137, 811, -1139, 964, -746, 658, -549, 566, 153, 88, 319, -134, 217, -115, 126, -29, 125, -28, 206, 92, 207, 89, 122, 60, 120, 59, 31, 107, 31)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(597, -1231)
+position = Vector2(592, -1348)
 
 [node name="items" type="Node2D" parent="."]
 position = Vector2(-35, -302)
@@ -15068,6 +15075,7 @@ position = Vector2(-2, 24)
 color = Color(0.666667, 0.666667, 0.666667, 1)
 
 [node name="light_source" type="Node2D" parent="."]
+visible = false
 position = Vector2(70, -42)
 
 [node name="lantern" parent="light_source" instance=ExtResource("26_aksei")]
@@ -15140,7 +15148,7 @@ position = Vector2(451, -1240)
 position = Vector2(567, -1203)
 
 [node name="lantern24" parent="light_source" instance=ExtResource("26_aksei")]
-position = Vector2(469, -1165)
+position = Vector2(465, -1157)
 
 [node name="lantern25" parent="light_source" instance=ExtResource("26_aksei")]
 position = Vector2(-82, 180)
@@ -15221,6 +15229,19 @@ position = Vector2(175, -165)
 position = Vector2(417, -867)
 shape = SubResource("RectangleShape2D_4o47f")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(593, -1387)
+shape = SubResource("RectangleShape2D_hvgut")
+
+[node name="Interaction_area" parent="." instance=ExtResource("27_kudes")]
+action_name = "to enter boss room"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
+position = Vector2(-39, -1049)
+shape = SubResource("CircleShape2D_1beu7")
+
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer2" to="." method="_on_detecplayer_2_ndroom_body_entered"]
@@ -15230,6 +15251,8 @@ shape = SubResource("RectangleShape2D_4o47f")
 [connection signal="body_entered" from="detectplayerarea/detectplayer7" to="." method="_on_detectplayer_7_body_entered"]
 [connection signal="body_entered" from="maze_room" to="." method="_on_maze_room_body_entered"]
 [connection signal="body_exited" from="maze_room" to="." method="_on_maze_room_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Interaction_area" to="." method="_on_interaction_area_body_entered"]
 
 [editable path="traps/spikes4"]
 [editable path="items/chest"]
