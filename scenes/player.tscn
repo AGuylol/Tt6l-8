@@ -278,18 +278,11 @@ func apply_upgrades():
 		gun_cooldown = gun_cooldown - 3
 			
 
-
-
 func _on_regen_timer_timeout():
 	if player_health < player_max_health/3:
 		player_health = min(player_health + (player_max_health / 3), player_max_health) 
 		healthbar.health = player_health
 		print(\"Player health after regen:\", player_health)
-		
-		
-		
-func get_item(itemData):
-	$Bag.get
 
 
 func player():
