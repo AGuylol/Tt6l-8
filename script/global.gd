@@ -10,7 +10,7 @@ var player_health = 100.0
 var player_max_health = 100.0
 var player_sword_damage = 20
 var player_gun_damage = 30
-
+var gun_cooldown = 10
 
 var current_scene = "world"
 var transition_scene = false
@@ -25,6 +25,7 @@ func reset_stats():
 	player_max_health = 100.0
 	player_sword_damage = 20
 	player_gun_damage = 30
+	gun_cooldown = 10
 	player_inventory = []
 	
 	
