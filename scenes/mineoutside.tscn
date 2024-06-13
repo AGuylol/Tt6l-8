@@ -1,6 +1,5 @@
 [gd_scene load_steps=22 format=3 uid="uid://cp3k2h3cswqw4"]
 
-[ext_resource type="Script" path="res://scenes/mineoutside.gd" id="1_05fwx"]
 [ext_resource type="Texture2D" uid="uid://cioegjltvp74w" path="res://arts/tilesets/decor_8x8.png" id="1_763ef"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="1_gw3fd"]
 [ext_resource type="Script" path="res://script/mineoutside.gd" id="1_wnpo2"]
@@ -1506,13 +1505,11 @@ sources/6 = SubResource("TileSetAtlasSource_5glo8")
 sources/7 = SubResource("TileSetAtlasSource_014ee")
 sources/8 = SubResource("TileSetAtlasSource_qiccx")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbrxa"]
-size = Vector2(60, 39)
-
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1oi4p"]
+size = Vector2(20, 22.125)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_wnpo2")
-
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_4ikal")
@@ -1531,13 +1528,10 @@ visible = false
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions"]
 polygon = PackedVector2Array(0, -1, 234, 53, 237, 106, 298, 114, 236, 154, 204, 157, 169, 187, -16, 189, 25, 140, -84, 132, -108, 107, -162, 127, 7, 143, -33, 209, -12, 247, 20, 333, -132, 333, -159, 287, -140, 339, 11, 337, 31.4565, 336.475, -19, 227, 128, 334, 309, 331, 128, 330, -12, 228, 355, 222, 505, 303, 362, 218, 370, 178, 327, 110, 322, 92, 309, 90, 303, 109, 243, 106, 245, 16, 110, 22, 21, 5, 19, -9, 483, 1, 543, 149, 540, 338, 529, 383, 349, 381, 0, 380, -210, 364, -224, 205, -174, 52, -37, 6)
 
-[node name="mine_transition_point" type="Area2D" parent="."]
-position = Vector2(307, 91)
-
+[node name="mine" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mine"]
-position = Vector2(8, -2)
-shape = SubResource("RectangleShape2D_xbrxa")
+position = Vector2(314, 94.9375)
+shape = SubResource("RectangleShape2D_1oi4p")
 
 [connection signal="body_entered" from="mine" to="." method="_on_mine_body_entered"]
-

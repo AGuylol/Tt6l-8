@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
-[ext_resource type="PackedScene" uid="uid://dn5gmpqxr2b60" path="res://scenes/orc.tscn" id="2_fw4j0"]
 [ext_resource type="Texture2D" uid="uid://dmenfn0432uwj" path="res://arts/mines/Water.png" id="3_8i56k"]
+[ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="3_ehlqx"]
 [ext_resource type="Texture2D" uid="uid://by7v8eucker37" path="res://arts/mines/Set 4.5.png" id="4_ktwja"]
 [ext_resource type="Texture2D" uid="uid://duyejpjrvpcx4" path="res://arts/mines/Structure.png" id="5_xx0o5"]
 [ext_resource type="Texture2D" uid="uid://d3yj3587h1amh" path="res://arts/objects/objects.png" id="6_2d1m2"]
@@ -14387,7 +14387,6 @@ radius = 25.0
 [node name="Node2D" type="Node2D"]
 position = Vector2(101, -675)
 script = ExtResource("1_cjri4")
-enemy_scene = ExtResource("2_fw4j0")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, -1)
@@ -14526,6 +14525,15 @@ position = Vector2(657, -1256)
 
 [node name="spawn_point25" type="Marker2D" parent="enemy_spawns"]
 position = Vector2(608, -1209)
+
+[node name="spawn_point26" type="Marker2D" parent="enemy_spawns"]
+position = Vector2(6, -99)
+
+[node name="spawn_point27" type="Marker2D" parent="enemy_spawns"]
+position = Vector2(325, -106)
+
+[node name="spawn_point28" type="Marker2D" parent="enemy_spawns"]
+position = Vector2(302, -348)
 
 [node name="traps" type="Node2D" parent="."]
 
@@ -15076,6 +15084,7 @@ position = Vector2(-2, 24)
 color = Color(0.666667, 0.666667, 0.666667, 1)
 
 [node name="light_source" type="Node2D" parent="."]
+visible = false
 position = Vector2(70, -42)
 
 [node name="lantern" parent="light_source" instance=ExtResource("26_aksei")]
@@ -15234,6 +15243,9 @@ shape = SubResource("RectangleShape2D_4o47f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(593, -1387)
 shape = SubResource("RectangleShape2D_hvgut")
+
+[node name="player" parent="." instance=ExtResource("3_ehlqx")]
+position = Vector2(10, 156)
 
 [node name="Interaction_area" parent="." instance=ExtResource("27_kudes")]
 action_name = "to enter boss room"

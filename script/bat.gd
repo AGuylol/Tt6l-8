@@ -4,10 +4,10 @@ extends CharacterBody2D
 @onready var healthbar = $Healthbar
 @onready var coin_scene = preload("res://scenes/coins.tscn")
 @onready var sprite = $AnimatedSprite2D
-var speed = 35
+var speed = 50
 var player_chase = false
 var player = null
-var health = 75
+var health = 35
 var player_attacked = false
 
 var knockback_force = Vector2()
@@ -18,7 +18,7 @@ var moving = false
 var direction: Vector2
 
 func _ready():
-	$AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D.play("bat")
 	healthbar.init_health(health)
 	$hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
@@ -47,7 +47,7 @@ func movement(delta):
 			if moving:
 				var direction = (player.position -  position).normalized()
 				velocity = direction * speed
-				$AnimatedSprite2D.play("moving")
+				
 				
 		else:
 			velocity = Vector2.ZERO
@@ -60,7 +60,6 @@ func enemy_damaged():
 		health -= 20
 		print("slime health " , health)
 		if health <= 0 :
-			$AnimatedSprite2D.play("death")
 			self.queue_free()
 
 
@@ -105,7 +104,7 @@ func take_damage(damage):
 	
 	health -= damage
 	print(health)
-	$AnimatedSprite2D.play("hurt")
+	
 	
 	if health <= 0:
 		disable_collisions()
@@ -113,9 +112,7 @@ func take_damage(damage):
 		$hitbox.monitoring = false
 		$hitbox.area_entered.disconnect(_on_hitbox_area_entered)
 		
-		$AnimatedSprite2D.play("death")
-		await get_tree().create_timer(0.6).timeout
-		spawn_coins()
+		
 		queue_free()
 		
 	await get_tree().create_timer(6).timeout
@@ -135,13 +132,5 @@ func apply_knockback(source_position , knockback_multiplier):
 	
 	
 	
-func spawn_coins():
-	#var coin_count = randi() % 3 + 1
-	#for i in range(coin_count):
-		#var coin_instance = coin_scene.instantiate()
-		#coin_instance.position = position
-		#print("Spawning coin at position: ", coin_instance.position)
-		#get_parent().add_child(coin_instance)
-		#print("Coin spawned")
-	pass
+
 

@@ -27,7 +27,7 @@ func reset_stats():
 	player_gun_damage = 30
 	gun_cooldown = 10
 	player_inventory = []
-	
+	reset_spawn_states()
 	
 func finish_changescenes():
 	if transition_scene == true:
@@ -67,6 +67,11 @@ var spawn_states = {
 	"spawn_area_7": false,
 }
 
+func reset_spawn_states():
+	for key in spawn_states.keys():
+		spawn_states[key] = false
+		
+		
 func set_spawn_state(area_name: String, state: bool):
 	spawn_states[area_name] = state
 

@@ -117,7 +117,7 @@ func update_parameters(input_vector):
 		
 	if Input.is_action_just_pressed("attack"):
 		animation_tree["parameters/conditions/attacking"]= true
-		$AudioStreamPlayer2D.play()
+		$slash.play()
 		print(scene_manager2.current_scene)
 		print(scene_manager2.transition_target)
 		
@@ -145,13 +145,16 @@ func apply_movement(amount) -> void:
 
 
 func _on_playerhitbox_body_entered(body):
-	if body.is_in_group("enemy") or body.is_in_group("orc"):
+	if body.is_in_group("enemy") or body.is_in_group("bat") or body.is_in_group("orc") or body.is_in_group("soldier") :
 		var knockback_direction = (global_position - body.global_position).normalized()
 		apply_knockback(knockback_direction)
-		if body.is_in_group("enemy"):
+		if body.is_in_group("enemy") or body.is_in_group("bat"):
 			global.player_health -= 15
 		elif body.is_in_group("orc"):
 			global.player_health -= 20
+		elif body.is_in_group("soldier"):
+			global.player_health -= 25
+			
 		healthbar.health = global.player_health
 		print("Player health:", global.player_health)
 		if global.player_health <= 0:
@@ -178,6 +181,8 @@ func enemy_attack():
 		healthbar.health = global.player_health
 		regen_timer.start()
 		
+		
+		
 func _on_attack_timeout():
 	enemy_attack_cooldown = false
 
@@ -186,7 +191,7 @@ func bow_shoot():
 	$Marker2D.look_at(mouse_pos)
 	
 	if Input.is_action_just_pressed("bow") and bow_cooldown:
-		$AudioStreamPlayer2D2.play()
+		$gun_shot.play()
 		bow_cooldown = false
 		var arrow_instance = arrow.instantiate()
 		arrow_instance.rotation = $Marker2D.rotation 
@@ -262,13 +267,6 @@ func _on_playerhitbox_area_entered(area):
 	
 	
 	
-
-func _on_regen_timer_timeout():
-	if global.player_health < global.player_max_health/3:
-		global.player_health = min(global.player_health + (global.player_max_health / 3), global.player_max_health) 
-		healthbar.health = global.player_health
-		print("Player health after regen:", global.player_health)
-		
 func current_camera():
 	if scene_manager2.current_scene == "world":
 		$normal_zoom.enabled = true

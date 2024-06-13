@@ -4,10 +4,10 @@ extends CharacterBody2D
 @onready var healthbar = $Healthbar
 @onready var coin_scene = preload("res://scenes/coins.tscn")
 @onready var sprite = $AnimatedSprite2D
-var speed = 35
+var speed = 45
 var player_chase = false
 var player = null
-var health = 75
+var health = 100
 var player_attacked = false
 
 var knockback_force = Vector2()
@@ -114,12 +114,10 @@ func take_damage(damage):
 		$hitbox.area_entered.disconnect(_on_hitbox_area_entered)
 		
 		$AnimatedSprite2D.play("death")
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(1).timeout
 		spawn_coins()
 		queue_free()
 		
-	await get_tree().create_timer(6).timeout
-	$AnimatedSprite2D.play("default")
 		
 func disable_collisions():
 	$hitarea/CollisionShape2D.disabled = true
@@ -144,4 +142,7 @@ func spawn_coins():
 		#get_parent().add_child(coin_instance)
 		#print("Coin spawned")
 	pass
+
+
+
 
