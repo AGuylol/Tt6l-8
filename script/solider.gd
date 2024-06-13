@@ -58,7 +58,6 @@ func movement(delta):
 func enemy_damaged():
 	if player_attacked == true:
 		health -= 20
-		print("slime health " , health)
 		if health <= 0 :
 			$AnimatedSprite2D.play("death")
 			self.queue_free()
