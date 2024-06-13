@@ -646,7 +646,6 @@ layer_2/tile_data = PackedInt32Array(-1966085, 5, 6, -1900549, 5, 7, -1966084, 6
 position = Vector2(97, -67)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.0431373, 0.0431373, 0.0431373, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

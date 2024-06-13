@@ -145,20 +145,20 @@ func apply_movement(amount) -> void:
 
 
 func _on_playerhitbox_body_entered(body):
-	if body.is_in_group("enemy"):
-		enemy_inattack_range = true
-		$enemy_attack_timer.start()
-		
+	if body.is_in_group("enemy") or body.is_in_group("orc"):
 		var knockback_direction = (global_position - body.global_position).normalized()
 		apply_knockback(knockback_direction)
-		global.player_health -= 10
+		if body.is_in_group("enemy"):
+			global.player_health -= 15
+		elif body.is_in_group("orc"):
+			global.player_health -= 20
 		healthbar.health = global.player_health
 		print("Player health:", global.player_health)
 		if global.player_health <= 0:
 			player_alive = false
-			
-			
-	
+
+
+
 
 
 func _on_playerhitbox_body_exited(body):
@@ -251,16 +251,17 @@ func _on_playerhitbox_area_entered(area):
 		global.player_health -= 25
 	elif area.is_in_group("laser"):
 		global.player_health -= 40
-		
+	elif area.is_in_group("skeleton"):
+		enemy_inattack_range = true
+		$enemy_attack_timer.stop()
 
 	
 	healthbar.health = global.player_health
 	print(global.player_health)
 	regen_timer.start()
 	
-
-
-
+	
+	
 
 func _on_regen_timer_timeout():
 	if global.player_health < global.player_max_health/3:

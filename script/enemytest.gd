@@ -13,7 +13,7 @@ var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
 
-
+var direction: Vector2
 
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -122,12 +122,12 @@ func apply_knockback(source_position , knockback_multiplier):
 	
 	
 func spawn_coins():
-	var coin_count = randi() % 3 + 1
-	for i in range(coin_count):
-		var coin_instance = coin_scene.instantiate()
-		coin_instance.position = position
-		print("Spawning coin at position: ", coin_instance.position)
-		get_parent().add_child(coin_instance)
-		print("Coin spawned")
-
+	#var coin_count = randi() % 3 + 1
+	#for i in range(coin_count):
+		#var coin_instance = coin_scene.instantiate()
+		#coin_instance.position = position
+		#print("Spawning coin at position: ", coin_instance.position)
+		#get_parent().add_child(coin_instance)
+		#print("Coin spawned")
+	pass
 

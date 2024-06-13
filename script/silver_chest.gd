@@ -3,7 +3,7 @@ extends StaticBody2D
 
 @onready var interaction_area :interaction_area = $Interaction_area
 @onready var anim_chest = $AnimationPlayer
-@onready var item = preload("res://scenes/arquebus.tscn")
+@onready var item = preload("res://scenes/istinggar.tscn")
 
 
 func _ready():

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://07h2oxonka6o"
+path="res://.godot/imported/[1-01] Cave Story (Main Theme) - Cave Story Remastered Soundtrack.mp3-a072d5c18d0d0687edce32d0506e0dc7.mp3str"
+
+[deps]
+
+source_file="res://Audio/[1-01] Cave Story (Main Theme) - Cave Story Remastered Soundtrack.mp3"
+dest_files=["res://.godot/imported/[1-01] Cave Story (Main Theme) - Cave Story Remastered Soundtrack.mp3-a072d5c18d0d0687edce32d0506e0dc7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

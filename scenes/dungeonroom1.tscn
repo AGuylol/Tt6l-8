@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
+[ext_resource type="PackedScene" uid="uid://dn5gmpqxr2b60" path="res://scenes/orc.tscn" id="2_fw4j0"]
 [ext_resource type="Texture2D" uid="uid://dmenfn0432uwj" path="res://arts/mines/Water.png" id="3_8i56k"]
 [ext_resource type="Texture2D" uid="uid://by7v8eucker37" path="res://arts/mines/Set 4.5.png" id="4_ktwja"]
 [ext_resource type="Texture2D" uid="uid://duyejpjrvpcx4" path="res://arts/mines/Structure.png" id="5_xx0o5"]
@@ -14,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="9_d1ohs"]
 [ext_resource type="Texture2D" uid="uid://dynwsmcodx3ku" path="res://arts/mines/5.png" id="9_mst0c"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="10_1nqeg"]
-[ext_resource type="PackedScene" uid="uid://0vngswwsrm1" path="res://scenes/enemy.tscn" id="10_bo2mn"]
 [ext_resource type="Texture2D" uid="uid://fxi3e1qkvqjh" path="res://arts/mines/5modified.png" id="10_wch5v"]
 [ext_resource type="Texture2D" uid="uid://7ij533q6pfh8" path="res://arts/dungeon/Dungeon_Tileset_at.png" id="11_4myej"]
 [ext_resource type="Texture2D" uid="uid://b6os0xcnfxmpf" path="res://arts/mines/5modified2.png" id="11_q2xr8"]
@@ -14385,8 +14385,9 @@ size = Vector2(28.5, 41)
 radius = 25.0
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(101, -675)
 script = ExtResource("1_cjri4")
-enemy_scene = ExtResource("10_bo2mn")
+enemy_scene = ExtResource("2_fw4j0")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, -1)

@@ -6,7 +6,7 @@ var melee_upgrade1 = false
 var gun_damage_upgrade1 = false
 var gun_cooldown_upgrade1 = false
 var melee_upgrade2 = false
-
+var gun_upgrade = false
 	
 func apply_upgrades():
 	
@@ -26,7 +26,7 @@ func apply_upgrades():
 			
 	elif "arquebus" in global.player_inventory:
 		if gun_damage_upgrade1 == false:
-			global.player_gun_damage = global.player_gun_damage + 10
+			global.gun_cooldown -= 3
 			gun_damage_upgrade1 = false
 			
 			
@@ -39,6 +39,12 @@ func apply_upgrades():
 		if melee_upgrade2 == false:
 			global.player_sword_damage += 5
 			melee_upgrade2 = true
+			
+	elif "istinggar" in global.player_inventory:
+		if gun_upgrade == false:
+			global.player_gun_damage += 10
 		
+		
+	
 func _physics_process(delta):
 	apply_upgrades()
