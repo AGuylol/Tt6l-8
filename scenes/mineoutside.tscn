@@ -1538,5 +1538,6 @@ shape = SubResource("RectangleShape2D_1oi4p")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_emfdj")]
+visible = false
 
 [connection signal="body_entered" from="mine" to="." method="_on_mine_body_entered"]

@@ -1143,6 +1143,7 @@ shape = SubResource("RectangleShape2D_0ol1i")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_ll7b0")]
+visible = false
 
 [connection signal="body_entered" from="beach_transition_point" to="." method="_on_beach_transition_point_body_entered"]
 [connection signal="body_exited" from="beach_transition_point" to="." method="_on_beach_transition_point_body_exited"]

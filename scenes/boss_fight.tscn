@@ -5303,3 +5303,4 @@ color = Color(0.858824, 0.858824, 0.858824, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("14_nvsir")]
+visible = false
