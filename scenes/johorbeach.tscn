@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://y5jclu0ac6yj"]
+[gd_scene load_steps=26 format=3 uid="uid://y5jclu0ac6yj"]
 
 [ext_resource type="Script" path="res://scenes/johorbeach.gd" id="1_1cui0"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="1_nx1ql"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="11_ivlw0"]
 [ext_resource type="Script" path="res://scenes/meleebuff.gd" id="12_r0gf1"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="13_pr1oc"]
+[ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="14_3xcm8"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b333k"]
 tile_data = PackedInt32Array(0, 2, 2, 65536, 2, 3, 131072, 2, 4, 196608, 2, 5, 1, 65538, 2, 65537, 65538, 3, 131073, 65538, 4, 196609, 65538, 5)
@@ -942,6 +943,7 @@ vframes = 9
 script = ExtResource("12_r0gf1")
 
 [node name="Interaction_area" parent="meleebuff" instance=ExtResource("13_pr1oc")]
+action_name = "for +5 melee damage"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="meleebuff/Interaction_area"]
 shape = SubResource("CircleShape2D_vwvh0")
@@ -960,6 +962,10 @@ position = Vector2(117, 588)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/wall2"]
 position = Vector2(167, -415)
 shape = SubResource("RectangleShape2D_ljhog")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("14_3xcm8")]
 
 [connection signal="body_entered" from="forest_transition_point" to="." method="_on_forest_transition_point_body_entered"]
 [connection signal="body_exited" from="forest_transition_point" to="." method="_on_forest_transition_point_body_exited"]

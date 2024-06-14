@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cp3k2h3cswqw4"]
+[gd_scene load_steps=23 format=3 uid="uid://cp3k2h3cswqw4"]
 
 [ext_resource type="Texture2D" uid="uid://cioegjltvp74w" path="res://arts/tilesets/decor_8x8.png" id="1_763ef"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="1_gw3fd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="6_yr4a8"]
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="7_wmm6p"]
 [ext_resource type="Texture2D" uid="uid://b6os0xcnfxmpf" path="res://arts/mines/5modified2.png" id="8_twtq7"]
+[ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="11_emfdj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kxeuy"]
 texture = ExtResource("1_763ef")
@@ -1533,5 +1534,9 @@ polygon = PackedVector2Array(0, -1, 234, 53, 237, 106, 298, 114, 236, 154, 204, 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mine"]
 position = Vector2(314, 94.9375)
 shape = SubResource("RectangleShape2D_1oi4p")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_emfdj")]
 
 [connection signal="body_entered" from="mine" to="." method="_on_mine_body_entered"]

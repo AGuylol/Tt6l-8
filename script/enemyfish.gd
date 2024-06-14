@@ -7,7 +7,7 @@ extends CharacterBody2D
 var speed = 35
 var player_chase = false
 var player = null
-var health = 60
+var health = 40
 var player_attacked = false
 
 var knockback_force = Vector2()

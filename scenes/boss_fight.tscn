@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://hhp7y58fgeyq"]
+[gd_scene load_steps=24 format=3 uid="uid://hhp7y58fgeyq"]
 
 [ext_resource type="Script" path="res://script/boss_fight.gd" id="1_ds5b8"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="1_klsco"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="10_jkrqg"]
 [ext_resource type="PackedScene" uid="uid://b4gwjtpa0kbwk" path="res://scenes/spikes.tscn" id="11_6iuc7"]
 [ext_resource type="PackedScene" uid="uid://ci1e1dd0fmt1l" path="res://scenes/flamethrower.tscn" id="13_uusvp"]
+[ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="14_nvsir"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dbs57"]
 texture = ExtResource("1_klsco")
@@ -5298,3 +5299,7 @@ polygon = PackedVector2Array(-36, -75, -36, 21, 53, 20, 94, 102, -136, 65, -409,
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.858824, 0.858824, 0.858824, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("14_nvsir")]

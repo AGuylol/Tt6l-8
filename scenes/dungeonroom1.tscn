@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=97 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -14360,9 +14360,6 @@ polygon = PackedVector2Array(27, -319, 31, -319, 31, -318, 32, -318, 32, -318, 3
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2ekgf"]
 polygon = PackedVector2Array(-168, -947, -156, -940, -156, -934, -168, -934)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tcs2q"]
-polygon = PackedVector2Array(-125, -1308, -125, -1298, -117, -1297, -117, -1308)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o5v6y"]
 polygon = PackedVector2Array(185, -766, 187, -768, 191, -768, 195, -763, 197, -761, 195, -759, 186, -758, 183, -761)
 
@@ -15215,9 +15212,6 @@ occluder = SubResource("OccluderPolygon2D_0rci3")
 
 [node name="LightOccluder2D15" type="LightOccluder2D" parent="shadow"]
 occluder = SubResource("OccluderPolygon2D_2ekgf")
-
-[node name="LightOccluder2D16" type="LightOccluder2D" parent="shadow"]
-occluder = SubResource("OccluderPolygon2D_tcs2q")
 
 [node name="LightOccluder2D17" type="LightOccluder2D" parent="shadow"]
 occluder = SubResource("OccluderPolygon2D_o5v6y")

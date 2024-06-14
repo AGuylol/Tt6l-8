@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://u6wbyp42abtf"]
+[gd_scene load_steps=30 format=3 uid="uid://u6wbyp42abtf"]
 
 [ext_resource type="Script" path="res://script/secret_room.gd" id="1_gwwxe"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="2_gcimo"]
@@ -6,16 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="4_f34td"]
 [ext_resource type="Texture2D" uid="uid://6ft68d6kf5ab" path="res://arts/dungeon/Dungeon_Tileset.png" id="5_nhi51"]
 [ext_resource type="Texture2D" uid="uid://b6os0xcnfxmpf" path="res://arts/mines/5modified2.png" id="6_m8dob"]
-[ext_resource type="PackedScene" uid="uid://duv00ggr7vd8t" path="res://scenes/button.tscn" id="7_clcsq"]
+[ext_resource type="PackedScene" uid="uid://cagjk3c4p45o5" path="res://scenes/button.tscn" id="7_clcsq"]
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="9_alsde"]
 [ext_resource type="PackedScene" uid="uid://b4gwjtpa0kbwk" path="res://scenes/spikes.tscn" id="10_r48ar"]
 [ext_resource type="PackedScene" uid="uid://ci1e1dd0fmt1l" path="res://scenes/flamethrower.tscn" id="11_vn81b"]
-[ext_resource type="PackedScene" uid="uid://y7e5ynwm3ij4" path="res://scenes/silver_key.tscn" id="12_kjxrp"]
+[ext_resource type="PackedScene" path="res://scenes/silver_key.tscn" id="12_kjxrp"]
 [ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="13_kvagg"]
 [ext_resource type="Script" path="res://scenes/health_upgrade.gd" id="14_khh8h"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="15_do2du"]
 [ext_resource type="Script" path="res://script/sword_upgrade.gd" id="16_uai2a"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="17_b6b2s"]
+[ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="17_kapjw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ci3a"]
 texture = ExtResource("2_gcimo")
@@ -779,6 +780,10 @@ shape = SubResource("RectangleShape2D_0pgyc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="secret_room"]
 position = Vector2(-63.25, -480)
 shape = SubResource("RectangleShape2D_ui5ff")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("17_kapjw")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
