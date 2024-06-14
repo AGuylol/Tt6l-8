@@ -280,6 +280,10 @@ func current_camera():
 		$normal_zoom.enabled = false
 		$zoom_in.enabled = false
 		$zoom_out.enabled = true
+	elif global.current_scene == "beach":
+		$normal_zoom.enabled = false
+		$zoom_in.enabled = false
+		$zoom_out.enabled = true
 		
 		
 func get_item(itemData):

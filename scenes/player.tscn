@@ -1,7 +1,6 @@
-[gd_scene load_steps=88 format=3 uid="uid://c8tishbphs8e8"]
+[gd_scene load_steps=87 format=3 uid="uid://c8tishbphs8e8"]
 
 [ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
-[ext_resource type="Script" path="res://script/Camera2D.gd" id="1_g3rp2"]
 [ext_resource type="Script" path="res://script/player.gd" id="1_vobwu"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
 [ext_resource type="AudioStream" uid="uid://dwxoinpru6w6l" path="res://Audio/slash-21834.mp3" id="4_d6pil"]
@@ -1034,7 +1033,6 @@ shape = SubResource("CapsuleShape2D_hitfu")
 
 [node name="normal_zoom" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
-script = ExtResource("1_g3rp2")
 
 [node name="zoom_in" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
