@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=98 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -14352,7 +14352,7 @@ polygon = PackedVector2Array(-81, -575, -75, -569, -77, -567, -82, -565, -86, -5
 polygon = PackedVector2Array(-423, -266, -422, -266, -422, -273, -414, -273, -414, -266, -413, -266, -413, -258, -423, -258)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r0bsg"]
-polygon = PackedVector2Array(-92, -355, -100, -352, -104, -342, -104, -355)
+polygon = PackedVector2Array(-92, -355, -104, -342, -104, -355)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0rci3"]
 polygon = PackedVector2Array(27, -319, 31, -319, 31, -318, 32, -318, 32, -318, 32, -317, 33, -317, 33, -316, 34, -316, 34, -315, 35, -315, 35, -314, 36, -314, 36, -312, 35, -311, 32, -310, 26, -310, 25, -311, 24, -312, 23, -312, 23, -315, 24, -315, 24, -317, 25, -317, 25, -318, 26, -318, 26, -319)
@@ -14383,6 +14383,9 @@ size = Vector2(28.5, 41)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1beu7"]
 radius = 25.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xttud"]
+polygon = PackedVector2Array(305, -383, 305, -382, 306, -382, 306, -383, 310, -383, 310, -384, 311, -384, 313, -385, 313, -384, 314, -384, 314, -383, 317, -383, 317, -382, 318, -382, 318, -381, 319, -381, 319, -375, 320, -388, 311, -386)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(101, -675)
@@ -15084,7 +15087,6 @@ position = Vector2(-2, 24)
 color = Color(0.666667, 0.666667, 0.666667, 1)
 
 [node name="light_source" type="Node2D" parent="."]
-visible = false
 position = Vector2(70, -42)
 
 [node name="lantern" parent="light_source" instance=ExtResource("26_aksei")]
@@ -15106,7 +15108,7 @@ position = Vector2(311, -207)
 position = Vector2(211, -295)
 
 [node name="lantern7" parent="light_source" instance=ExtResource("26_aksei")]
-position = Vector2(322, -318)
+position = Vector2(327, -319)
 
 [node name="lantern8" parent="light_source" instance=ExtResource("26_aksei")]
 position = Vector2(-142, -270)
@@ -15253,6 +15255,9 @@ action_name = "to enter boss room"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
 position = Vector2(-39, -1049)
 shape = SubResource("CircleShape2D_1beu7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_xttud")
 
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]
