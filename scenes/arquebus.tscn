@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://vw74cqdt5tm3"]
+[gd_scene load_steps=5 format=3 uid="uid://dj0xv3hjatm4d"]
 
 [ext_resource type="Script" path="res://script/arquebus.gd" id="1_xmlmu"]
 [ext_resource type="Texture2D" uid="uid://43x0hjiw28p0" path="res://arts/guns/US.png" id="2_610r1"]

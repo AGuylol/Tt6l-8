@@ -22,6 +22,6 @@ func _on_beach_transition_point_body_exited(body):
 
 func change_scene():
 	if global.transition_scene == true:
-		if global.current_scene == "world":
+		if global.current_scene == "beach":
 			get_tree().change_scene_to_file("res://scenes/johorbeach.tscn")
 			global.finish_changescenes()
