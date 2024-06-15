@@ -48,9 +48,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
+offset_left = -26.5
 offset_top = -37.0
-offset_right = 23.0
+offset_right = 26.5
 offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -73,9 +73,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -31.5
+offset_left = -26.5
 offset_top = -31.0
-offset_right = 31.5
+offset_right = 26.5
 grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
@@ -91,13 +91,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -55.5
+offset_left = -66.0
 offset_top = -40.0
-offset_right = 55.5
+offset_right = 83.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
 
 [node name="Labels" type="VBoxContainer" parent="PanelContainer/Video/HBoxContainer"]
 layout_mode = 2
@@ -117,7 +116,6 @@ text = "VSync"
 
 [node name="Checks" type="VBoxContainer" parent="PanelContainer/Video/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="Fullscreen" type="CheckBox" parent="PanelContainer/Video/HBoxContainer/Checks"]
 layout_mode = 2
@@ -135,13 +133,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -22.5
-offset_top = -31.0
-offset_right = 22.5
+offset_left = -49.5
+offset_top = -37.0
+offset_right = 49.5
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 8
 text = "Back"
 
 [node name="Audio" type="Control" parent="PanelContainer"]
