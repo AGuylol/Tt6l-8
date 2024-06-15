@@ -2,11 +2,13 @@ extends Node2D
 
 
 func _ready():
-	pass 
+	$AudioStreamPlayer2D.play()
 
 
 func _process(delta):
 	change_scene()
+	await $AudioStreamPlayer2D.finished
+	$AudioStreamPlayer2D.play()
 
 
 func _on_johorbeach_transition_point_body_entered(body):

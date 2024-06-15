@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dn5gmpqxr2b60"]
+[gd_scene load_steps=41 format=3 uid="uid://brhsa80ekfbn6"]
 
 [ext_resource type="Script" path="res://script/orc.gd" id="1_q64lq"]
 [ext_resource type="Texture2D" uid="uid://cxykqm6ghmjmb" path="res://arts/characters/Orc/Orc-Attack01.png" id="2_17fpj"]
@@ -160,7 +160,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"death",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -177,7 +177,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hurt",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -249,9 +249,7 @@ script = ExtResource("1_q64lq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ljmho")
-animation = &"hurt"
-frame = 2
-frame_progress = 0.15706
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

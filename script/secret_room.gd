@@ -2,6 +2,7 @@ extends Node2D
 
 
 func _ready():
+	$AudioStreamPlayer2D.play()
 	if scene_manager2.transition_target == "maze_exit":
 		$player.position.x = scene_manager2.end_of_maze_posx
 		$player.position.y = scene_manager2.end_of_maze_posy
@@ -11,7 +12,8 @@ func _ready():
 		
 func _physics_process(delta):
 	change_scenes()
-
+	await $AudioStreamPlayer2D.finished
+	$AudioStreamPlayer2D.play()
 
 
 func _on_area_2d_body_entered(body):

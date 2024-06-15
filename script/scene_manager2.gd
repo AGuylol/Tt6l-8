@@ -1,6 +1,6 @@
 extends Node
 
-var current_scene = "beach"
+var current_scene = "outsidemine"
 var scene_transition = false
 var transition_target = ""
 

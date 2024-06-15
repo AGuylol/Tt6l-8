@@ -8,9 +8,13 @@ var spawn_points2: Array[NodePath]
 var enemies = []
 
 func _ready():
+	$AudioStreamPlayer.play()
+	$AudioStreamPlayer2D.play()
+	
 	spawn_points = [
 		$Node2D/Marker2D.get_path(),
-		$Node2D/Marker2D2.get_path()
+		$Node2D/Marker2D2.get_path(),
+		$Node2D/Marker2D6.get_path()
 	]
 	$Area2D.body_entered.connect(_on_area_2d_body_entered)
 	
@@ -57,7 +61,11 @@ func _on_enemy_defeated():
 	
 func _process(delta):
 	change_scene()
-
+	await $AudioStreamPlayer2D.finished
+	$AudioStreamPlayer2D.play()
+	
+	
+	
 func _on_forest_transition_point_body_entered(body):
 	if body.has_method("player"):
 		global.transition_scene = true

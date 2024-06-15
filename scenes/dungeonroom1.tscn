@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=98 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -24,9 +24,10 @@
 [ext_resource type="PackedScene" uid="uid://68xdu80spkc7" path="res://scenes/key.tscn" id="16_r3q1m"]
 [ext_resource type="PackedScene" uid="uid://jrw8xnclqdi8" path="res://scenes/chest.tscn" id="17_bcxu0"]
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
-[ext_resource type="PackedScene" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
+[ext_resource type="PackedScene" uid="uid://dw7bl28xjuabx" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
 [ext_resource type="PackedScene" path="res://scenes/lantern.tscn" id="26_aksei"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="27_kudes"]
+[ext_resource type="AudioStream" uid="uid://cgevroxf2ri3g" path="res://Audio/game-music-loop-6-144641.mp3" id="28_vx7d3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")
@@ -15252,6 +15253,10 @@ shape = SubResource("CircleShape2D_1beu7")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_xttud")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_vx7d3")
+volume_db = -5.0
 
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://u6wbyp42abtf"]
+[gd_scene load_steps=31 format=3 uid="uid://u6wbyp42abtf"]
 
 [ext_resource type="Script" path="res://script/secret_room.gd" id="1_gwwxe"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="2_gcimo"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://script/sword_upgrade.gd" id="16_uai2a"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="17_b6b2s"]
 [ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="17_kapjw"]
+[ext_resource type="AudioStream" uid="uid://bx7a7h2y10fu6" path="res://Audio/gaming-music-2-192858.mp3" id="18_nhjga"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ci3a"]
 texture = ExtResource("2_gcimo")
@@ -785,6 +786,10 @@ shape = SubResource("RectangleShape2D_ui5ff")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("17_kapjw")]
 visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_nhjga")
+stream_paused = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -10,15 +10,19 @@ var took_damage :float = false
 
 
 
-var health = 500:
+var health = 1000:
 	set(value):
 		health = value
 		healthbar.value = value
 		if value <= 0:
 			healthbar.visible = false
 			find_child("FiniteStateMachine").change_state("death")
+			await $AnimationPlayer.animation_finished
+			get_tree().change_scene_to_file("res://scenes/victoryscene.tscn")
+			
+			
 		elif value <= healthbar.max_value / 2 and defence == 0 :
-			defence = 5
+			defence = 10
 			took_damage = true
 			find_child("FiniteStateMachine").change_state("ArmorBuff")
 		

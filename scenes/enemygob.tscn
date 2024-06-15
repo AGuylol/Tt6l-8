@@ -113,7 +113,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"death",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -195,7 +195,9 @@ script = ExtResource("1_1t3b3")
 position = Vector2(0, -12)
 scale = Vector2(0.091259, 0.0926418)
 sprite_frames = SubResource("SpriteFrames_fgept")
-animation = &"hit"
+animation = &"death"
+frame = 1
+frame_progress = 0.0227597
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

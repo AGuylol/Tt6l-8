@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh0mskh2vhm0x"]
+[gd_scene load_steps=5 format=3 uid="uid://dh0mskh2vhm0x"]
 
 [ext_resource type="Script" path="res://script/Menu_Spare.gd" id="1_4dcic"]
 [ext_resource type="Texture2D" uid="uid://cwakah57w7cmn" path="res://arts/forest.jpg" id="2_y8tew"]
 [ext_resource type="FontFile" uid="uid://bp54rgoiy71ga" path="res://PixeloidSans-mLxMm.ttf" id="3_yknbr"]
+[ext_resource type="AudioStream" uid="uid://07h2oxonka6o" path="res://Audio/[1-01] Cave Story (Main Theme) - Cave Story Remastered Soundtrack.mp3" id="4_wcg2h"]
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -305,6 +306,10 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
 text = "Back"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wcg2h")
+volume_db = -15.459
 
 [connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Menu/Option" to="." method="_on_option_pressed"]

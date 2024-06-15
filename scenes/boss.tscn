@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bcyc8qgbo462v"]
+[gd_scene load_steps=35 format=3 uid="uid://bcyc8qgbo462v"]
 
 [ext_resource type="Texture2D" uid="uid://7ol6c3jio0ak" path="res://arts/boss/Mecha-stone Golem 0.1/PNG sheet/Character_sheet.png" id="1_3ib1x"]
 [ext_resource type="Script" path="res://script/boss.gd" id="1_arqcm"]
 [ext_resource type="Texture2D" uid="uid://bgs218rc1e2wo" path="res://arts/boss/Mecha-stone Golem 0.1/weapon PNG/Laser_sheet.png" id="2_mducq"]
 [ext_resource type="Script" path="res://script/FiniteStateMachine.gd" id="3_f1dbm"]
+[ext_resource type="AudioStream" uid="uid://vg77lpgk7gsy" path="res://Audio/Laser Sound Effect.mp3" id="4_6uqni"]
 [ext_resource type="Script" path="res://script/idle.gd" id="4_bjca8"]
 [ext_resource type="Script" path="res://script/follow.gd" id="6_sdrcw"]
 [ext_resource type="Script" path="res://script/MeleeAttack.gd" id="7_f0p6r"]
@@ -13,6 +14,8 @@
 [ext_resource type="Script" path="res://script/dash.gd" id="11_wbdet"]
 [ext_resource type="Script" path="res://script/death.gd" id="12_dghc0"]
 [ext_resource type="Script" path="res://script/laser.gd" id="12_jcsme"]
+[ext_resource type="AudioStream" uid="uid://cg8pfuen43l4g" path="res://Audio/swoosh-6339.mp3" id="15_dkspn"]
+[ext_resource type="AudioStream" uid="uid://dn8k2d2dj0yok" path="res://Audio/shoot-6-81136.mp3" id="16_0v8rf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rqnfp"]
 size = Vector2(250.109, 20)
@@ -62,6 +65,54 @@ tracks/3/path = NodePath("pivot_laser/laser_area/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_6uqni")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D2:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer2D3:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -254,6 +305,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_6uqni")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_j1aiw"]
 resource_name = "laser_cast"
@@ -325,6 +400,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25, 0.875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_cywy3"]
 resource_name = "ranged_attack"
@@ -353,6 +440,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D3:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.875, 1.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gw8ks"]
@@ -384,6 +483,9 @@ size = Vector2(36.5, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1amv"]
 size = Vector2(72, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lkjk"]
+size = Vector2(644.5, 373.75)
 
 [node name="boss" type="CharacterBody2D"]
 collision_layer = 2
@@ -428,6 +530,7 @@ shape = SubResource("CapsuleShape2D_xlhvq")
 [node name="player_detection" type="Area2D" parent="."]
 light_mask = 0
 collision_layer = 0
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
 shape = SubResource("CircleShape2D_j3ubt")
@@ -443,7 +546,7 @@ anchor_bottom = 1.0
 offset_top = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-value = 100.0
+max_value = 1000.0
 
 [node name="Label" type="Label" parent="CanvasLayer/ProgressBar"]
 layout_mode = 0
@@ -487,15 +590,6 @@ script = ExtResource("12_dghc0")
 [node name="laser" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("12_jcsme")
 
-[node name="debug" type="Label" parent="."]
-visible = false
-offset_left = -23.0
-offset_top = -51.0
-offset_right = 26.0
-offset_bottom = -28.0
-text = "debug
-"
-
 [node name="hitbox" type="Area2D" parent="."]
 visible = false
 
@@ -516,6 +610,22 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="melee_area"]
 position = Vector2(-1, -5)
 shape = SubResource("RectangleShape2D_d1amv")
+
+[node name="dertect_player" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dertect_player"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8lkjk")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6uqni")
+volume_db = -8.179
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_dkspn")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_0v8rf")
 
 [connection signal="body_entered" from="player_detection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

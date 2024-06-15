@@ -60,6 +60,8 @@ func close_all_doors():
 		doors_open = false
 		
 func _ready():
+	$AudioStreamPlayer.play()
+	
 	interaction_area.interact = Callable (self, "_on_interact")
 	
 	
@@ -130,7 +132,8 @@ func _ready():
 
 func _process(delta):
 	change_scenes()
-	
+	await $AudioStreamPlayer.finished
+	$AudioStreamPlayer.play()
 
 		
 func spawn_enemies():
@@ -178,7 +181,6 @@ func spawn_from_points(points):
 		
 		
 func _on_enemy_defeated():
-	global.player_health += 5
 	enemies.erase(enemies[-1])  
 	print(enemies)
 	if enemies.size() == 0:

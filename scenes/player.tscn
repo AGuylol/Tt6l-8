@@ -1089,9 +1089,6 @@ offset_bottom = -55.0
 
 [node name="dash_cooldown" type="Timer" parent="."]
 
-[node name="regen_timer" type="Timer" parent="."]
-wait_time = 5.0
-
 [node name="slash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_d6pil")
 
@@ -1107,4 +1104,3 @@ volume_db = -12.381
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
 [connection signal="timeout" from="dash_period" to="." method="_on_dash_period_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
-[connection signal="timeout" from="regen_timer" to="." method="_on_regen_timer_timeout"]

@@ -1,20 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://hunke5ierv7v"]
+[gd_scene load_steps=5 format=3 uid="uid://c1x1c3vgq7vwg"]
 
 [ext_resource type="Script" path="res://script/istinggar.gd" id="1_e8qhh"]
-[ext_resource type="Script" path="res://script/Interaction_area.gd" id="2_ide3u"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="3_0a7cx"]
 [ext_resource type="Texture2D" uid="uid://43x0hjiw28p0" path="res://arts/guns/US.png" id="3_60sor"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uijq"]
+radius = 33.7343
 
 [node name="istinggar" type="Node2D"]
 script = ExtResource("1_e8qhh")
-
-[node name="interaction_area" type="Area2D" parent="."]
-script = ExtResource("2_ide3u")
-action_name = "pick up for +for +10 dun damage"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_60sor")
 hframes = 3
 vframes = 6
 frame = 1
+
+[node name="Interaction_area" parent="." instance=ExtResource("3_0a7cx")]
+action_name = "for +10 gun damage"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
+shape = SubResource("CircleShape2D_0uijq")

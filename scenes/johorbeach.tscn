@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://y5jclu0ac6yj"]
+[gd_scene load_steps=30 format=3 uid="uid://y5jclu0ac6yj"]
 
 [ext_resource type="Script" path="res://scenes/johorbeach.gd" id="1_1cui0"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="1_nx1ql"]
@@ -7,13 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://cg05q6udtbwsw" path="res://arts/beach (not the other b)/32x32/Beach/SeaTilemap1.png" id="4_rfl3i"]
 [ext_resource type="Texture2D" uid="uid://dhyonjmbky8ni" path="res://arts/beach (not the other b)/32x32/Forest/GrassAndEarthTilemap.png" id="5_6gotf"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="6_ycrm7"]
-[ext_resource type="PackedScene" uid="uid://0vngswwsrm1" path="res://scenes/enemy.tscn" id="9_kj0sh"]
 [ext_resource type="PackedScene" uid="uid://b65dc1lsqko4t" path="res://scenes/enemygob.tscn" id="9_uebdt"]
 [ext_resource type="PackedScene" uid="uid://c7ndiccsumhpc" path="res://scenes/enemyfish.tscn" id="10_3iqsd"]
 [ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="11_ivlw0"]
 [ext_resource type="Script" path="res://scenes/meleebuff.gd" id="12_r0gf1"]
+[ext_resource type="Script" path="res://script/health_upgrade.gd" id="13_3oyql"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="13_pr1oc"]
+[ext_resource type="Script" path="res://script/defence_upgrade.gd" id="14_3un6v"]
 [ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="14_3xcm8"]
+[ext_resource type="AudioStream" uid="uid://cv7s18x1i06lv" path="res://Audio/game-start-6104.mp3" id="15_2uksf"]
+[ext_resource type="AudioStream" uid="uid://pm72bej60b0e" path="res://Audio/game-music-loop-7-145285.mp3" id="16_ptnx2"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b333k"]
 tile_data = PackedInt32Array(0, 2, 2, 65536, 2, 3, 131072, 2, 4, 196608, 2, 5, 1, 65538, 2, 65537, 65538, 3, 131073, 65538, 4, 196609, 65538, 5)
@@ -856,11 +859,14 @@ pattern_0 = SubResource("TileMapPattern_b333k")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vew2"]
 size = Vector2(78, 72)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0he0s"]
-size = Vector2(781, 186)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwvh0"]
 radius = 22.0907
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xsnmi"]
+radius = 27.0185
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0he0s"]
+size = Vector2(781, 186)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljhog"]
 size = Vector2(674, 20)
@@ -898,14 +904,50 @@ position = Vector2(591, 727)
 position = Vector2(29, 3)
 shape = SubResource("RectangleShape2D_3vew2")
 
-[node name="enemytest2" parent="." instance=ExtResource("9_kj0sh")]
-position = Vector2(466, 469)
+[node name="items" type="Node2D" parent="."]
+position = Vector2(46, -126)
 
-[node name="enemytest" parent="." instance=ExtResource("9_uebdt")]
-position = Vector2(362, 474)
+[node name="meleebuff" type="Sprite2D" parent="items"]
+position = Vector2(134, -206)
+texture = ExtResource("11_ivlw0")
+hframes = 8
+vframes = 9
+script = ExtResource("12_r0gf1")
 
-[node name="enemytest3" parent="." instance=ExtResource("10_3iqsd")]
-position = Vector2(409, 386)
+[node name="Interaction_area" parent="items/meleebuff" instance=ExtResource("13_pr1oc")]
+visible = false
+action_name = "for +5 melee damage"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/meleebuff/Interaction_area"]
+shape = SubResource("CircleShape2D_vwvh0")
+
+[node name="health_upgrade" type="Sprite2D" parent="items"]
+position = Vector2(133, 139)
+texture = ExtResource("11_ivlw0")
+hframes = 8
+vframes = 9
+frame = 24
+script = ExtResource("13_3oyql")
+
+[node name="Interaction_area" parent="items/health_upgrade" instance=ExtResource("13_pr1oc")]
+action_name = "for +10 hp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/health_upgrade/Interaction_area"]
+shape = SubResource("CircleShape2D_vwvh0")
+
+[node name="Sprite2D" type="Sprite2D" parent="items"]
+position = Vector2(61, 423)
+texture = ExtResource("11_ivlw0")
+hframes = 8
+vframes = 9
+frame = 44
+script = ExtResource("14_3un6v")
+
+[node name="Interaction_area" parent="items/Sprite2D" instance=ExtResource("13_pr1oc")]
+action_name = "for +3 defence"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/Sprite2D/Interaction_area"]
+shape = SubResource("CircleShape2D_xsnmi")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-7, -45)
@@ -922,7 +964,14 @@ position = Vector2(239, 183)
 [node name="Marker2D4" type="Marker2D" parent="Node2D"]
 position = Vector2(192, 181)
 
+[node name="Marker2D5" type="Marker2D" parent="Node2D"]
+position = Vector2(382, 143)
+
+[node name="Marker2D6" type="Marker2D" parent="Node2D"]
+position = Vector2(331, -409)
+
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(186, -458)
@@ -934,19 +983,6 @@ position = Vector2(151, 571)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="spawn"]
 position = Vector2(100.5, -430)
 shape = SubResource("RectangleShape2D_0he0s")
-
-[node name="meleebuff" type="Sprite2D" parent="."]
-position = Vector2(4, -314)
-texture = ExtResource("11_ivlw0")
-hframes = 8
-vframes = 9
-script = ExtResource("12_r0gf1")
-
-[node name="Interaction_area" parent="meleebuff" instance=ExtResource("13_pr1oc")]
-action_name = "for +5 melee damage"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="meleebuff/Interaction_area"]
-shape = SubResource("CircleShape2D_vwvh0")
 
 [node name="wall" type="Node" parent="."]
 
@@ -967,6 +1003,43 @@ shape = SubResource("RectangleShape2D_ljhog")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("14_3xcm8")]
 visible = false
+
+[node name="enemytest" parent="." instance=ExtResource("9_uebdt")]
+position = Vector2(111, -160)
+
+[node name="enemytest2" parent="." instance=ExtResource("9_uebdt")]
+position = Vector2(299, -125)
+
+[node name="enemytest4" parent="." instance=ExtResource("9_uebdt")]
+position = Vector2(195, -87)
+
+[node name="enemytest3" parent="." instance=ExtResource("10_3iqsd")]
+position = Vector2(268, -251)
+
+[node name="enemytest5" parent="." instance=ExtResource("10_3iqsd")]
+position = Vector2(-41, -189)
+
+[node name="enemytest6" parent="." instance=ExtResource("10_3iqsd")]
+position = Vector2(64, -264)
+
+[node name="enemytest7" parent="." instance=ExtResource("10_3iqsd")]
+position = Vector2(503, 376)
+
+[node name="enemytest9" parent="." instance=ExtResource("9_uebdt")]
+position = Vector2(369, 436)
+
+[node name="enemytest10" parent="." instance=ExtResource("9_uebdt")]
+position = Vector2(435, 536)
+
+[node name="enemytest8" parent="." instance=ExtResource("10_3iqsd")]
+position = Vector2(560, 540)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_2uksf")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_ptnx2")
+volume_db = -5.0
 
 [connection signal="body_entered" from="forest_transition_point" to="." method="_on_forest_transition_point_body_entered"]
 [connection signal="body_exited" from="forest_transition_point" to="." method="_on_forest_transition_point_body_exited"]
