@@ -119,6 +119,8 @@ func update_parameters(input_vector):
 		print(global.gun_cooldown)
 		print(global.player_inventory)
 		print(global.player_defence)
+		print(global.player_max_health)
+		print(global.player_sword_damage)
 		
 	else:
 		animation_tree["parameters/conditions/attacking"]= false

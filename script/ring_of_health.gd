@@ -8,5 +8,5 @@ func _ready():
 
 
 func _on_pick_up():
-	global.player_health += 15
+	global.player_max_health += 15
 	queue_free()

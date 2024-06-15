@@ -7,5 +7,5 @@ func _ready():
 
 
 func _on_pickup():
-	global.player_inventory.append("istinggar")
+	global.player_gun_damage += 15
 	queue_free()

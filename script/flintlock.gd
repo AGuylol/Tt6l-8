@@ -8,6 +8,6 @@ func _ready():
 
 
 func _on_pickup():
-	global.player_inventory.append("flintlock")
+	global.gun_cooldown -= 3
 	queue_free()
-	print(global.player_inventory)
+

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvj5bcyqouo3g"]
+[gd_scene load_steps=6 format=3 uid="uid://cvj5bcyqouo3g"]
 
 [ext_resource type="Script" path="res://gameover/Button.gd" id="1_iftao"]
+[ext_resource type="Script" path="res://script/victoryscene.gd" id="1_lifuh"]
 [ext_resource type="Texture2D" uid="uid://bihcocs82rojb" path="res://arts/vic.png" id="1_w3a2s"]
 [ext_resource type="FontFile" uid="uid://bp54rgoiy71ga" path="res://PixeloidSans-mLxMm.ttf" id="2_pej6j"]
+[ext_resource type="AudioStream" uid="uid://dhct6ub0dn735" path="res://Audio/brass-fanfare-with-timpani-and-winchimes-reverberated-146260.mp3" id="4_2wi2g"]
 
 [node name="victoryscene" type="Control"]
 layout_mode = 3
@@ -11,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lifuh")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -56,5 +59,9 @@ theme_override_fonts/font = ExtResource("2_pej6j")
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 script = ExtResource("1_iftao")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2wi2g")
+volume_db = -3.0
 
 [connection signal="pressed" from="TextureRect/Button" to="TextureRect/Button" method="_on_pressed"]

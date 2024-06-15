@@ -6,11 +6,11 @@ var player_inventory =  []
 
 var button_pressed = false
 
-var player_health = 1000.0
+var player_health = 100.0
 var player_max_health = 100.0
-var player_sword_damage = 200
+var player_sword_damage = 20
 var player_gun_damage = 30
-var gun_cooldown = 0.1
+var gun_cooldown = 10
 var player_defence = 0
 
 var current_scene = "beach"

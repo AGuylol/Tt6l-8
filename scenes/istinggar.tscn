@@ -17,7 +17,7 @@ vframes = 6
 frame = 1
 
 [node name="Interaction_area" parent="." instance=ExtResource("3_0a7cx")]
-action_name = "for +10 gun damage"
+action_name = "for +15 gun damage"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
 shape = SubResource("CircleShape2D_0uijq")
