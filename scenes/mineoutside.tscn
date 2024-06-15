@@ -1,12 +1,11 @@
 [gd_scene load_steps=22 format=3 uid="uid://cp3k2h3cswqw4"]
 
-[ext_resource type="Script" path="res://scenes/mineoutside.gd" id="1_05fwx"]
 [ext_resource type="Texture2D" uid="uid://cioegjltvp74w" path="res://arts/tilesets/decor_8x8.png" id="1_763ef"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="1_gw3fd"]
 [ext_resource type="Script" path="res://script/mineoutside.gd" id="1_wnpo2"]
 [ext_resource type="Texture2D" uid="uid://chf7hwgcew7ij" path="res://arts/tilesets/decor_16x16.png" id="2_jo0ym"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="3_ey7s0"]
-[ext_resource type="Texture2D" uid="uid://dhyonjmbky8ni" path="res://arts/beach (not the other b)/32x32/Forest/GrassAndEarthTilemap.png" id="4_fhy5m"]
+[ext_resource type="Texture2D" uid="uid://dhyonjmbky8ni" path="res://arts/objects/arts/beach (not the other b)/32x32/Forest/GrassAndEarthTilemap.png" id="4_fhy5m"]
 [ext_resource type="Texture2D" uid="uid://qgbx3iagg5gu" path="res://arts/mines/cave_tiles_by_paradigmi_dbmzbay.png" id="5_kdyum"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="6_yr4a8"]
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="7_wmm6p"]
@@ -1509,10 +1508,8 @@ sources/8 = SubResource("TileSetAtlasSource_qiccx")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xbrxa"]
 size = Vector2(60, 39)
 
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_wnpo2")
-
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_4ikal")
@@ -1534,10 +1531,6 @@ polygon = PackedVector2Array(0, -1, 234, 53, 237, 106, 298, 114, 236, 154, 204, 
 [node name="mine_transition_point" type="Area2D" parent="."]
 position = Vector2(307, 91)
 
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="mine"]
+[node name="mine#CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -2)
 shape = SubResource("RectangleShape2D_xbrxa")
-
-[connection signal="body_entered" from="mine" to="." method="_on_mine_body_entered"]
-
