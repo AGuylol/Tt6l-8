@@ -30,7 +30,9 @@ func _on_mineoutside_transition_point_2_body_exited(body):
 
 func change_scene():
 	if global.transition_scene == true:
+
 		if global.current_scene == "beach" :
 			get_tree().change_scene_to_file("res://scenes/mineoutside.tscn")
+
 			global.finish_changescenes()
 	

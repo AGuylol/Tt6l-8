@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://k0v52ursqnkc"]
 
 [ext_resource type="Script" path="res://scenes/forest.gd" id="1_1q7nl"]
-[ext_resource type="Texture2D" uid="uid://dxhige8qaimdy" path="res://arts/beach (not the other b)/16x16/Forest/ForestPlants.png" id="1_k8h3o"]
-[ext_resource type="Texture2D" uid="uid://cv85id2vvbvoo" path="res://arts/beach (not the other b)/32x32/Forest/ForestPlants.png" id="2_w4lm2"]
-[ext_resource type="Texture2D" uid="uid://dwx1qmt68w0mh" path="res://arts/beach (not the other b)/16x16/Forest/Grass and EarthTilemap.png" id="3_8b42m"]
+[ext_resource type="Texture2D" uid="uid://dxhige8qaimdy" path="res://arts/objects/arts/beach (not the other b)/16x16/Forest/ForestPlants.png" id="1_k8h3o"]
+[ext_resource type="Texture2D" uid="uid://cv85id2vvbvoo" path="res://arts/objects/arts/beach (not the other b)/32x32/Forest/ForestPlants.png" id="2_w4lm2"]
+[ext_resource type="Texture2D" uid="uid://dwx1qmt68w0mh" path="res://arts/objects/arts/beach (not the other b)/16x16/Forest/Grass and EarthTilemap.png" id="3_8b42m"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="4_d0cdf"]
 [ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="6_8uk45"]
 [ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="7_2d1u6"]

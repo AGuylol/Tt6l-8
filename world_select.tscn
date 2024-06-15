@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://lgy3l72rxshl"]
+
+[ext_resource type="PackedScene" uid="uid://ciipxmuiabq4j" path="res://scenes/world_select/world_icon.tscn" id="1_q5lg5"]
+[ext_resource type="Script" path="res://world_select.gd" id="1_uw04h"]
+[ext_resource type="PackedScene" uid="uid://bkw6bt1n8u4rm" path="res://scenes/world_select/player_icon.tscn" id="3_jrvgy"]
+
+[node name="WorldSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uw04h")
+
+[node name="WorldIcon" parent="." instance=ExtResource("1_q5lg5")]
+world_index = 2
+
+[node name="WorldIcon2" parent="." instance=ExtResource("1_q5lg5")]
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+world_index = 2
+
+[node name="WorldIcon3" parent="." instance=ExtResource("1_q5lg5")]
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 192.0
+world_index = 2
+
+[node name="WorldIcon4" parent="." instance=ExtResource("1_q5lg5")]
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 128.0
+world_index = 2
+
+[node name="PlayerIcon" parent="." instance=ExtResource("3_jrvgy")]
+layout_mode = 0
+offset_top = 128.0
+offset_bottom = 192.0

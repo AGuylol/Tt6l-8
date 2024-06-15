@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://tutorial.gd" id="1_ki3qn"]
 [ext_resource type="Texture2D" uid="uid://qgbx3iagg5gu" path="res://arts/mines/cave_tiles_by_paradigmi_dbmzbay.png" id="2_d6t82"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="2_sie23"]
+
 [ext_resource type="Texture2D" uid="uid://igmejgqbb8rw" path="res://arts/beach (not the other b)/16x16/Beach/GrassAndSandTilemap.png" id="3_5hfrl"]
 [ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="6_ll7b0"]
 [ext_resource type="AudioStream" uid="uid://cv7s18x1i06lv" path="res://Audio/game-start-6104.mp3" id="7_8bx6i"]
