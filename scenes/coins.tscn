@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4bbi7f5hbqpk"]
+[gd_scene load_steps=12 format=3 uid="uid://dtbfqxn5nnbb4"]
 
 [ext_resource type="Texture2D" uid="uid://dem8o1kyaraah" path="res://arts/dungeon/item and and trap/coin/coin_1.png" id="1_jcag0"]
 [ext_resource type="Script" path="res://script/coins.gd" id="1_yda7m"]

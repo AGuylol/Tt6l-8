@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://level_select.gd" id="1_pruy4"]
 [ext_resource type="PackedScene" uid="uid://85xx2r2rtumw" path="res://scenes/world_select/level_icon.tscn" id="1_sja1r"]
-[ext_resource type="Texture2D" uid="uid://c25h3gr8hp6jy" path="res://malaya penisula.png" id="2_oq4lw"]
+[ext_resource type="Texture2D" uid="uid://p0d5avv5dtpa" path="res://malaya penisula.png" id="2_oq4lw"]
 [ext_resource type="PackedScene" uid="uid://bkw6bt1n8u4rm" path="res://scenes/world_select/player_icon.tscn" id="3_p5ahm"]
 [ext_resource type="Texture2D" uid="uid://bsi74l6ig6blq" path="res://arts/characters/Malay guy.png" id="5_ooy82"]
 

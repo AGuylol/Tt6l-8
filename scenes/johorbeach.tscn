@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b65dc1lsqko4t" path="res://scenes/enemygob.tscn" id="9_uebdt"]
 [ext_resource type="PackedScene" uid="uid://c7ndiccsumhpc" path="res://scenes/enemyfish.tscn" id="10_3iqsd"]
 [ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="11_ivlw0"]
-[ext_resource type="Script" path="res://scenes/meleebuff.gd" id="12_r0gf1"]
+[ext_resource type="Script" path="res://script/meleebuff.gd" id="12_r0gf1"]
 [ext_resource type="Script" path="res://script/health_upgrade.gd" id="13_3oyql"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="13_pr1oc"]
 [ext_resource type="Script" path="res://script/defence_upgrade.gd" id="14_3un6v"]
