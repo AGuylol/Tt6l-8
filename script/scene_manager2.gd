@@ -45,3 +45,4 @@ func finish_scene_changes():
 			current_scene = "boss_room"
 		elif current_scene == "outsidemine" and transition_target == "start_world":
 			current_scene = "world"
+		

@@ -1,18 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://btewb5ida7n1p"]
+[gd_scene load_steps=6 format=3 uid="uid://cvj5bcyqouo3g"]
 
 [ext_resource type="Script" path="res://gameover/Button.gd" id="1_iftao"]
+[ext_resource type="Script" path="res://script/victoryscene.gd" id="1_lifuh"]
 [ext_resource type="Texture2D" uid="uid://bihcocs82rojb" path="res://arts/vic.png" id="1_w3a2s"]
-
-[sub_resource type="SystemFont" id="SystemFont_jq3v1"]
-font_names = PackedStringArray("", "Impact")
-font_italic = true
-font_weight = 425
-font_stretch = 75
-msdf_pixel_range = 30
-oversampling = 1.8
-
-[sub_resource type="FontVariation" id="FontVariation_65evt"]
-base_font = SubResource("SystemFont_jq3v1")
+[ext_resource type="FontFile" uid="uid://bp54rgoiy71ga" path="res://PixeloidSans-mLxMm.ttf" id="2_pej6j"]
+[ext_resource type="AudioStream" uid="uid://dhct6ub0dn735" path="res://Audio/brass-fanfare-with-timpani-and-winchimes-reverberated-146260.mp3" id="4_2wi2g"]
 
 [node name="victoryscene" type="Control"]
 layout_mode = 3
@@ -21,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lifuh")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -45,8 +38,9 @@ grow_horizontal = 2
 
 [node name="Label" type="Label" parent="TextureRect/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_65evt")
-theme_override_font_sizes/font_size = 36
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_pej6j")
+theme_override_font_sizes/font_size = 46
 text = "You Win"
 
 [node name="Button" type="Button" parent="TextureRect"]
@@ -61,8 +55,13 @@ offset_top = -50.0
 offset_right = 85.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_pej6j")
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 script = ExtResource("1_iftao")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2wi2g")
+volume_db = -3.0
 
 [connection signal="pressed" from="TextureRect/Button" to="TextureRect/Button" method="_on_pressed"]

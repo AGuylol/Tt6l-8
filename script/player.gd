@@ -20,7 +20,6 @@ var state = idle
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var healthbar = $Healthbar
-@onready var regen_timer = $regen_timer
 var blend_position : Vector2 = Vector2.ZERO
 
 var dash_speed = 400
@@ -39,9 +38,6 @@ var knockback_duration = 0.5
 var is_knocked_back = false
 
 
-@onready var camera = $Camera2D
-var normal_zoom = Vector2(1.5, 1.5)
-var zoomed_in = Vector2(0.5, 0.5)
 
 var took_damage : bool = false
 
@@ -117,9 +113,14 @@ func update_parameters(input_vector):
 		
 	if Input.is_action_just_pressed("attack"):
 		animation_tree["parameters/conditions/attacking"]= true
-		$AudioStreamPlayer2D.play()
+		$slash.play()
 		print(scene_manager2.current_scene)
 		print(scene_manager2.transition_target)
+		print(global.gun_cooldown)
+		print(global.player_inventory)
+		print(global.player_defence)
+		print(global.player_max_health)
+		print(global.player_sword_damage)
 		
 	else:
 		animation_tree["parameters/conditions/attacking"]= false
@@ -143,22 +144,27 @@ func apply_movement(amount) -> void:
 	velocity = velocity.limit_length(max_speed)
 	
 
-
+# handle all enemy attacks
 func _on_playerhitbox_body_entered(body):
-	if body.is_in_group("enemy"):
-		enemy_inattack_range = true
-		$enemy_attack_timer.start()
-		
+	if body.is_in_group("enemy") or body.is_in_group("bat") or body.is_in_group("orc") or body.is_in_group("soldier") or body.is_in_group("fish") or body.is_in_group("toyol") :
 		var knockback_direction = (global_position - body.global_position).normalized()
 		apply_knockback(knockback_direction)
-		global.player_health -= 10
+		if body.is_in_group("enemy") or body.is_in_group("bat"):
+			global.player_health -= 15 - global.player_defence
+		elif body.is_in_group("orc"):
+			global.player_health -= 20- global.player_defence
+		elif body.is_in_group("soldier"):
+			global.player_health -= 25- global.player_defence
+		elif body.is_in_group("fish") or body.is_in_group("toyol"):
+			global.player_health -= 15 
+			
 		healthbar.health = global.player_health
 		print("Player health:", global.player_health)
 		if global.player_health <= 0:
 			player_alive = false
-			
-			
-	
+
+
+
 
 
 func _on_playerhitbox_body_exited(body):
@@ -176,7 +182,8 @@ func enemy_attack():
 		await get_tree().create_timer(0.5).timeout
 		enemy_attack_cooldown = false
 		healthbar.health = global.player_health
-		regen_timer.start()
+		
+		
 		
 func _on_attack_timeout():
 	enemy_attack_cooldown = false
@@ -186,7 +193,7 @@ func bow_shoot():
 	$Marker2D.look_at(mouse_pos)
 	
 	if Input.is_action_just_pressed("bow") and bow_cooldown:
-		$AudioStreamPlayer2D2.play()
+		$gun_shot.play()
 		bow_cooldown = false
 		var arrow_instance = arrow.instantiate()
 		arrow_instance.rotation = $Marker2D.rotation 
@@ -237,37 +244,25 @@ func _on_playerhitbox_area_entered(area):
 	elif area.is_in_group("key"):
 		global.player_inventory.append("key")
 		print(global.player_inventory)
-	elif area.is_in_group("coin"):
-		global.player_inventory.append("coin")
-		print(global.player_inventory)
 	elif area.is_in_group("flamethrower"):
 		global.player_health -=10
 	elif area.is_in_group("BossProjectile"):
-		global.player_health -= 20
+		global.player_health -= 20- global.player_defence
 		can_move = false
 		await get_tree().create_timer(2).timeout
 		can_move = true
 	elif area.is_in_group("bossmelee"):
-		global.player_health -= 25
+		global.player_health -= 25- global.player_defence
 	elif area.is_in_group("laser"):
-		global.player_health -= 40
-		
+		global.player_health -= 40- global.player_defence
 
 	
 	healthbar.health = global.player_health
 	print(global.player_health)
-	regen_timer.start()
+
 	
-
-
-
-
-func _on_regen_timer_timeout():
-	if global.player_health < global.player_max_health/3:
-		global.player_health = min(global.player_health + (global.player_max_health / 3), global.player_max_health) 
-		healthbar.health = global.player_health
-		print("Player health after regen:", global.player_health)
-		
+	
+	
 func current_camera():
 	if scene_manager2.current_scene == "world":
 		$normal_zoom.enabled = true
@@ -281,10 +276,8 @@ func current_camera():
 		$normal_zoom.enabled = false
 		$zoom_in.enabled = false
 		$zoom_out.enabled = true
+	
 		
-		
-func get_item(itemData):
-	$Bag.get
 
 
 func player():

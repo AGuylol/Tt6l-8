@@ -8,4 +8,5 @@ func _ready():
 
 func _on_pickup():
 	global.player_inventory.append("melee_upgrade2")
+	global.player_sword_damage += 5
 	queue_free()

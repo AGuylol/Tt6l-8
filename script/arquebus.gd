@@ -8,4 +8,5 @@ func _ready():
 
 func _on_pickup():
 	global.player_inventory.append("arquebus")
+	global.gun_cooldown -= 2
 	queue_free()

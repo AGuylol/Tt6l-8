@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh0mskh2vhm0x"]
+[gd_scene load_steps=5 format=3 uid="uid://dh0mskh2vhm0x"]
 
 [ext_resource type="Script" path="res://script/Menu_Spare.gd" id="1_4dcic"]
-[ext_resource type="Texture2D" uid="uid://b2iijfpv4gwn8" path="res://arts/background img.jpg" id="2_hq5i3"]
-
-[sub_resource type="SystemFont" id="SystemFont_ybdcw"]
-font_names = PackedStringArray("Traditional Arabic")
-font_italic = true
+[ext_resource type="Texture2D" uid="uid://cwakah57w7cmn" path="res://arts/forest.jpg" id="2_y8tew"]
+[ext_resource type="FontFile" uid="uid://bp54rgoiy71ga" path="res://PixeloidSans-mLxMm.ttf" id="3_yknbr"]
+[ext_resource type="AudioStream" uid="uid://07h2oxonka6o" path="res://Audio/[1-01] Cave Story (Main Theme) - Cave Story Remastered Soundtrack.mp3" id="4_wcg2h"]
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -28,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_hq5i3")
+texture = ExtResource("2_y8tew")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -45,27 +43,32 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sesat" type="Label" parent="Menu"]
-modulate = Color(0.91694, 0.261303, 0.167544, 1)
-self_modulate = Color(0.889002, 0.248471, 0.279066, 1)
+self_modulate = Color(0.980139, 0.980139, 0.980139, 1)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = SubResource("SystemFont_ybdcw")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_yknbr")
+theme_override_font_sizes/font_size = 30
 text = "SESAT"
 
 [node name="Start" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yknbr")
 text = "Start"
 
 [node name="Option" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yknbr")
 text = "Option"
 
 [node name="Instruction" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yknbr")
 text = "Instruction"
 
 [node name="Quit" type="Button" parent="Menu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_yknbr")
 text = "Quit"
 
 [node name="Option" type="Control" parent="."]
@@ -303,6 +306,10 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
 text = "Back"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wcg2h")
+volume_db = -15.459
 
 [connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Menu/Option" to="." method="_on_option_pressed"]

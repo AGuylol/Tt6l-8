@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cokcr3v8snkrw"]
+[gd_scene load_steps=5 format=3 uid="uid://dw7bl28xjuabx"]
 
 [ext_resource type="Script" path="res://script/flintlock.gd" id="1_mp6io"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="2_o63f6"]
@@ -11,6 +11,7 @@ radius = 12.0
 script = ExtResource("1_mp6io")
 
 [node name="Interaction_area" parent="." instance=ExtResource("2_o63f6")]
+action_name = "for -3 gun cooldown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
 shape = SubResource("CircleShape2D_etymy")

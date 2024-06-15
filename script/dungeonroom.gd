@@ -1,16 +1,20 @@
 extends Node2D
 
 @onready var interaction_area :interaction_area = $Interaction_area
-@export var enemy_scene: PackedScene
+@export var enemy_scenes: Dictionary = {
+	"bat": preload("res://scenes/bat.tscn"),
+	"orc": preload("res://scenes/orc.tscn"),
+	"soldier": preload("res://scenes/solider.tscn")
+}
 @onready var chest_scene = preload("res://scenes/silver_chest.tscn")
 
-var spawn_points: Array[NodePath]
-var spawn_points_2: Array[NodePath]
-var spawn_points_3: Array[NodePath]
-var spawn_points_4: Array[NodePath]
-var spawn_points_5: Array[NodePath]
-var spawn_points_6: Array[NodePath]
-var spawn_points_7: Array[NodePath]
+var spawn_points: Dictionary
+var spawn_points_2: Dictionary
+var spawn_points_3: Dictionary
+var spawn_points_4: Dictionary
+var spawn_points_5: Dictionary
+var spawn_points_6: Dictionary
+var spawn_points_7: Dictionary
 
 var enemies = []
 var doors_open = true
@@ -56,6 +60,8 @@ func close_all_doors():
 		doors_open = false
 		
 func _ready():
+	$AudioStreamPlayer.play()
+	
 	interaction_area.interact = Callable (self, "_on_interact")
 	
 	
@@ -71,48 +77,48 @@ func _ready():
 		$player.position.x = scene_manager2.player_start_position_posx
 		$player.position.y = scene_manager2.player_start_position_posy
 	
-	spawn_points = [
-		$enemy_spawns/spawn_point.get_path(),
-		$enemy_spawns/spawn_point2.get_path(),
-	]
-	spawn_points_2 = [
-		$enemy_spawns/spawn_point3.get_path(),
-		$enemy_spawns/spawn_point4.get_path(),
-	]
-	spawn_points_3 = [
-		$enemy_spawns/spawn_point5.get_path(),
-		$enemy_spawns/spawn_point6.get_path(),
-		$enemy_spawns/spawn_point7.get_path()
-	]
-	spawn_points_4 = [
-		$enemy_spawns/spawn_point8.get_path(),
-		$enemy_spawns/spawn_point9.get_path(),
-		$enemy_spawns/spawn_point10.get_path(),
-		$enemy_spawns/spawn_point11.get_path()
-	]
-	spawn_points_5 = [
-		
-		$enemy_spawns/spawn_point12.get_path(),
-		$enemy_spawns/spawn_point13.get_path(),
-		$enemy_spawns/spawn_point14.get_path(),
-		$enemy_spawns/spawn_point15.get_path()
-		
-	]
-	spawn_points_6 = [
-		$enemy_spawns/spawn_point16.get_path(),
-		$enemy_spawns/spawn_point17.get_path(),
-		$enemy_spawns/spawn_point18.get_path(),
-		$enemy_spawns/spawn_point19.get_path(),
-		$enemy_spawns/spawn_point20.get_path()
-	]
-	spawn_points_7 = [
-		$enemy_spawns/spawn_point21.get_path(),
-		$enemy_spawns/spawn_point22.get_path(),
-		$enemy_spawns/spawn_point23.get_path(),
-		$enemy_spawns/spawn_point24.get_path(),
-		$enemy_spawns/spawn_point25.get_path()
-		
-	]
+	spawn_points = {
+		$enemy_spawns/spawn_point.get_path(): "bat",
+		$enemy_spawns/spawn_point2.get_path(): "bat",
+		$enemy_spawns/spawn_point26.get_path(): "orc"
+	}
+	spawn_points_2 = {
+		$enemy_spawns/spawn_point3.get_path(): "orc",
+		$enemy_spawns/spawn_point4.get_path(): "orc",
+		$enemy_spawns/spawn_point27.get_path(): "bat"
+	}
+	spawn_points_3 = {
+		$enemy_spawns/spawn_point5.get_path(): "bat",
+		$enemy_spawns/spawn_point6.get_path(): "bat",
+		$enemy_spawns/spawn_point7.get_path(): "orc",
+		$enemy_spawns/spawn_point28.get_path(): "orc"
+	}
+	spawn_points_4 = {
+		$enemy_spawns/spawn_point8.get_path(): "orc",
+		$enemy_spawns/spawn_point9.get_path(): "orc",
+		$enemy_spawns/spawn_point10.get_path(): "bat",
+		$enemy_spawns/spawn_point11.get_path(): "bat"
+	}
+	spawn_points_5 = {
+		$enemy_spawns/spawn_point12.get_path(): "bat",
+		$enemy_spawns/spawn_point13.get_path(): "orc",
+		$enemy_spawns/spawn_point14.get_path(): "soldier",
+		$enemy_spawns/spawn_point15.get_path(): "orc"
+	}
+	spawn_points_6 = {
+		$enemy_spawns/spawn_point16.get_path(): "orc",
+		$enemy_spawns/spawn_point17.get_path(): "orc",
+		$enemy_spawns/spawn_point18.get_path(): "orc",
+		$enemy_spawns/spawn_point19.get_path(): "soldier",
+		$enemy_spawns/spawn_point20.get_path(): "soldier"
+	}
+	spawn_points_7 = {
+		$enemy_spawns/spawn_point21.get_path(): "orc",
+		$enemy_spawns/spawn_point22.get_path(): "orc",
+		$enemy_spawns/spawn_point23.get_path(): "soldier",
+		$enemy_spawns/spawn_point24.get_path(): "orc",
+		$enemy_spawns/spawn_point25.get_path(): "orc"
+	}
 
 	$detectplayerarea/detectplayer.body_entered.connect(_on_detectplayer_body_entered)
 	$detectplayerarea/detectplayer2.body_entered.connect(_on_detecplayer_2_ndroom_body_entered)
@@ -126,7 +132,8 @@ func _ready():
 
 func _process(delta):
 	change_scenes()
-	
+	await $AudioStreamPlayer.finished
+	$AudioStreamPlayer.play()
 
 		
 func spawn_enemies():
@@ -163,6 +170,7 @@ func spawn_from_points(points):
 		var spawn_point = get_node(spawn_point_path)
 		if spawn_point == null:
 			continue
+		var enemy_scene = enemy_scenes[points[spawn_point_path]]
 		var enemy = enemy_scene.instantiate()
 		if enemy == null:
 			continue
@@ -173,7 +181,6 @@ func spawn_from_points(points):
 		
 		
 func _on_enemy_defeated():
-	print("enemy")
 	enemies.erase(enemies[-1])  
 	print(enemies)
 	if enemies.size() == 0:

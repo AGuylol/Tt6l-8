@@ -1,8 +1,9 @@
-[gd_scene load_steps=97 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=98 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
 [ext_resource type="Texture2D" uid="uid://dmenfn0432uwj" path="res://arts/mines/Water.png" id="3_8i56k"]
+[ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="3_ehlqx"]
 [ext_resource type="Texture2D" uid="uid://by7v8eucker37" path="res://arts/mines/Set 4.5.png" id="4_ktwja"]
 [ext_resource type="Texture2D" uid="uid://duyejpjrvpcx4" path="res://arts/mines/Structure.png" id="5_xx0o5"]
 [ext_resource type="Texture2D" uid="uid://d3yj3587h1amh" path="res://arts/objects/objects.png" id="6_2d1m2"]
@@ -14,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="9_d1ohs"]
 [ext_resource type="Texture2D" uid="uid://dynwsmcodx3ku" path="res://arts/mines/5.png" id="9_mst0c"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="10_1nqeg"]
-[ext_resource type="PackedScene" uid="uid://0vngswwsrm1" path="res://scenes/enemy.tscn" id="10_bo2mn"]
 [ext_resource type="Texture2D" uid="uid://fxi3e1qkvqjh" path="res://arts/mines/5modified.png" id="10_wch5v"]
 [ext_resource type="Texture2D" uid="uid://7ij533q6pfh8" path="res://arts/dungeon/Dungeon_Tileset_at.png" id="11_4myej"]
 [ext_resource type="Texture2D" uid="uid://b6os0xcnfxmpf" path="res://arts/mines/5modified2.png" id="11_q2xr8"]
@@ -24,9 +24,10 @@
 [ext_resource type="PackedScene" uid="uid://68xdu80spkc7" path="res://scenes/key.tscn" id="16_r3q1m"]
 [ext_resource type="PackedScene" uid="uid://jrw8xnclqdi8" path="res://scenes/chest.tscn" id="17_bcxu0"]
 [ext_resource type="PackedScene" uid="uid://evtggxv8uoam" path="res://scenes/flametrap.tscn" id="17_go1gu"]
-[ext_resource type="PackedScene" uid="uid://cokcr3v8snkrw" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
-[ext_resource type="PackedScene" uid="uid://8xg70g12da07" path="res://scenes/lantern.tscn" id="26_aksei"]
+[ext_resource type="PackedScene" uid="uid://dw7bl28xjuabx" path="res://scenes/flintlock.tscn" id="25_2g5mk"]
+[ext_resource type="PackedScene" path="res://scenes/lantern.tscn" id="26_aksei"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="27_kudes"]
+[ext_resource type="AudioStream" uid="uid://cgevroxf2ri3g" path="res://Audio/game-music-loop-6-144641.mp3" id="28_vx7d3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iai0k"]
 texture = ExtResource("2_cl8ss")
@@ -14352,16 +14353,13 @@ polygon = PackedVector2Array(-81, -575, -75, -569, -77, -567, -82, -565, -86, -5
 polygon = PackedVector2Array(-423, -266, -422, -266, -422, -273, -414, -273, -414, -266, -413, -266, -413, -258, -423, -258)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r0bsg"]
-polygon = PackedVector2Array(-92, -355, -100, -352, -104, -342, -104, -355)
+polygon = PackedVector2Array(-92, -355, -104, -342, -104, -355)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0rci3"]
 polygon = PackedVector2Array(27, -319, 31, -319, 31, -318, 32, -318, 32, -318, 32, -317, 33, -317, 33, -316, 34, -316, 34, -315, 35, -315, 35, -314, 36, -314, 36, -312, 35, -311, 32, -310, 26, -310, 25, -311, 24, -312, 23, -312, 23, -315, 24, -315, 24, -317, 25, -317, 25, -318, 26, -318, 26, -319)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2ekgf"]
 polygon = PackedVector2Array(-168, -947, -156, -940, -156, -934, -168, -934)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tcs2q"]
-polygon = PackedVector2Array(-125, -1308, -125, -1298, -117, -1297, -117, -1308)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o5v6y"]
 polygon = PackedVector2Array(185, -766, 187, -768, 191, -768, 195, -763, 197, -761, 195, -759, 186, -758, 183, -761)
@@ -14384,9 +14382,12 @@ size = Vector2(28.5, 41)
 [sub_resource type="CircleShape2D" id="CircleShape2D_1beu7"]
 radius = 25.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xttud"]
+polygon = PackedVector2Array(305, -383, 305, -382, 306, -382, 306, -383, 310, -383, 310, -384, 311, -384, 313, -385, 313, -384, 314, -384, 314, -383, 317, -383, 317, -382, 318, -382, 318, -381, 319, -381, 319, -375, 320, -388, 311, -386)
+
 [node name="Node2D" type="Node2D"]
+position = Vector2(101, -675)
 script = ExtResource("1_cjri4")
-enemy_scene = ExtResource("10_bo2mn")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, -1)
@@ -14525,6 +14526,15 @@ position = Vector2(657, -1256)
 
 [node name="spawn_point25" type="Marker2D" parent="enemy_spawns"]
 position = Vector2(608, -1209)
+
+[node name="spawn_point26" type="Marker2D" parent="enemy_spawns"]
+position = Vector2(6, -99)
+
+[node name="spawn_point27" type="Marker2D" parent="enemy_spawns"]
+position = Vector2(325, -106)
+
+[node name="spawn_point28" type="Marker2D" parent="enemy_spawns"]
+position = Vector2(302, -348)
 
 [node name="traps" type="Node2D" parent="."]
 
@@ -15096,7 +15106,7 @@ position = Vector2(311, -207)
 position = Vector2(211, -295)
 
 [node name="lantern7" parent="light_source" instance=ExtResource("26_aksei")]
-position = Vector2(322, -318)
+position = Vector2(327, -319)
 
 [node name="lantern8" parent="light_source" instance=ExtResource("26_aksei")]
 position = Vector2(-142, -270)
@@ -15204,9 +15214,6 @@ occluder = SubResource("OccluderPolygon2D_0rci3")
 [node name="LightOccluder2D15" type="LightOccluder2D" parent="shadow"]
 occluder = SubResource("OccluderPolygon2D_2ekgf")
 
-[node name="LightOccluder2D16" type="LightOccluder2D" parent="shadow"]
-occluder = SubResource("OccluderPolygon2D_tcs2q")
-
 [node name="LightOccluder2D17" type="LightOccluder2D" parent="shadow"]
 occluder = SubResource("OccluderPolygon2D_o5v6y")
 
@@ -15234,12 +15241,22 @@ shape = SubResource("RectangleShape2D_4o47f")
 position = Vector2(593, -1387)
 shape = SubResource("RectangleShape2D_hvgut")
 
+[node name="player" parent="." instance=ExtResource("3_ehlqx")]
+position = Vector2(10, 156)
+
 [node name="Interaction_area" parent="." instance=ExtResource("27_kudes")]
 action_name = "to enter boss room"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_area"]
 position = Vector2(-39, -1049)
 shape = SubResource("CircleShape2D_1beu7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_xttud")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_vx7d3")
+volume_db = -5.0
 
 [connection signal="body_entered" from="detectplayerarea/detectplayer3" to="." method="_on_detectplayer_3_body_entered"]
 [connection signal="body_entered" from="detectplayerarea/detectplayer" to="." method="_on_detectplayer_body_entered"]

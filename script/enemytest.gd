@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 @onready var healthbar = $Healthbar
-@onready var coin_scene = preload("res://scenes/coins.tscn")
+@onready var small_healing_scene = preload("res://scenes/small_healing.tscn")
+@onready var big_healing_scene = preload ("res://scenes/big_healing.tscn")
 var speed = 35
 var player_chase = false
 var player = null
@@ -13,7 +14,7 @@ var knockback_duration = 0.5
 var knockback_timer = 0.0
 var moving = false
 
-
+var direction: Vector2
 
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -100,12 +101,11 @@ func take_damage(damage):
 		$hitbox.area_entered.disconnect(_on_hitbox_area_entered)
 		
 		$AnimatedSprite2D.play("death")
-		await get_tree().create_timer(0.6).timeout
-		spawn_coins()
+		await get_tree().create_timer(1).timeout
+		spawn_healing()
 		queue_free()
 		
-	await get_tree().create_timer(6).timeout
-	$AnimatedSprite2D.play("default")
+
 		
 func disable_collisions():
 	$hitarea/CollisionShape2D.disabled = true
@@ -121,13 +121,14 @@ func apply_knockback(source_position , knockback_multiplier):
 	
 	
 	
-func spawn_coins():
-	var coin_count = randi() % 3 + 1
-	for i in range(coin_count):
-		var coin_instance = coin_scene.instantiate()
-		coin_instance.position = position
-		print("Spawning coin at position: ", coin_instance.position)
-		get_parent().add_child(coin_instance)
-		print("Coin spawned")
-
+func spawn_healing():
+	var rand_value = randf()
+	if rand_value < 0.1:
+		var big_healing_instance = big_healing_scene.instantiate()
+		big_healing_instance.position = position
+		get_parent().add_child(big_healing_instance)
+	elif rand_value < 0.3:  
+		var small_healing_instance = small_healing_scene.instantiate()
+		small_healing_instance.position = position
+		get_parent().add_child(small_healing_instance)
 

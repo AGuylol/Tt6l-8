@@ -1,10 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://k0v52ursqnkc"]
+[gd_scene load_steps=24 format=3 uid="uid://k0v52ursqnkc"]
 
 [ext_resource type="Script" path="res://scenes/forest.gd" id="1_1q7nl"]
 [ext_resource type="Texture2D" uid="uid://dxhige8qaimdy" path="res://arts/objects/arts/beach (not the other b)/16x16/Forest/ForestPlants.png" id="1_k8h3o"]
 [ext_resource type="Texture2D" uid="uid://cv85id2vvbvoo" path="res://arts/objects/arts/beach (not the other b)/32x32/Forest/ForestPlants.png" id="2_w4lm2"]
 [ext_resource type="Texture2D" uid="uid://dwx1qmt68w0mh" path="res://arts/objects/arts/beach (not the other b)/16x16/Forest/Grass and EarthTilemap.png" id="3_8b42m"]
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="4_d0cdf"]
+[ext_resource type="PackedScene" uid="uid://cdhfn04jkywxr" path="res://pause/pause.tscn" id="6_8uk45"]
+[ext_resource type="Texture2D" uid="uid://deep4p25xkwrd" path="res://arts/items/Sheet.png" id="7_2d1u6"]
+[ext_resource type="Script" path="res://script/ring_of_health.gd" id="8_fbhjn"]
+[ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="9_5pkgb"]
+[ext_resource type="Script" path="res://script/upgrade.gd" id="10_6752l"]
+[ext_resource type="PackedScene" uid="uid://b65dc1lsqko4t" path="res://scenes/enemygob.tscn" id="10_qeocb"]
+[ext_resource type="Script" path="res://script/defence_upgrade2.gd" id="11_bwq3i"]
+[ext_resource type="PackedScene" uid="uid://0vngswwsrm1" path="res://scenes/enemy.tscn" id="11_gdg2o"]
+[ext_resource type="PackedScene" uid="uid://brhsa80ekfbn6" path="res://scenes/orc.tscn" id="12_aprn4"]
+[ext_resource type="AudioStream" uid="uid://bv1u425egymvc" path="res://Audio/game-music-loop-1-143979.mp3" id="15_j54as"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yv76b"]
 texture = ExtResource("1_k8h3o")
@@ -196,6 +206,15 @@ sources/2 = SubResource("TileSetAtlasSource_2bqrh")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rfrb"]
 size = Vector2(58, 135)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ulrq1"]
+radius = 21.3776
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t3lh2"]
+radius = 23.3452
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ekdqp"]
+radius = 36.0139
+
 [node name="forest" type="Node2D"]
 script = ExtResource("1_1q7nl")
 
@@ -227,8 +246,89 @@ shape = SubResource("RectangleShape2D_4rfrb")
 position = Vector2(1738, 304)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mineoutside_transition_point2"]
-position = Vector2(7, 0.5)
+position = Vector2(35, 9)
 shape = SubResource("RectangleShape2D_4rfrb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_8uk45")]
+visible = false
+
+[node name="items" type="Node2D" parent="."]
+
+[node name="ring_of_health" type="Sprite2D" parent="items"]
+position = Vector2(145, 122)
+texture = ExtResource("7_2d1u6")
+hframes = 8
+vframes = 9
+frame = 42
+script = ExtResource("8_fbhjn")
+
+[node name="Interaction_area" parent="items/ring_of_health" instance=ExtResource("9_5pkgb")]
+visible = false
+action_name = "for +15 max hp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/ring_of_health/Interaction_area"]
+shape = SubResource("CircleShape2D_ulrq1")
+
+[node name="upgrade" type="Sprite2D" parent="items"]
+position = Vector2(660, 294)
+texture = ExtResource("7_2d1u6")
+hframes = 8
+vframes = 9
+frame = 34
+script = ExtResource("10_6752l")
+
+[node name="Interaction_area" parent="items/upgrade" instance=ExtResource("9_5pkgb")]
+action_name = "for +10 melee damage"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/upgrade/Interaction_area"]
+shape = SubResource("CircleShape2D_t3lh2")
+
+[node name="defence_upgrade" type="Sprite2D" parent="items"]
+position = Vector2(1228, 294)
+texture = ExtResource("7_2d1u6")
+hframes = 8
+vframes = 9
+frame = 45
+script = ExtResource("11_bwq3i")
+
+[node name="Interaction_area" parent="items/defence_upgrade" instance=ExtResource("9_5pkgb")]
+action_name = "for +4 defence"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/defence_upgrade/Interaction_area"]
+shape = SubResource("CircleShape2D_ekdqp")
+
+[node name="enemytest4" parent="." instance=ExtResource("11_gdg2o")]
+position = Vector2(836, 311)
+
+[node name="enemytest" parent="." instance=ExtResource("11_gdg2o")]
+position = Vector2(471, 243)
+
+[node name="enemytest6" parent="." instance=ExtResource("10_qeocb")]
+position = Vector2(985, 312)
+
+[node name="enemytest7" parent="." instance=ExtResource("11_gdg2o")]
+position = Vector2(876, 273)
+
+[node name="orc2" parent="." instance=ExtResource("12_aprn4")]
+position = Vector2(1467, 305)
+
+[node name="orc" parent="." instance=ExtResource("12_aprn4")]
+position = Vector2(1465, 265)
+
+[node name="enemytest2" parent="." instance=ExtResource("10_qeocb")]
+position = Vector2(547, 293)
+
+[node name="enemytest3" parent="." instance=ExtResource("10_qeocb")]
+position = Vector2(412, 190)
+
+[node name="enemytest5" parent="." instance=ExtResource("10_qeocb")]
+position = Vector2(945, 274)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_j54as")
+volume_db = -5.0
 
 [connection signal="body_entered" from="johorbeach_transition_point" to="." method="_on_johorbeach_transition_point_body_entered"]
 [connection signal="body_exited" from="johorbeach_transition_point" to="." method="_on_johorbeach_transition_point_body_exited"]

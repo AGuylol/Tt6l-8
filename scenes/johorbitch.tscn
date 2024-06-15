@@ -1,4 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://b610i72tlbhp0"]
+
+[gd_scene load_steps=15 format=3 uid="uid://bocm1pbosjh4b"]
+
 
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="1_a5l6o"]
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="2_cftqq"]
@@ -848,7 +850,9 @@ pattern_0 = SubResource("TileMapPattern_b333k")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vew2"]
 size = Vector2(78, 72)
 
-[node name="Node2D" type="Node2D"]
+
+[node name="Node2D3" type="Node2D"]
+
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true

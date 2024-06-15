@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bnbior1b67oky"]
+[gd_scene load_steps=32 format=3 uid="uid://bnbior1b67oky"]
 
 [ext_resource type="Script" path="res://script/world.gd" id="1_28d3h"]
 [ext_resource type="Texture2D" uid="uid://b6tp43m76nt05" path="res://arts/dungeon/demonstration.png" id="3_l018g"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://boyi655oiulii" path="res://arts/tilesets/grass.png" id="4_uvbvb"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="5_3k5mo"]
 [ext_resource type="Texture2D" uid="uid://cwyc7tyhcmyou" path="res://arts/tilesets/plains.png" id="5_cash8"]
-[ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="5_fdaxo"]
 [ext_resource type="Texture2D" uid="uid://7ij533q6pfh8" path="res://arts/dungeon/Dungeon_Tileset_at.png" id="5_xnilc"]
 [ext_resource type="Texture2D" uid="uid://d3yj3587h1amh" path="res://arts/objects/objects.png" id="6_iro0s"]
 [ext_resource type="Texture2D" uid="uid://dc4qhw5fqbiks" path="res://arts/mines/gems.png" id="6_xln6q"]
@@ -5010,6 +5009,3 @@ visible = false
 
 [node name="dungeonroom1" parent="." instance=ExtResource("14_4m8ot")]
 position = Vector2(-16, 15)
-
-[node name="player" parent="dungeonroom1" instance=ExtResource("5_fdaxo")]
-position = Vector2(-1, 143)

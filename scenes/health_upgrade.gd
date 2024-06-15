@@ -9,6 +9,5 @@ func _ready():
 
 
 func _on_pick_up():
-	global.player_inventory.append("health_upgrade1")
-	print(global.player_inventory)
+	global.player_max_health += 50
 	queue_free()

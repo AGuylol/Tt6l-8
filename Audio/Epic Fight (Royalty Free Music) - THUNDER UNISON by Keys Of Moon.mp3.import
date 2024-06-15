@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://3sj5gvodga8n"
+path="res://.godot/imported/Epic Fight (Royalty Free Music) - THUNDER UNISON by Keys Of Moon.mp3-c16cb8f92d8fd627e29d2457e809821d.mp3str"
+
+[deps]
+
+source_file="res://Audio/Epic Fight (Royalty Free Music) - THUNDER UNISON by Keys Of Moon.mp3"
+dest_files=["res://.godot/imported/Epic Fight (Royalty Free Music) - THUNDER UNISON by Keys Of Moon.mp3-c16cb8f92d8fd627e29d2457e809821d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

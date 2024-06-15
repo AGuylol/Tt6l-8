@@ -2,11 +2,13 @@ extends Node2D
 
 
 func _ready():
-	pass 
+	$AudioStreamPlayer2D.play()
 
 
 func _process(delta):
 	change_scene()
+	await $AudioStreamPlayer2D.finished
+	$AudioStreamPlayer2D.play()
 
 
 func _on_johorbeach_transition_point_body_entered(body):
@@ -20,6 +22,7 @@ func _on_johorbeach_transition_point_body_exited(body):
 func _on_mineoutside_transition_point_2_body_entered(body):
 	if body.has_method("player"):
 		global.transition_scene =true
+		
 
 func _on_mineoutside_transition_point_2_body_exited(body):
 	if body.has_method("player"):
@@ -27,7 +30,9 @@ func _on_mineoutside_transition_point_2_body_exited(body):
 
 func change_scene():
 	if global.transition_scene == true:
-		if global.current_scene == "world":
-			get_tree().change_scene_to_file("res://scenes/malaccahub.tscn")
+
+		if global.current_scene == "beach" :
+			get_tree().change_scene_to_file("res://scenes/mineoutside.tscn")
+
 			global.finish_changescenes()
 	
