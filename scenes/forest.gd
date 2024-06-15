@@ -32,7 +32,7 @@ func change_scene():
 	if global.transition_scene == true:
 
 		if global.current_scene == "beach" :
-			get_tree().change_scene_to_file("res://scenes/mineoutside.tscn")
+			get_tree().change_scene_to_file("res://scenes/malaccahub.tscn")
 
 			global.finish_changescenes()
 	

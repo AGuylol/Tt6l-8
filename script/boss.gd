@@ -17,7 +17,6 @@ var health = 1000:
 		if value <= 0:
 			healthbar.visible = false
 			find_child("FiniteStateMachine").change_state("death")
-			await $AnimationPlayer.animation_finished
 			get_tree().change_scene_to_file("res://scenes/victoryscene.tscn")
 			
 			

@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://scenes/First Character.gd" id="8_udcha"]
 [ext_resource type="Texture2D" uid="uid://bsi74l6ig6blq" path="res://arts/characters/Malay guy.png" id="9_kwly7"]
 [ext_resource type="PackedScene" uid="uid://b4buwlf11wj8j" path="res://scenes/interaction_area.tscn" id="10_a366c"]
+[ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="11_av3o4"]
 [ext_resource type="Script" path="res://scenes/Sign.gd" id="11_gyeyq"]
-[ext_resource type="Texture2D" uid="uid://de4rw3teabxrn" path="res://arts/objects/stolen sign.png" id="11_yqnaw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlr6a"]
 texture = ExtResource("1_jjncf")
@@ -969,9 +969,14 @@ script = ExtResource("11_gyeyq")
 
 [node name="cool sign sprite" type="Sprite2D" parent="Sign"]
 position = Vector2(1064, 160)
-texture = ExtResource("11_yqnaw")
+texture = ExtResource("11_av3o4")
+hframes = 10
+vframes = 10
+frame = 43
 
 [node name="Interaction_area" parent="Sign" instance=ExtResource("10_a366c")]
+visible = false
+action_name = "pick a level"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sign/Interaction_area"]
 position = Vector2(1064, 160)

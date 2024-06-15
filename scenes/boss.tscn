@@ -1,8 +1,8 @@
 [gd_scene load_steps=35 format=3 uid="uid://bcyc8qgbo462v"]
 
-[ext_resource type="Texture2D" uid="uid://7ol6c3jio0ak" path="res://arts/boss/Mecha-stone Golem 0.1/PNG sheet/Character_sheet.png" id="1_3ib1x"]
+[ext_resource type="Texture2D" uid="uid://7ol6c3jio0ak" path="res://arts/objects/arts/boss/Mecha-stone Golem 0.1/PNG sheet/Character_sheet.png" id="1_3ib1x"]
 [ext_resource type="Script" path="res://script/boss.gd" id="1_arqcm"]
-[ext_resource type="Texture2D" uid="uid://bgs218rc1e2wo" path="res://arts/boss/Mecha-stone Golem 0.1/weapon PNG/Laser_sheet.png" id="2_mducq"]
+[ext_resource type="Texture2D" uid="uid://bgs218rc1e2wo" path="res://arts/objects/arts/boss/Mecha-stone Golem 0.1/weapon PNG/Laser_sheet.png" id="2_mducq"]
 [ext_resource type="Script" path="res://script/FiniteStateMachine.gd" id="3_f1dbm"]
 [ext_resource type="AudioStream" uid="uid://vg77lpgk7gsy" path="res://Audio/Laser Sound Effect.mp3" id="4_6uqni"]
 [ext_resource type="Script" path="res://script/idle.gd" id="4_bjca8"]

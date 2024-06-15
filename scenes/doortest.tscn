@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://7edbjg761cox"]
 
-[ext_resource type="Texture2D" uid="uid://dwhww6oy6xblw" path="res://arts/door/Block Door Sheet.png" id="1_foyf5"]
+[ext_resource type="Texture2D" uid="uid://dwhww6oy6xblw" path="res://arts/objects/arts/door/Block Door Sheet.png" id="1_foyf5"]
 [ext_resource type="Script" path="res://script/doortest.gd" id="1_glqo1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3wbt"]
