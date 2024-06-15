@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjfo6i1acgkag"]
 
-[ext_resource type="Texture2D" uid="uid://hh4q0mrxby82" path="res://background img.jpg" id="1_ud3ko"]
+[ext_resource type="Texture2D" uid="uid://srntocngb8is" path="res://background img.jpg" id="1_ud3ko"]
 
 [sub_resource type="Theme" id="Theme_48et6"]
 

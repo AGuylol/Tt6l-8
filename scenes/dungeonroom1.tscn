@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://bq03udps8dlie"]
+[gd_scene load_steps=94 format=3 uid="uid://bq03udps8dlie"]
 
 [ext_resource type="Script" path="res://script/dungeonroom.gd" id="1_cjri4"]
 [ext_resource type="Texture2D" uid="uid://bb17w7yyxnbg4" path="res://arts/mines/tileset.png" id="2_cl8ss"]
@@ -6,17 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://c8tishbphs8e8" path="res://scenes/player.tscn" id="3_ehlqx"]
 [ext_resource type="Texture2D" uid="uid://by7v8eucker37" path="res://arts/mines/Set 4.5.png" id="4_ktwja"]
 [ext_resource type="Texture2D" uid="uid://duyejpjrvpcx4" path="res://arts/mines/Structure.png" id="5_xx0o5"]
-[ext_resource type="Texture2D" uid="uid://d3yj3587h1amh" path="res://arts/objects/objects.png" id="6_2d1m2"]
 [ext_resource type="Texture2D" uid="uid://dwhww6oy6xblw" path="res://arts/objects/arts/door/Block Door Sheet.png" id="6_ptiwa"]
 [ext_resource type="Texture2D" uid="uid://6ft68d6kf5ab" path="res://arts/objects/arts/dungeon/Dungeon_Tileset.png" id="6_wdyqt"]
 [ext_resource type="Texture2D" uid="uid://cnbiufydjc221" path="res://arts/objects/arts/dungeon/Set 1.png" id="7_kf4jt"]
 [ext_resource type="Texture2D" uid="uid://qgbx3iagg5gu" path="res://arts/mines/cave_tiles_by_paradigmi_dbmzbay.png" id="8_ccia7"]
 [ext_resource type="Texture2D" uid="uid://cjswbhsvymdpq" path="res://arts/tilesets/wall/walls.png" id="8_qjl3x"]
 [ext_resource type="Texture2D" uid="uid://ch73mjngs60k6" path="res://arts/mines/tilesetrailway.png" id="9_d1ohs"]
-[ext_resource type="Texture2D" uid="uid://dynwsmcodx3ku" path="res://arts/mines/5.png" id="9_mst0c"]
 [ext_resource type="Texture2D" uid="uid://hil3pc8k4mng" path="res://arts/mines/CaveTilemap.png" id="10_1nqeg"]
-[ext_resource type="Texture2D" uid="uid://fxi3e1qkvqjh" path="res://arts/mines/5modified.png" id="10_wch5v"]
-[ext_resource type="Texture2D" uid="uid://7ij533q6pfh8" path="res://arts/objects/arts/dungeon/Dungeon_Tileset_at.png" id="11_4myej"]
 [ext_resource type="Texture2D" uid="uid://b6os0xcnfxmpf" path="res://arts/mines/5modified2.png" id="11_q2xr8"]
 [ext_resource type="Texture2D" uid="uid://crcekaok46jgq" path="res://arts/tilesets/Flamethrower.png" id="12_nji81"]
 [ext_resource type="PackedScene" uid="uid://b4gwjtpa0kbwk" path="res://scenes/spikes.tscn" id="14_6cn4f"]
@@ -207,7 +203,6 @@ texture = ExtResource("3_8i56k")
 7:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yaq6e"]
-texture = ExtResource("11_4myej")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -7155,7 +7150,6 @@ texture = ExtResource("8_ccia7")
 35:23/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wdegm"]
-texture = ExtResource("9_mst0c")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -7938,7 +7932,6 @@ texture = ExtResource("9_mst0c")
 17:19/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3vsyn"]
-texture = ExtResource("10_wch5v")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -9691,7 +9684,6 @@ texture = ExtResource("5_xx0o5")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.77297, 12.5511, 4.5962, 4.06586, -4.59619, 4.24264, -4.41942, 12.5511)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grxc3"]
-texture = ExtResource("6_2d1m2")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -10930,7 +10922,6 @@ texture = ExtResource("10_1nqeg")
 8:7/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jj5vx"]
-texture = ExtResource("11_4myej")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
