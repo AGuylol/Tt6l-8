@@ -1,15 +1,300 @@
+[gd_scene load_steps=86 format=3 uid="uid://c8tishbphs8e8"]
 
-[gd_scene load_steps=88 format=3 uid="uid://c8tishbphs8e8"]
-
-
-[ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/characters/survivalgame-player-green.png" id="1_2pnou"]
+[ext_resource type="Texture2D" uid="uid://c0r3q5mfr0mjo" path="res://arts/objects/arts/characters/survivalgame-player-green.png" id="1_2pnou"]
 [ext_resource type="Script" path="res://script/Camera2D.gd" id="1_g3rp2"]
-[ext_resource type="Script" path="res://script/player.gd" id="1_vobwu"]
 [ext_resource type="PackedScene" uid="uid://bcij4y6ry8na4" path="res://healthbar/healthbar.tscn" id="3_23llv"]
 
-[ext_resource type="AudioStream" uid="uid://dwxoinpru6w6l" path="res://Audio/slash-21834.mp3" id="4_d6pil"]
-[ext_resource type="AudioStream" uid="uid://c8psaeotulurw" path="res://Audio/single-gunshot-54-40780.mp3" id="5_m48px"]
+[sub_resource type="GDScript" id="GDScript_g0g3h"]
+script/source = "extends CharacterBody2D
 
+
+var enemy_inattack_range = false
+var enemy_attack_cooldown = true
+
+var player_health = global.player_health
+var player_max_health = global.player_max_health
+var max_regen_health = player_max_health / 2
+var player_alive = false
+var attacking = false
+var sword_equiped = true
+
+var bow_cooldown = true
+var arrow = preload(\"res://scenes/arrow.tscn\")
+
+var max_speed = 100
+var accel = 800
+var friction = 600
+enum {idle , walk}
+var state = idle
+
+@onready var animation_tree : AnimationTree = $AnimationTree
+@onready var healthbar = $Healthbar
+@onready var regen_timer = $regen_timer
+var blend_position : Vector2 = Vector2.ZERO
+
+var dash_speed = 400
+var dash_duration = 0.075
+var is_dashing = false
+var can_dash = true
+var dash_direction : Vector2
+var can_move : bool = true
+
+
+@onready var dash_period = $dash_period
+@onready var dash_cooldown_timer = $dash_cooldown
+@onready var anim_player = $AnimationPlayer
+var knockback_force = 100
+var knockback_duration = 0.5
+var is_knocked_back = false
+
+var gun_cooldown = 10
+
+@onready var camera = $Camera2D
+var normal_zoom = Vector2(1.5, 1.5)
+var zoomed_in = Vector2(0.5, 0.5)
+
+var took_damage : bool = false
+
+func _ready():
+	animation_tree.active = true
+	healthbar.init_health(player_health)
+	$playerhitbox.area_entered.connect(_on_playerhitbox_area_entered)
+	apply_upgrades() 
+	
+	
+func _physics_process(delta):
+	player_movement(delta)
+	enemy_attack()
+	_on_attack_timeout()
+	bow_shoot()
+	apply_upgrades()
+	
+		
+		
+	if player_health <= 0:
+		player_alive = false 
+		$playerhitbox.monitoring = false
+		$playerhitbox.area_entered.disconnect(_on_playerhitbox_area_entered)
+		get_tree().change_scene_to_file(\"res://gameover/gameover.tscn\")
+		global.reset_stats()
+	
+		
+	
+func player_movement(delta):
+	if can_move:
+		var input_vector = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+		if is_knocked_back:
+			apply_friction(friction * delta)
+		else:
+			
+			if input_vector == Vector2.ZERO and not is_dashing:
+				state = idle
+				apply_friction(friction * delta)
+			elif not is_dashing:
+				state = walk
+				apply_movement(input_vector * accel * delta)
+				blend_position = input_vector
+
+			if Input.is_action_just_pressed(\"dash\") and can_dash:
+				start_dash(input_vector)
+		
+		move_and_slide()
+		update_parameters(input_vector)
+
+
+
+func start_dash(input_vector):
+	is_dashing = true
+	can_dash = false
+	dash_direction = input_vector.normalized()
+	velocity = dash_direction * dash_speed
+	dash_period.start(dash_duration)
+	$dash_cooldown.start()
+
+
+	
+	
+func update_parameters(input_vector):
+	if input_vector == Vector2.ZERO:
+		animation_tree[\"parameters/conditions/idle\"] = true
+		animation_tree[\"parameters/conditions/is_moving\"]= false
+	else:
+		animation_tree[\"parameters/conditions/idle\"] = false
+		animation_tree[\"parameters/conditions/is_moving\"]= true
+		
+	if Input.is_action_just_pressed(\"attack\"):
+		animation_tree[\"parameters/conditions/attacking\"]= true
+	
+	else:
+		animation_tree[\"parameters/conditions/attacking\"]= false
+	
+	if input_vector != Vector2.ZERO:
+		animation_tree[\"parameters/idle/blend_position\"] = input_vector
+		animation_tree[\"parameters/walk/blend_position\"] = input_vector
+		animation_tree[\"parameters/attacking/blend_position\"] = input_vector
+
+
+func apply_friction(amount) -> void:
+	if velocity.length() > amount:
+		velocity -= velocity.normalized() * amount
+	else:
+		velocity = Vector2.ZERO
+		
+		
+		
+func apply_movement(amount) -> void:
+	velocity += amount
+	velocity = velocity.limit_length(max_speed)
+	
+
+
+func _on_playerhitbox_body_entered(body):
+	if body.is_in_group(\"enemy\"):
+		enemy_inattack_range = true
+		$enemy_attack_timer.start()
+		
+		var knockback_direction = (global_position - body.global_position).normalized()
+		apply_knockback(knockback_direction)
+		player_health -= 10
+		healthbar.health = player_health
+		print(\"Player health:\", player_health)
+		if player_health <= 0:
+			player_alive = false
+			
+			
+	
+
+
+func _on_playerhitbox_body_exited(body):
+	if body.is_in_group(\"enemy\"):
+		enemy_inattack_range= false
+		$enemy_attack_timer.stop()
+
+		
+func enemy_attack():
+	if enemy_inattack_range and enemy_attack_cooldown:
+		player_health -= 15
+		print(player_health)
+		print(\"enemy attacked you\")
+		took_damage = true
+		await get_tree().create_timer(0.5).timeout
+		enemy_attack_cooldown = false
+		healthbar.health = player_health
+		regen_timer.start()
+		
+func _on_attack_timeout():
+	enemy_attack_cooldown = false
+
+func bow_shoot():
+	var mouse_pos = get_global_mouse_position()
+	$Marker2D.look_at(mouse_pos)
+	
+	if Input.is_action_just_pressed(\"bow\") and bow_cooldown:
+		bow_cooldown = false
+		var arrow_instance = arrow.instantiate()
+		arrow_instance.rotation = $Marker2D.rotation 
+		arrow_instance.global_position = $Marker2D.global_position
+		add_child(arrow_instance)
+		
+		
+		if \"arquebus\" in global.player_inventory:
+			shoot_arrow($Marker2D.global_position, $Marker2D.rotation + 0.4)
+		
+		await get_tree().create_timer(gun_cooldown).timeout
+		bow_cooldown = true
+		
+func shoot_arrow(position, rotation):
+	var arrow_instance = arrow.instantiate()
+	arrow_instance.rotation = rotation
+	arrow_instance.global_position = position
+	add_child(arrow_instance)
+	
+	
+func _on_enemy_attack_timer_timeout():
+	enemy_attack_cooldown = true
+
+
+func _on_dash_period_timeout():
+	is_dashing = false
+	max_speed = 100
+	accel = 800
+
+func _on_dash_cooldown_timeout():
+	can_dash = true
+	
+func apply_knockback(direction: Vector2):
+	is_knocked_back = true
+	velocity = direction * knockback_force
+	await get_tree().create_timer(knockback_duration).timeout
+	is_knocked_back = false
+	
+
+# damage to player
+func _on_playerhitbox_area_entered(area):
+	if area.is_in_group(\"spikes\"):
+		player_health -=5
+	elif area.is_in_group(\"lava\"):
+		player_health -=10
+		print(player_health)
+	elif area.is_in_group(\"flame\"):
+		player_health -=5
+	elif area.is_in_group(\"key\"):
+		global.player_inventory.append(\"key\")
+		print(global.player_inventory)
+	elif area.is_in_group(\"coin\"):
+		global.player_inventory.append(\"coin\")
+		print(global.player_inventory)
+	elif area.is_in_group(\"flamethrower\"):
+		player_health -=10
+		print(player_health)
+	elif area.is_in_group(\"BossProjectile\"):
+		player_health -= 20
+		can_move = false
+		await get_tree().create_timer(2).timeout
+		can_move = true
+	elif area.is_in_group(\"bossmelee\"):
+		player_health -= 25
+	elif area.is_in_group(\"laser\"):
+		player_health -= 40
+		
+	
+	healthbar.health = player_health
+	print(player_health)
+	regen_timer.start()
+	
+	
+func apply_upgrades():
+	if \"health_upgrade1\" in global.player_inventory:
+		player_max_health = player_max_health + 50
+		player_health = player_health + 50
+		
+	elif \"weapon_upgrade1\" in global.player_inventory:
+		global.player_sword_damage = global.player_sword_damage + 10
+	
+	elif \"arquebus\" in global.player_inventory:
+		global.player_gun_damage = global.player_gun_damage + 10
+			
+	elif \"flintlock\" in global.player_inventory:
+		gun_cooldown = gun_cooldown - 3
+			
+
+
+
+func _on_regen_timer_timeout():
+	if player_health < player_max_health/3:
+		player_health = min(player_health + (player_max_health / 3), player_max_health) 
+		healthbar.health = player_health
+		print(\"Player health after regen:\", player_health)
+		
+		
+		
+func get_item(itemData):
+	$Bag.get
+
+
+func player():
+	pass
+"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitfu"]
 radius = 3.0
@@ -1025,9 +1310,8 @@ height = 14.0
 [node name="player" type="CharacterBody2D" groups=["player"]]
 light_mask = 3
 visibility_layer = 3
-collision_layer = 11
-collision_mask = 9
-script = ExtResource("1_vobwu")
+collision_layer = 3
+script = SubResource("GDScript_g0g3h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 3
@@ -1036,15 +1320,9 @@ y_sort_enabled = true
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_hitfu")
 
-[node name="normal_zoom" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 script = ExtResource("1_g3rp2")
-
-[node name="zoom_in" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
-[node name="zoom_out" type="Camera2D" parent="."]
-zoom = Vector2(1.25, 1.25)
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.769)
@@ -1057,9 +1335,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_th5yy")
-}
 tree_root = SubResource("AnimationNodeStateMachine_usk0s")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attacking = false
@@ -1089,10 +1364,10 @@ wait_time = 0.5
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="Healthbar" parent="." instance=ExtResource("3_23llv")]
-offset_left = -150.0
-offset_top = -76.0
-offset_right = -99.0
-offset_bottom = -72.0
+offset_left = -88.0
+offset_top = -59.0
+offset_right = -37.0
+offset_bottom = -55.0
 
 [node name="dash_period" type="Timer" parent="."]
 
@@ -1100,17 +1375,6 @@ offset_bottom = -72.0
 
 [node name="regen_timer" type="Timer" parent="."]
 wait_time = 5.0
-
-
-[node name="PauseMenu" parent="." instance=ExtResource("4_15qxe")]
-visible = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_d6pil")
-
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_m48px")
-
 
 [connection signal="area_entered" from="playerhitbox" to="." method="_on_playerhitbox_area_entered"]
 [connection signal="body_entered" from="playerhitbox" to="." method="_on_playerhitbox_body_entered"]

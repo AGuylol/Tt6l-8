@@ -1,0 +1,17 @@
+join "Tok Kandar" 2 [animation="Fade In Up"]
+"Tok Kandar" (malay guy): .     Ah, you're finally awake.
+"Tok Kandar" (malay guy): .     You were trying to cross the border, right?
+"Tok Kandar" (malay guy): .     Don't answer that, i've heard it all.
+"Tok Kandar" (malay guy): .     Alright, time to break the 4th wall here.
+"Tok Kandar" (malay guy): .     WASD is the basic walking.
+"Tok Kandar" (malay guy): .     Left click to attack with your sword.
+"Tok Kandar" (malay guy): .     Right click to shoot your gun.
+"Tok Kandar" (malay guy): .     Shift to dash.
+"Tok Kandar" (malay guy): .     And E for anything that requires interactions.
+"Tok Kandar" (malay guy): .     Got that?
+"Tok Kandar" (malay guy): .     I hope not.
+"Tok Kandar" (malay guy): .     Now go bugger off somewhere.
+"Tok Kandar": .     ...
+"Tok Kandar": .     Oh yeah, the sign across the river is interactable.
+"Tok Kandar": .     Now you can go.
+[end_timeline]

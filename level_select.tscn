@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://coll205qbj770"]
+
+[ext_resource type="Script" path="res://level_select.gd" id="1_pruy4"]
+[ext_resource type="PackedScene" uid="uid://85xx2r2rtumw" path="res://scenes/world_select/level_icon.tscn" id="1_sja1r"]
+[ext_resource type="Texture2D" uid="uid://c25h3gr8hp6jy" path="res://malaya penisula.png" id="2_oq4lw"]
+[ext_resource type="PackedScene" uid="uid://bkw6bt1n8u4rm" path="res://scenes/world_select/player_icon.tscn" id="3_p5ahm"]
+[ext_resource type="Texture2D" uid="uid://bsi74l6ig6blq" path="res://arts/characters/Malay guy.png" id="5_ooy82"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pruy4")
+
+[node name="MalayaPenisula" type="Sprite2D" parent="."]
+position = Vector2(328, 328)
+scale = Vector2(4.437, 4.437)
+texture = ExtResource("2_oq4lw")
+
+[node name="LevelIcon" parent="." node_paths=PackedStringArray("next_level_up", "next_level_down") instance=ExtResource("1_sja1r")]
+offset_left = 296.0
+offset_top = 568.0
+offset_right = 360.0
+offset_bottom = 632.0
+level_name = " Melaka"
+next_sceen_path = "res://scenes/malaccahub.tscn"
+next_level_up = NodePath("../LevelIcon3")
+next_level_down = NodePath("../LevelIcon2")
+
+[node name="LevelIcon2" parent="." node_paths=PackedStringArray("next_level_up") instance=ExtResource("1_sja1r")]
+offset_left = 512.0
+offset_top = 648.0
+offset_right = 576.0
+offset_bottom = 712.0
+level_name = " Johor"
+next_sceen_path = "res://scenes/johorbeach.tscn"
+next_level_up = NodePath("../LevelIcon")
+
+[node name="LevelIcon3" parent="." node_paths=PackedStringArray("next_level_down") instance=ExtResource("1_sja1r")]
+offset_left = 416.0
+offset_top = 472.0
+offset_right = 480.0
+offset_bottom = 536.0
+level_name = " Pahang"
+next_sceen_path = "res://scenes/world.tscn"
+next_level_down = NodePath("../LevelIcon")
+
+[node name="PlayerIcon" parent="." instance=ExtResource("3_p5ahm")]
+layout_mode = 0
+offset_top = 128.0
+offset_bottom = 192.0
+texture = ExtResource("5_ooy82")
+stretch_mode = 5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 576)
+scale = Vector2(2, 2)

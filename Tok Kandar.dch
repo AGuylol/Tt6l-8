@@ -1,0 +1,29 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"_translation_id": "",
+"color": Color(1, 1, 1, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "textbubbles_NPC"
+},
+"default_portrait": "malay guy",
+"description": "He just wants rest man",
+"display_name": "Tok Kandar",
+"mirror": false,
+"nicknames": ["Tok"],
+"offset": Vector2(0, 0),
+"portraits": {
+"malay guy": {
+"export_overrides": {
+"image": "\"res://arts/characters/Malay guy.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 1.0
+}
